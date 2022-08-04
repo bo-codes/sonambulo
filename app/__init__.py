@@ -12,6 +12,7 @@ from .api.like_routes import like_routes
 from .api.tag_routes import tag_routes
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.aws_routes import aws_routes
 
 from .seeds import seed_commands
 
@@ -39,6 +40,7 @@ app.register_blueprint(post_routes, url_prefix='/api/posts')
 app.register_blueprint(comment_routes, url_prefix='/api/comments')
 app.register_blueprint(like_routes, url_prefix='/api/likes')
 app.register_blueprint(tag_routes, url_prefix='/api/tags')
+app.register_blueprint(aws_routes, url_prefix='/api/images')
 db.init_app(app)
 Migrate(app, db)
 

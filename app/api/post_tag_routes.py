@@ -28,7 +28,7 @@ def generate_post_tag():
 @post_tag_routes.route('/<int:postId>')
 @login_required
 def load_post_tags(postId):
-    post_tags = Post_Tag.query.filter(Post_Tag.post_id == postId)
+    post_tags = Post_Tag.query.filter(Post_Tag.user_id == postId)
     return {'post_tags': [post_tag.to_dict() for post_tag in post_tags]}
 
 @post_tag_routes.route('/delete/<int:id>', methods=["DELETE"])

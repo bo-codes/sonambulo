@@ -15,8 +15,8 @@ class PostForm(FlaskForm):
     user_id = IntegerField('user_id', validators=[DataRequired()])
     image = StringField(
         'image')
-    caption = TextAreaField('caption')
-    created_at = StringField('created_at', validators=[DataRequired()])
+    caption = TextAreaField('caption', validators=[DataRequired()])
+    # created_at = StringField('created_at', validators=[DataRequired()])
 
 
 
@@ -24,5 +24,5 @@ class EditPostForm(FlaskForm):
     user_id = IntegerField('user_id', validators=[DataRequired()])
     image = StringField(
         'image')
-    caption = TextAreaField('caption')
-    created_at = StringField('created_at', validators=[DataRequired()])
+    caption = TextAreaField('caption', validators=[DataRequired()])
+    # created_at = StringField('created_at', validators=[DataRequired()])

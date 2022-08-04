@@ -3,6 +3,7 @@ from flask_login import login_required
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.models import Post, db
 from app.forms.newPost_form import PostForm, EditPostForm
+import datetime
 # from datetime import timezone
 
 post_routes = Blueprint('posts', __name__)
@@ -35,7 +36,7 @@ def create_post():
             user_id=form.data['user_id'],
             image_url=form.data['image'],
             caption=form.data['caption'],
-            created_at=form.data['created_at'],
+            created_at=datetime.datetime.now()
         )
 
         db.session.add(post)
@@ -58,7 +59,7 @@ def update_post(id):
         post.user_id = form.data['user_id'],
         post.image_url = form.data['image'],
         post.caption = form.data['caption'],
-        post.created_at = form.data['created_at'],
+        post.created_at=datetime.datetime.now()
 
         db.session.commit()
         return post.to_dict()
