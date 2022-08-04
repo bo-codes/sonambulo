@@ -94,19 +94,19 @@ export const acquirePosts = () => async (dispatch) => {
 };
 
 export const editPost =
-  (post_id, userId, image, caption, created_at) => async (dispatch) => {
+  (post_id, user_id, image_url, caption, created_at) => async (dispatch) => {
     if (typeof image === "object") {
-      const imageData = new FormData();
-      imageData.append("image", image);
+      const postData = new FormData();
+      postData.append("image", image_url);
 
       const imageRes = await fetch(`/api/images/`, {
         method: "POST",
-        body: imageData,
+        body: postData,
       });
 
       if (imageRes.ok) {
-        image = await imageRes.json();
-        image = image.url;
+        image_url = await imageRes.json();
+        image_url = image_url.url;
       } else if (imageRes.status < 500) {
         const data = await imageRes.json();
         if (data.errors) {
@@ -123,8 +123,8 @@ export const editPost =
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userId,
-        image,
+        user_id,
+        image_url,
         caption,
         created_at,
       }),
