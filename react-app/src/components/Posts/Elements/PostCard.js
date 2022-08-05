@@ -66,32 +66,15 @@ function PostCard({ post }) {
           </p>
         )}
       </div>
+      {/* <Comments post.id/> */}
       {/* START OF MODAL */}
       <div>
         {post ? (
-          <div
-            style={{
-              width: "99%",
-              // backgroundColor: "red",
-              wordWrap: "break-word",
-            }}
-          >
-            {/* <div
-              className="event-title-container"
-              style={{
-                width: "40vw",
-              }}
-            ></div> */}
+          <div>
             <div className="button-container">
               {user && post.user_id === user.id && (
                 <button
                   onClick={() => setShowModal(true)}
-                  style={{
-                    fontSize: "20px",
-                    padding: "6px 10px",
-                    border: "2px solid white",
-                    borderRadius: "50%",
-                  }}
                 >
                   ✎
                 </button>
@@ -112,7 +95,6 @@ function PostCard({ post }) {
                 </Modal>
               )}
             </div>
-            {/* START */}
           </div>
         ) : (
           <h1>Loading Event</h1>

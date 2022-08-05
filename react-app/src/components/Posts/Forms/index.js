@@ -33,6 +33,7 @@ function PostForm({ post = null, setShowModal }) {
     setDate(date);
 
     if (!post) {
+      console.log(userId, image, caption, date);
       post = await dispatch(
         makePost(userId, image, caption, date.replace("T", " "))
       );
@@ -65,7 +66,7 @@ function PostForm({ post = null, setShowModal }) {
   };
 
   return (
-    <div >
+    <div>
       <form onSubmit={submit}>
         {!post && (
           <div>
@@ -79,12 +80,11 @@ function PostForm({ post = null, setShowModal }) {
         )}
         {post && (
           <div>
-            <div
-            >
+            <div>
               <h2>Update Your Post</h2>
             </div>
             <div>
-              <ul >
+              <ul>
                 {errors &&
                   errors.map((error) => {
                     return <li key={error}>{error}</li>;
@@ -94,8 +94,8 @@ function PostForm({ post = null, setShowModal }) {
           </div>
         )}
         <div>
-          <label >Image </label>
-          <label htmlFor="image-upload-button" >
+          <label>Image </label>
+          <label htmlFor="image-upload-button">
             Upload
             <input
               id="image-upload-button"
@@ -106,15 +106,12 @@ function PostForm({ post = null, setShowModal }) {
             />
           </label>
           {image && (
-            <span
-              htmlFor="image-upload-button"
-              name="image"
-            >
+            <span htmlFor="image-upload-button" name="image">
               {image.name}
             </span>
           )}
         </div>
-        <div >
+        <div>
           <label htmlFor="caption">Caption</label>
           <textarea
             name="caption"
@@ -136,19 +133,14 @@ function PostForm({ post = null, setShowModal }) {
           {post ? (
             <div>
               {imageLoading ? (
-                <button disabled >
-                  Loading . . .
-                </button>
+                <button disabled>Loading . . .</button>
               ) : (
-                <button type="submit" >
-                  Update Post
-                </button>
+                <button type="submit">Update Post</button>
               )}
               <button
                 type="button"
                 onClick={deletePostModal}
                 disabled={imageLoading}
-
               >
                 Delete Event
               </button>
@@ -156,11 +148,9 @@ function PostForm({ post = null, setShowModal }) {
           ) : (
             <div>
               {imageLoading ? (
-                <button disabled >
-                  Loading . . .
-                </button>
+                <button disabled>Loading . . .</button>
               ) : (
-                <button >Create Post</button>
+                <button>Create Post</button>
               )}
             </div>
           )}

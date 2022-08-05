@@ -7,7 +7,7 @@ import datetime
 
 comment_routes = Blueprint("comments", __name__)
 
-#-------------------------REVIEW VALIDATIONS------------------
+#-------------------------COMMENT VALIDATIONS------------------
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -37,7 +37,6 @@ def add_comment():
         comment = Comment(
             user_id=form.data["user_id"],
             post_id=form.data["post_id"],
-            rating=form.data["rating"],
             content=form.data["content"],
             created_at=datetime.datetime.now()
         )
@@ -62,7 +61,6 @@ def update_one_comment(id):
         current_comment = Comment.query.get(id)
         current_comment.user_id=form.data['user_id'],
         current_comment.post_id=form.data['post_id'],
-        current_comment.rating=form.data['rating'],
         current_comment.content=form.data['content'],
 
         db.session.commit()
@@ -70,17 +68,17 @@ def update_one_comment(id):
         return current_comment.to_dict()
     return {'errors': "ERROR!!!!!!!"}, 401
 
-#-------------------------DELETE ONE REVIEW-------------------
+#-------------------------DELETE ONE COMMENT-------------------
 @comment_routes.route("/<int:id>", methods=["DELETE"])
 # @login_required
-def delete_review(id):
+def delete_comment(id):
     comment = Comment.query.get(id)
     db.session.delete(comment)
     db.session.commit()
     return {"message": "Sucessfully Deleted."}
 
-#-----------------------GET ALL REVIEWS-----------------------
+#-----------------------GET ALL COMMENT-----------------------
 @comment_routes.route("/all")
-def get_all_reviews():
-    reviews = Comment.query.all()
-    return { "Reviews": [comment.to_dict() for comment in reviews] }
+def get_all_comments():
+    comments = Comment.query.all()
+    return { "Comments": [comment.to_dict() for comment in comments] }

@@ -1,7 +1,7 @@
 from flask import Blueprint, request
-from app.AWS import (allowed_file, upload_file_to_s3, get_unique_filename)
 from app.models import db
 from flask_login import login_required
+from app.AWS import (allowed_file, upload_file_to_s3, get_unique_filename)
 
 
 aws_routes = Blueprint('images', __name__)

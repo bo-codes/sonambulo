@@ -14,9 +14,7 @@ function Posts() {
 
   useEffect(() => {
     dispatch(acquirePosts());
-    console.log("getting posts");
   }, [dispatch]);
-
 
   return (
     <main

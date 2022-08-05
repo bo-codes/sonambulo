@@ -1,56 +1,36 @@
 /********************** ACTIONS **************************/
 
-const CREATE_POST = "post/CREATE_POST";
-const READ_POST = "post/READ_POST";
-const UPDATE_POST = "post/UPDATE_POST";
-const DELETE_POST = "post/DELETE_POST";
+const CREATE_COMMENT = "comment/CREATE_COMMENT";
+const READ_COMMENT = "comment/READ_COMMENT";
+const UPDATE_COMMENT = "comment/UPDATE_COMMENT";
+const DELETE_COMMENT = "comment/DELETE_COMMENT";
 
 /********************** ACTION CREATORS **************************/
 
-const createPost = (post) => ({
-  type: CREATE_POST,
-  payload: post,
+const createComment = (comment) => ({
+  type: CREATE_COMMENT,
+  payload: comment,
 });
 
-const readPost = (posts) => ({
-  type: READ_POST,
-  payload: posts,
+const readComment = (comments) => ({
+  type: READ_COMMENT,
+  payload: comments,
 });
 
-const updatePost = (post) => ({
-  type: UPDATE_POST,
-  payload: post,
+const updateComment = (comment) => ({
+  type: UPDATE_COMMENT,
+  payload: comment,
 });
 
-const deletePost = (postId) => ({
-  type: DELETE_POST,
-  postId,
+const deleteComment = (commentId) => ({
+  type: DELETE_COMMENT,
+  commentId,
 });
 
 /***************************** THUNKS ***************************************/
 
-export const makePost =
+export const makeComment =
   (user_id, image, caption, created_at) => async (dispatch) => {
-    const imageData = new FormData();
-    imageData.append("image", image);
-    console.log("IMAGEDATA", image);
-
-    const imageRes = await fetch(`/api/images/`, {
-      method: "POST",
-      body: imageData,
-    });
-
-    if (imageRes.ok) {
-      image = await imageRes.json();
-    } else if (imageRes.status < 500) {
-      const data = await imageRes.json();
-      if (data.errors) {
-        return [data.errors];
-      }
-    } else {
-      return ["An error occurred. Please try again."];
-    }
-
     const response = await fetch("/api/posts/", {
       method: "POST",
       headers: {
@@ -66,7 +46,7 @@ export const makePost =
 
     if (response.ok) {
       const data = await response.json();
-      dispatch(createPost(data));
+      dispatch(createComment(data));
       return data;
     } else if (response.status < 500) {
       const data = await response.json();
@@ -83,7 +63,7 @@ export const acquirePosts = () => async (dispatch) => {
   console.log("inside acquirePosts thunk", response);
   if (response.ok) {
     const data = await response.json();
-    dispatch(readPost(data));
+    dispatch(readComment(data));
     return data;
   } else if (response.status < 500) {
     const data = await response.json();
@@ -134,7 +114,7 @@ export const editPost =
 
     if (response.ok) {
       const data = await response.json();
-      dispatch(updatePost(data));
+      dispatch(updateComment(data));
       return data;
     } else if (response.status < 500) {
       const data = await response.json();
@@ -153,7 +133,7 @@ export const removePost = (postId) => async (dispatch) => {
   console.log(postId);
 
   if (response.ok) {
-    dispatch(deletePost(postId));
+    dispatch(deleteComment(postId));
   }
 };
 
@@ -164,20 +144,20 @@ const initialState = {};
 export default function reducer(state = initialState, action) {
   let newState = { ...state };
   switch (action.type) {
-    case CREATE_POST:
+    case CREATE_COMMENT:
       const post = action.payload;
       newState[post.id] = post;
       return newState;
-    case READ_POST:
+    case READ_COMMENT:
       newState = {};
       action.payload.posts.forEach((post) => {
         newState[post.id] = post;
       });
       return newState;
-    case UPDATE_POST:
+    case UPDATE_COMMENT:
       newState[action.payload.id] = action.payload;
       return newState;
-    case DELETE_POST:
+    case DELETE_COMMENT:
       console.log(action);
       delete newState[action.postId];
       return newState;

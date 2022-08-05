@@ -67,7 +67,7 @@ def update_post(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@post_routes.route('/:id', methods=["DELETE"])
+@post_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_post(id):
     post = Post.query.filter(Post.id == id)
