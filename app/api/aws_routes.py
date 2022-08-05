@@ -22,7 +22,7 @@ def upload():
     upload = upload_file_to_s3(image)
 
     if "url" not in upload:
-        return {"errors": upload}, 400
+        return {"errors": upload}, 401
 
     url = upload['url']
 
