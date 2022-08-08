@@ -33,7 +33,6 @@ export const makePost =
   (user_id, image, caption, created_at) => async (dispatch) => {
     const imageData = new FormData();
     imageData.append("image", image);
-    console.log("IMAGEDATA", image);
 
     const imageRes = await fetch(`/api/images/`, {
       method: "POST",

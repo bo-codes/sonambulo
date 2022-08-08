@@ -1,24 +1,16 @@
 import React from "react";
-import PostForm from "../Forms";
+import PostForm from "../Forms/postForm";
 
+// PAGE JUST HOLDS THE FORM TO CREATE A POST
 function CreatePost() {
   return (
     <main>
-      <div id="create-form">
-        <div className="create-form-image"></div>
-        <div className="create-event-page-container">
-          <h1
-            style={{
-              color: "#A675A1",
-              letterSpacing: "4px",
-              fontFamily: "Eina-bold",
-              fontSize: "77px",
-            }}
-          >
-            Create Post
-          </h1>
-          <PostForm />
-        </div>
+      <div>
+        <h1>
+          Create Post
+        </h1>
+        {/* THE FORM */}
+        <PostForm />
       </div>
     </main>
   );

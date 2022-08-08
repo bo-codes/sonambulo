@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, request
 from flask_login import login_required
 from app.api.auth_routes import validation_errors_to_error_messages
-from app.models import Post, db
+from app.models import Post, Comment, db
 from app.forms.newPost_form import PostForm, EditPostForm
 import datetime
 # from datetime import timezone
@@ -74,3 +74,10 @@ def delete_post(id):
     post.delete()
     db.session.commit()
     return {'message': 'Post deleted'}
+
+
+# @post_routes.route('/<int:id>/comments')
+# def get_comments(id):
+#     comments = Comment.query.filter(Comment.post_id == id)
+#     print("\n\n\nBOBOBO", comments)
+#     return [comment.to_dict() for comment in comments]

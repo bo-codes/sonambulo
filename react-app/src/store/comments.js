@@ -4,6 +4,7 @@ const CREATE_COMMENT = "comment/CREATE_COMMENT";
 const READ_COMMENT = "comment/READ_COMMENT";
 const UPDATE_COMMENT = "comment/UPDATE_COMMENT";
 const DELETE_COMMENT = "comment/DELETE_COMMENT";
+const GET_ALL_COMMENTS = "comment/GET_ALL_COMMENTS";
 
 /********************** ACTION CREATORS **************************/
 
@@ -12,14 +13,14 @@ const createComment = (comment) => ({
   payload: comment,
 });
 
-const readComment = (comments) => ({
-  type: READ_COMMENT,
-  payload: comments,
+const getComments = (comments) => ({
+  type: GET_ALL_COMMENTS,
+  comments,
 });
 
 const updateComment = (comment) => ({
   type: UPDATE_COMMENT,
-  payload: comment,
+  comment,
 });
 
 const deleteComment = (commentId) => ({
@@ -28,18 +29,35 @@ const deleteComment = (commentId) => ({
 });
 
 /***************************** THUNKS ***************************************/
+export const acquireAllComments = () => async (dispatch) => {
+  const response = await fetch(`/api/comments/all`);
+
+  if (response.ok) {
+    const comments = await response.json();
+    console.log(comments);
+    dispatch(getComments(comments.Comments));
+    return comments;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+};
 
 export const makeComment =
-  (user_id, image, caption, created_at) => async (dispatch) => {
-    const response = await fetch("/api/posts/", {
+  (user_id, post_id, content, created_at) => async (dispatch) => {
+    const response = await fetch("/api/comments/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         user_id,
-        image: image.url,
-        caption,
+        post_id,
+        content,
         created_at,
       }),
     });
@@ -58,56 +76,17 @@ export const makeComment =
     }
   };
 
-export const acquirePosts = () => async (dispatch) => {
-  const response = await fetch("/api/posts/");
-  console.log("inside acquirePosts thunk", response);
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(readComment(data));
-    return data;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  } else {
-    return ["An error occurred. Please try again."];
-  }
-};
-
-export const editPost =
-  (post_id, user_id, image, caption, created_at) => async (dispatch) => {
-    if (typeof image === "object") {
-      const postData = new FormData();
-      postData.append("image", image);
-
-      const imageRes = await fetch(`/api/images/`, {
-        method: "POST",
-        body: postData,
-      });
-
-      if (imageRes.ok) {
-        image = await imageRes.json();
-        image = image.url;
-      } else if (imageRes.status < 500) {
-        const data = await imageRes.json();
-        if (data.errors) {
-          return data.errors;
-        }
-      } else {
-        return ["An error occurred. Please try again."];
-      }
-    }
-
-    const response = await fetch(`/api/posts/${post_id}`, {
+export const editComment =
+  (comment_id, user_id, post_id, content, created_at) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${comment_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         user_id,
-        image,
-        caption,
+        post_id,
+        content,
         created_at,
       }),
     });
@@ -126,11 +105,10 @@ export const editPost =
     }
   };
 
-export const removePost = (postId) => async (dispatch) => {
+export const removeComment = (postId) => async (dispatch) => {
   const response = await fetch(`/api/posts/${postId}`, {
     method: "DELETE",
   });
-  console.log(postId);
 
   if (response.ok) {
     dispatch(deleteComment(postId));
@@ -145,21 +123,26 @@ export default function reducer(state = initialState, action) {
   let newState = { ...state };
   switch (action.type) {
     case CREATE_COMMENT:
-      const post = action.payload;
-      newState[post.id] = post;
+      const comment = action.payload;
+      newState[comment.id] = comment;
       return newState;
     case READ_COMMENT:
       newState = {};
-      action.payload.posts.forEach((post) => {
-        newState[post.id] = post;
+      action.payload.comments.forEach((comment) => {
+        newState[comment.id] = comment;
+      });
+      return newState;
+    case GET_ALL_COMMENTS:
+      newState = {};
+      action.comments.forEach((comment) => {
+        newState[comment.id] = comment;
       });
       return newState;
     case UPDATE_COMMENT:
-      newState[action.payload.id] = action.payload;
+      newState[action.comment.id] = action.comment;
       return newState;
     case DELETE_COMMENT:
-      console.log(action);
-      delete newState[action.postId];
+      delete newState[action.commentId];
       return newState;
     default:
       return state;

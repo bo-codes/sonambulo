@@ -21,12 +21,6 @@ const NavigationBar = styled.div`
   text-decoration: none;
 `;
 
-const Logo = styled.img`
-  width: 12rem;
-  height: auto;
-  padding-top: 0%;
-  align-self: center;
-`;
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
