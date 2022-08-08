@@ -60,7 +60,7 @@ def update_comment(id):
         db.session.commit()
         print(form.data)
         return comment.to_dict()
-    return {'errors': "ERROR"}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 #-------------------------DELETE ONE COMMENT-------------------
 @comment_routes.route("/<int:id>", methods=["DELETE"])
