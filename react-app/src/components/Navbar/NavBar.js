@@ -21,7 +21,6 @@ const NavigationBar = styled.div`
   text-decoration: none;
 `;
 
-
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
@@ -45,11 +44,6 @@ const NavBar = () => {
       {showLogin && (
         <Modal onClose={() => setShowLogin(false)}>
           <LoginForm setShowLogin={setShowLogin} />
-        </Modal>
-      )}
-      {showSignup && (
-        <Modal onClose={() => setShowSignup(false)}>
-          <SignUpForm setShowSignup={setShowSignup} />
         </Modal>
       )}
       <div
@@ -120,18 +114,16 @@ const NavBar = () => {
                   Login
                 </button>
               </div>
-              <div>
-                <button
-                  className="navlink"
-                  onClick={() => setShowSignup(true)}
-                  style={{
-                    border: "none",
-                    background: "transparent",
-                  }}
-                >
-                  Sign Up
-                </button>
-              </div>
+              <NavLink
+                to="/signup"
+                activeClassName="active"
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                }}
+              >
+                Signup
+              </NavLink>
             </>
           )}
           {loggedIn && user && (

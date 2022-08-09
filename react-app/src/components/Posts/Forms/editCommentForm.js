@@ -9,7 +9,7 @@ import DeleteCommentModal from "../Elements/DeleteCommentModal";
 import { makeComment, editComment } from "../../../store/comments";
 
 // COMMENT FORM THAT WE WILL DISPLAY ON THE POSTS PAGE USING A MODAL AND BUTTON THAT SHOWS MODAL NEXT TO EACH POST
-function CommentForm({ comment = null, post = null, setShowCommentEditModal }) {
+function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
   // SETTING STATES
   const [date, setDate] = useState(
     (comment && comment.created_at.slice(0, 17).replace(" ", "T")) || ""
@@ -41,26 +41,14 @@ function CommentForm({ comment = null, post = null, setShowCommentEditModal }) {
       return;
     }
 
-    // IS THERE NO COMMENT? IF SO, DISPATCH THE CREATE THUNK
-    if (!comment) {
-      comment = await dispatch(
-        makeComment(userId, postId, content, created_at)
-      );
-      if (comment.id) {
-        history.push(`/posts`);
-        return;
-      }
-      // OTHERWISE DISPATCH THE EDIT THUNK
-    } else {
-      comment = await dispatch(
-        editComment(comment.id, userId, postId, content, created_at)
-      );
-    }
+    comment = await dispatch(
+      editComment(comment.id, userId, postId, content, created_at)
+    );
 
     if (Array.isArray(comment)) {
       setErrors(comment);
     } else {
-      setShowCommentEditModal(false);
+      setShowEditComment(false);
       return;
     }
   };
@@ -139,4 +127,4 @@ function CommentForm({ comment = null, post = null, setShowCommentEditModal }) {
   );
 }
 
-export default CommentForm;
+export default EditCommentForm;

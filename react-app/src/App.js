@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Posts from "./components/Posts/Pages/Posts";
 import CreatePost from "./components/Posts/Pages/CreatePost";
 import { authenticate } from "./store/session";
+import Signup from "./components/auth/Pages/Signup";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,6 +36,9 @@ function App() {
         <ProtectedRoute path="/posts/create" exact={true}>
           <CreatePost />
         </ProtectedRoute>
+        <Route path="/signup" exact={true}>
+          <Signup />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

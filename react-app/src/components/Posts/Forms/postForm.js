@@ -9,7 +9,7 @@ import DeletePostModal from "../Elements/DeletePostModal";
 import { makePost, editPost } from "../../../store/posts";
 
 // THIS IS OUR POST CREATION/EDIT FORM COMPONENT
-function PostForm({ post = null, setShowModal }) {
+function PostForm({ post = null, setShowCreatePost }) {
   // SETTING STATES
   const [date, setDate] = useState(
     (post && post.created_at.slice(0, 17).replace(" ", "T")) || ""
@@ -80,7 +80,7 @@ function PostForm({ post = null, setShowModal }) {
     if (Array.isArray(post)) {
       setErrors(post);
     } else {
-      setShowModal(false);
+      setShowCreatePost(false);
       return;
     }
   };
@@ -190,9 +190,9 @@ function PostForm({ post = null, setShowModal }) {
             <div>
               {imageLoading ? (
                 <button disabled>Loading . . .</button>
-                ) : (
-                  <button>Create Post</button>
-                  )}
+              ) : (
+                <button>Create Post</button>
+              )}
             </div>
             // ----- CREATE BUTTON ----- ^^//
           )}

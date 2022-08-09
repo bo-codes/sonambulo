@@ -7,7 +7,6 @@ import PostCard from "../Elements/PostCard";
 import { acquireAllComments } from "../../../store/comments";
 import { acquirePosts } from "../../../store/posts";
 
-
 // PAGE THAT DISPLAYS ALL OF OUR POSTS
 function Posts() {
   // NEED TO DO THIS TO BE ABLE TO DISPATCH
@@ -30,51 +29,23 @@ function Posts() {
     <main>
       {/* TITLE */}
       <h1>Posts</h1>
-      {/* THIS DIV HOLDS ALL THE POSTS */}
       <div>
         {/* CHECK IF THERE ARE POSTS SO THAT THE USESELECTOR DOESNT FUCK US */}
         {posts &&
-          posts
-            // .filter((event) => {
-            //   if (startDate === endDate) return true;
-            //   if (
-            //     new Date(event.date) > new Date(startDate) &&
-            //     new Date(event.date) < new Date(endDate)
-            //   )
-            //     return true;
-            //   return false;
-            // })
-            // .filter((event) => {
-            //   return checkCategories(event);
-            // })
-            // .filter((event) => {
-            //   return event.name.match(new RegExp(search, "i"));
-            // })
-            // .sort((a, b) => {
-            //   if (sortBy === "name") {
-            //     if (a.name < b.name) return -1;
-            //     if (a.name > b.name) return 1;
-            //     return 0;
-            //   }
-            //   if (sortBy === "date") {
-            //     return new Date(a.date) - new Date(b.date);
-            //   }
-            //   return a - b;
-            // })
-            .map((post) => {
-              // WE FILTER THROUGH ALL COMMENTS EVER TO ONLY GRAB THE ONES ASSOCIATED WITH THIS POST
-              const postComments = comments.filter((comment) => {
-                return parseInt(comment.post_id) === parseInt(post.id);
-              });
+          posts.map((post) => {
+            // WE FILTER THROUGH ALL COMMENTS EVER TO ONLY GRAB THE ONES ASSOCIATED WITH THIS POST
+            const postComments = comments.filter((comment) => {
+              return parseInt(comment.post_id) === parseInt(post.id);
+            });
 
-              // RETURNING A POST CARD WHICH IS A COMPONENT THAT DETERMINES HOW THE POST IS STRUCTURED
-              return (
-                // EACH ITEM IN A MAP NEEDS ITS OWN UNIQUE KEY
-                <div key={post.id}>
-                  <PostCard post={post} postComments={postComments} />
-                </div>
-              );
-            })}
+            // RETURNING A POST CARD WHICH IS A COMPONENT THAT DETERMINES HOW THE POST IS STRUCTURED
+            return (
+              // EACH ITEM IN A MAP NEEDS ITS OWN UNIQUE KEY
+              <div key={post.id}>
+                <PostCard post={post} postComments={postComments} />
+              </div>
+            );
+          })}
       </div>
     </main>
   );

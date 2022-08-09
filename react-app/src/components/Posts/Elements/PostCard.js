@@ -2,22 +2,26 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Modal } from "../../Global/Elements/Modal";
 import PostForm from "../Forms/postForm";
-import CommentForm from "../Forms/commentForm";
+import CreateCommentForm from "../Forms/createCommentForm";
+import Comment from "./Comment";
+import LoginFormPosts from "../../auth/LoginFormPosts";
+import SignUpForm from "../../auth/SignUpForm";
+import moment from "moment";
 
-// WE IMPORTED THE CURRENT POST IN THE MAP AND THE COMMENTS ASSOCIATED WITH SAID POST
 function PostCard({ post, postComments }) {
   // -------- SETTING STATES ------- //
-  // CREATING A SLICE OF STATE DEDICATED TO SHOWING OR HIDING THE EDIT POST MODAL
-  const [showModal, setShowModal] = useState(false);
-  // CREATING A SLICE OF STATE DEDICATED TO SHOWING OR HIDING THE EDIT COMMENT MODAL
-  const [showCommentEditModal, setShowCommentEditModal] = useState(false);
-  // CREATING A SLICE OF STATE DEDICATED TO SHOWING OR HIDING THE CREATE COMMENT MODAL
-  const [showCommentModal, setShowCommentModal] = useState(false);
+  // SHOWING OR HIDING THE EDIT POST MODAL
+  const [showCreatePost, setShowCreatePost] = useState(false);
+  // SHOWING OR HIDING THE CREATE COMMENT MODAL
+  const [showCreateComment, setShowCreateComment] = useState(false);
+
+  const [showSignup, setShowSignup] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   // -------- PULLING INFO FROM THE STATE -------- //
   const user = useSelector((state) => state.session.user);
-  const [localDate] = useState(new Date(post.created_at).toString());
-
+  // const [localDate] = useState(new Date(post.created_at).toString());
+  const [localDate] = useState(new Date(post.created_at));
   return (
     <div style={{ margin: "30px" }}>
       {/* POST IMAGE ----------- vv*/}
@@ -31,8 +35,10 @@ function PostCard({ post, postComments }) {
       {/* POST DATE ----- vv*/}
       <div>
         <div>
-          <div>{localDate.split(" ")[1].toUpperCase()}</div>
-          <div>{localDate.split(" ")[2]}</div>
+          {/* <div>{localDate.split(" ")[1].toUpperCase()}</div> */}
+          {/* <div>{localDate.split(" ")[2]}</div> */}
+          <div>{moment(localDate).calendar()}</div>
+          {/* <div>{post.created_at}</div> */}
         </div>
       </div>
       {/* POST DATE ----- ^^*/}
@@ -45,20 +51,17 @@ function PostCard({ post, postComments }) {
 
       {/* ------ POST EDIT BUTTON ------ vv*/}
       <div>
+        {/* if we dont have a post, we dont error out */}
         {post ? (
-          // WE DO THIS TO MAKE SURE THAT IF WE DONT HAVE A POST YET, WE DONT ERROR OUT. ADDING THE LOADING TEXT IS JUST EXTRA, FANCY STUFF
-
           // POST EDIT BUTTON
-          // WHEN CLICKED, setShowModal WILL TOGGLE TO TRUE
+          // when clicked, setShowCreatePost will toggle to true
           <div>
             {user && post.user_id === user.id && (
-              <button onClick={() => setShowModal(true)}>✎</button>
+              <button onClick={() => setShowCreatePost(true)}>✎</button>
             )}
-            {/* IF setShowModal iS SET TO TRUE, THEN SHOW THE MODAL WHICH HOLDS THE POST EDIT FORM. TO REITERATE, THE BUTTON ABOVE TOGGLES IT TRUE */}
-            {showModal && (
-              <Modal onClose={() => setShowModal(false)}>
-                <PostForm post={post} setShowModal={setShowModal} />
-              </Modal>
+            {/* if setShowCreatePost is set to true, then show the modal which holds the post edit form. */}
+            {showCreatePost && (
+              <PostForm post={post} setShowCreatePost={setShowCreatePost} />
             )}
           </div>
         ) : (
@@ -67,12 +70,31 @@ function PostCard({ post, postComments }) {
         {/* ------ POST EDIT BUTTON ------ ^^*/}
 
         {/* ----------- CREATE COMMENT BUTTON ----------- */}
-        <button onClick={() => setShowCommentModal(true)}>comment</button>
-        {/* ----------- CREATE COMMENT BUTTON ----------- */}
-        {showCommentModal && (
-          <Modal onClose={() => setShowCommentModal(false)}>
-            <CommentForm post={post} showCommentModalVal={showCommentModal} />
+        {user ? (
+          <button onClick={() => setShowCreateComment(true)}>comment</button>
+        ) : (
+          <button onClick={() => setShowLogin(true)}>comment</button>
+        )}
+        {showLogin && (
+          <Modal onClose={() => setShowLogin(false)}>
+            <LoginFormPosts
+              setShowLogin={setShowLogin}
+              setShowSignup={setShowSignup}
+            />
           </Modal>
+        )}
+        {showSignup && (
+          <Modal onClose={() => setShowSignup(false)}>
+            <SignUpForm setShowSignup={setShowSignup} />
+          </Modal>
+        )}
+        {/* ----------- CREATE COMMENT BUTTON ----------- */}
+        {showCreateComment && (
+          <CreateCommentForm
+            post={post}
+            setShowCreateComment={setShowCreateComment}
+            userId={user.id}
+          />
         )}
         <div>
           {/* LIKES  START*/}
@@ -91,30 +113,7 @@ function PostCard({ post, postComments }) {
         {postComments &&
           postComments.map((comment) => {
             // FOR EACH COMMENT DISPLAY THIS
-            return (
-              <div key={comment.id}>
-                {/* COMMENT CONTENT */}
-                <div>{comment.content}</div>
-                {/* IF COMMENT BELONGS TO THE CURRENT USER, SHOW THE COMMENT EDIT BUTTON */}
-                <div>
-                  {user && comment.user_id === user.id && (
-                    <button onClick={() => setShowCommentEditModal(true)}>
-                      edit
-                    </button>
-                  )}
-                  {/* IF SHOW COMMENT MODAL IS TOGGLED TRUE, SHOW THE COMMENT FORM MODAL */}
-                  {showCommentEditModal && (
-                    <Modal onClose={() => setShowCommentEditModal(false)}>
-                      <CommentForm
-                        post={post}
-                        setShowCommentEditModal={setShowCommentEditModal}
-                        comment={comment}
-                      />
-                    </Modal>
-                  )}
-                </div>
-              </div>
-            );
+            return <Comment key={comment.id} comment={comment} post={post} />;
           })}
         {/* ------------ COMMENTS ------------ ^^*/}
       </div>
