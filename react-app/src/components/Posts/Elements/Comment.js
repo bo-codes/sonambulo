@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import EditCommentForm from "../Forms/editCommentForm";
 import CommentDropdown from "./CommentDropdown";
+import moment from "moment";
 
 function Comment({ comment, post, userId }) {
   const [showEditComment, setShowEditComment] = useState(false);
-
+  const [commentDate] = useState(new Date(comment.created_at));
   return (
     <>
       {showEditComment ? (
@@ -23,6 +23,7 @@ function Comment({ comment, post, userId }) {
             />
           )}
           <p>{comment.content}</p>
+          <div>{moment(commentDate).calendar()}</div>
         </div>
       )}
     </>

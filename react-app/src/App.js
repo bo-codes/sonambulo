@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import NavBar from "./components/Navbar/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import Posts from "./components/Posts/Pages/Posts";
-import CreatePost from "./components/Posts/Pages/CreatePost";
+import Posts from "./components/auth/Posts";
+import CreatePost from "./components/auth/CreatePost";
 import { authenticate } from "./store/session";
 import Signup from "./components/auth/Pages/Signup";
 

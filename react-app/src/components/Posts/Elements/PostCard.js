@@ -19,9 +19,11 @@ function PostCard({ post, postComments }) {
   const [showLogin, setShowLogin] = useState(false);
 
   // -------- PULLING INFO FROM THE STATE -------- //
-  const user = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.session.user) || "";
   // const [localDate] = useState(new Date(post.created_at).toString());
   const [localDate] = useState(new Date(post.created_at));
+
+  // -------- RETURN -------- //
   return (
     <div style={{ margin: "30px" }}>
       {/* POST IMAGE ----------- vv*/}
@@ -113,7 +115,14 @@ function PostCard({ post, postComments }) {
         {postComments &&
           postComments.map((comment) => {
             // FOR EACH COMMENT DISPLAY THIS
-            return <Comment key={comment.id} comment={comment} post={post} />;
+            return (
+              <Comment
+                key={comment.id}
+                comment={comment}
+                post={post}
+                userId={user.id}
+              />
+            );
           })}
         {/* ------------ COMMENTS ------------ ^^*/}
       </div>

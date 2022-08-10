@@ -7,7 +7,6 @@ import UserMenu from "./UserMenu";
 import { login } from "../../store/session";
 import "./navBar.css";
 import LoginForm from "../auth/LoginForm";
-import SignUpForm from "../auth/SignUpForm";
 import { Modal } from "../Global/Elements/Modal";
 
 const NavigationBar = styled.div`
@@ -23,7 +22,6 @@ const NavigationBar = styled.div`
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
@@ -46,32 +44,9 @@ const NavBar = () => {
           <LoginForm setShowLogin={setShowLogin} />
         </Modal>
       )}
-      <div
-        className="navBarWrapper"
-        style={{
-          // backgroundColor: "green",
-          paddingLeft: "20px",
-          height: "70px",
-          // margin: "0px"
-        }}
-      >
-        <div
-          className="navBarDiv1"
-          style={{
-            // backgroundColor: "red",
-            height: "100%",
-            // alignItems: "center",
-          }}
-        >
-          <NavLink
-            to="/"
-            exact={true}
-            activeClassName="navlink navBarDiv1"
-            style={{
-              width: "205px",
-              height: "100%",
-            }}
-          >
+      <div className="navBarWrapper">
+        <div className="navBarDiv1">
+          <NavLink to="/" exact={true} activeClassName="navlink navBarDiv1">
             {/* <Logo src={`${EventzeitLogo}`} /> */}
           </NavLink>
         </div>
@@ -79,49 +54,21 @@ const NavBar = () => {
           {!loggedIn && (
             <>
               <div>
-                <NavLink
-                  to="/posts"
-                  exact={true}
-                  activeClassName="active"
-                  style={{
-                    textDecoration: "none",
-                  }}
-                >
+                <NavLink to="/posts" exact={true} activeClassName="active">
                   <p className="navlink">Posts</p>
                 </NavLink>
               </div>
               <div>
-                <button
-                  onClick={demoLogIn}
-                  className="navlink"
-                  style={{
-                    border: "0px",
-                    backgroundColor: "white",
-                  }}
-                >
+                <button onClick={demoLogIn} className="navlink">
                   Demo User
                 </button>
               </div>
               <div>
-                <button
-                  className="navlink"
-                  onClick={() => setShowLogin(true)}
-                  style={{
-                    border: "none",
-                    background: "transparent",
-                  }}
-                >
+                <button className="navlink" onClick={() => setShowLogin(true)}>
                   Login
                 </button>
               </div>
-              <NavLink
-                to="/signup"
-                activeClassName="active"
-                style={{
-                  textDecoration: "none",
-                  color: "black",
-                }}
-              >
+              <NavLink to="/signup" activeClassName="active">
                 Signup
               </NavLink>
             </>
@@ -129,44 +76,21 @@ const NavBar = () => {
           {loggedIn && user && (
             <>
               <div>
-                <NavLink
-                  to="/posts/create"
-                  activeClassName="active"
-                  style={{
-                    textDecoration: "none",
-                  }}
-                >
+                <NavLink to="/posts/create" activeClassName="active">
                   <p className="navlink">Create</p>
                 </NavLink>
               </div>
               <div>
-                <NavLink
-                  to="/posts"
-                  activeClassName="active"
-                  style={{
-                    textDecoration: "none",
-                  }}
-                >
+                <NavLink to="/posts" activeClassName="active">
                   <p className="navlink">Posts</p>
                 </NavLink>
               </div>
               <div>
-                <NavLink
-                  to="/profile"
-                  activeClassName="active"
-                  style={{
-                    textDecoration: "none",
-                  }}
-                >
+                <NavLink to="/userposts" exact={true} activeClassName="active">
                   <p className="navlink">Profile</p>
                 </NavLink>
               </div>
-              <div
-                style={{
-                  color: "#191923",
-                  fontFamily: "Eina-semibold",
-                }}
-              >
+              <div>
                 <UserMenu user={user} />
               </div>
             </>

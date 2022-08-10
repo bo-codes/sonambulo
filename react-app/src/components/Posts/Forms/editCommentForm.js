@@ -6,13 +6,13 @@ import { useHistory } from "react-router-dom";
 import { Modal } from "../../Global/Elements/Modal";
 import DeleteCommentModal from "../Elements/DeleteCommentModal";
 // IMPORT THUNKS WE NEED TO DISPATCH --------
-import { makeComment, editComment } from "../../../store/comments";
+import { editComment } from "../../../store/comments";
 
 // COMMENT FORM THAT WE WILL DISPLAY ON THE POSTS PAGE USING A MODAL AND BUTTON THAT SHOWS MODAL NEXT TO EACH POST
 function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
   // SETTING STATES
   const [date, setDate] = useState(
-    (comment && comment.created_at.slice(0, 17).replace(" ", "T")) || ""
+    (comment && comment.created_at) || ""
   );
   const [content, setContent] = useState((comment && comment.content) || "");
   const [errors, setErrors] = useState([]);
@@ -42,7 +42,7 @@ function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
     }
 
     comment = await dispatch(
-      editComment(comment.id, userId, postId, content, created_at)
+      editComment(comment.id, userId, postId, content, date)
     );
 
     if (Array.isArray(comment)) {

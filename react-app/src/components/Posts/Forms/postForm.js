@@ -11,9 +11,7 @@ import { makePost, editPost } from "../../../store/posts";
 // THIS IS OUR POST CREATION/EDIT FORM COMPONENT
 function PostForm({ post = null, setShowCreatePost }) {
   // SETTING STATES
-  const [date, setDate] = useState(
-    (post && post.created_at.slice(0, 17).replace(" ", "T")) || ""
-  );
+  const [date, setDate] = useState((post && post.created_at) || "");
   const [image, setImage] = useState((post && post.image_url) || "");
   const [caption, setCaption] = useState((post && post.caption) || "");
   const [errors, setErrors] = useState([]);
@@ -53,7 +51,7 @@ function PostForm({ post = null, setShowCreatePost }) {
     if (!post) {
       // CREATING
       post = await dispatch(
-        makePost(userId, image, caption, date.replace("T", " "))
+        makePost(userId, image, caption, date)
         // WE ARE JUST PULLING FROM THE SLICES OF STATE ABOVE BECAUSE WE HAVE THE FORM SET UP TO UPDATE
         // THE SLICES OF STATE LIVE/onChange
       );

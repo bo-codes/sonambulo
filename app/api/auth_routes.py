@@ -76,46 +76,6 @@ def sign_up():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@auth_routes.route('/dashboard/<int:id>', methods=["PUT"])
-@login_required
-def update_user(id):
-    """
-    Updates a logged in user
-    """
-    user = User.query.get(id)
-    if user.id == 1:
-        return {'errors': ['You cannot edit the demo user, try creating your own user!']}, 403
-    else:
-        form = EditUserForm()
-        form['csrf_token'].data = request.cookies['csrf_token']
-        if form.validate_on_submit():
-            user = User.query.filter(User.id == id).first()
-
-            user.username = form.data['username']
-            user.email = form.data['email']
-            user.password = form.data['password']
-            user.avatar = form.data['avatar']
-
-            db.session.commit()
-            return user.to_dict()
-
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
-
-@auth_routes.route('/dashboard/<int:id>', methods=["DELETE"])
-def delete_user(id):
-    """
-    Deletes a user account
-    """
-    user = User.query.get(id)
-    if user.id == 1:
-        return {'error': ['You cannot delete the demo user.']}, 403
-    else:
-        db.session.delete(user)
-        db.session.commit()
-        return {"message": "User deleted successfully"}, 200
-
-
 @auth_routes.route('/unauthorized')
 def unauthorized():
     """

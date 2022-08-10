@@ -2,17 +2,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-// IMPORT COMPONENTS WE'RE USING --------
-import { Modal } from "../../Global/Elements/Modal";
-import DeleteCommentModal from "../Elements/DeleteCommentModal";
+
 // IMPORT THUNKS WE NEED TO DISPATCH --------
-import { makeComment, editComment } from "../../../store/comments";
+import { makeComment } from "../../../store/comments";
 
 // COMMENT FORM THAT WE WILL DISPLAY ON THE POSTS PAGE USING A MODAL AND BUTTON THAT SHOWS MODAL NEXT TO EACH POST
 function CreateCommentForm({ comment = null, post = null, setShowCreateComment }) {
   // SETTING STATES
   const [date, setDate] = useState(
-    (comment && comment.created_at.slice(0, 17).replace(" ", "T")) || ""
+    (comment && comment.created_at) || ""
   );
   const [content, setContent] = useState((comment && comment.content) || "");
   const [errors, setErrors] = useState([]);
@@ -42,7 +40,7 @@ function CreateCommentForm({ comment = null, post = null, setShowCreateComment }
     }
 
       comment = await dispatch(
-        makeComment(userId, postId, content, created_at)
+        makeComment(userId, postId, content, date)
       );
       if (comment.id) {
         history.push(`/posts`);
@@ -57,10 +55,6 @@ function CreateCommentForm({ comment = null, post = null, setShowCreateComment }
     }
   };
 
-  // THIS SHOWS THE MODAL WHEN CALLED
-  const deleteCommentModal = () => {
-    setShowConfirmDeleteCommentModal(true);
-  };
 
   return (
     <div>
