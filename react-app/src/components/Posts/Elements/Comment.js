@@ -5,7 +5,10 @@ import moment from "moment";
 
 function Comment({ comment, post, userId }) {
   const [showEditComment, setShowEditComment] = useState(false);
-  const [commentDate] = useState(new Date(comment.created_at));
+  // const [commentDate] = useState(new Date(comment.created_at));
+  const commentDate = comment.created_at.toLocaleString("en-US", {
+    timeZone: "America/Los_Angeles",
+  });
   return (
     <>
       {showEditComment ? (
@@ -23,7 +26,8 @@ function Comment({ comment, post, userId }) {
             />
           )}
           <p>{comment.content}</p>
-          <div>{moment(commentDate).calendar()}</div>
+          <div>{moment(comment.commentDate).calendar()}</div>
+          <div>{comment.commentDate}</div>
         </div>
       )}
     </>
