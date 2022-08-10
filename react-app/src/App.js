@@ -33,6 +33,9 @@ function App() {
         <Route path="/posts" exact={true}>
           <Posts />
         </Route>
+        <Route path="/profile" exact={true}>
+          {/* <Posts /> */}
+        </Route>
         <ProtectedRoute path="/posts/create" exact={true}>
           <CreatePost />
         </ProtectedRoute>

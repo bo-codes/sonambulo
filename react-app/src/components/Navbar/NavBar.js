@@ -150,6 +150,17 @@ const NavBar = () => {
                   <p className="navlink">Posts</p>
                 </NavLink>
               </div>
+              <div>
+                <NavLink
+                  to="/profile"
+                  activeClassName="active"
+                  style={{
+                    textDecoration: "none",
+                  }}
+                >
+                  <p className="navlink">Profile</p>
+                </NavLink>
+              </div>
               <div
                 style={{
                   color: "#191923",

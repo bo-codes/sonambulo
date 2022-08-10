@@ -112,7 +112,6 @@ export const signUp =
     }
   };
 
-
 export const editUser =
   (user_id, username, email, password, avatar) => async (dispatch) => {
     const response = await fetch(`/api/auth/dashboard/${user_id}`, {
@@ -142,7 +141,6 @@ export const editUser =
       return ["An error has occured. Please try again."];
     }
   };
-
 
 export const destroyUser = (userId) => async (dispatch) => {
   const response = await fetch(`/api/auth/dashboard/${userId}`, {
