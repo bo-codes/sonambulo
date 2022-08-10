@@ -7,7 +7,6 @@ import UserMenu from "./UserMenu";
 import { login } from "../../store/session";
 import "./navBar.css";
 import LoginForm from "../auth/LoginForm";
-import SignUpForm from "../auth/SignUpForm";
 import { Modal } from "../Global/Elements/Modal";
 
 const NavigationBar = styled.div`
@@ -23,7 +22,6 @@ const NavigationBar = styled.div`
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
@@ -48,29 +46,14 @@ const NavBar = () => {
       )}
       <div
         className="navBarWrapper"
-        style={{
-          // backgroundColor: "green",
-          paddingLeft: "20px",
-          height: "70px",
-          // margin: "0px"
-        }}
       >
         <div
           className="navBarDiv1"
-          style={{
-            // backgroundColor: "red",
-            height: "100%",
-            // alignItems: "center",
-          }}
         >
           <NavLink
             to="/"
             exact={true}
             activeClassName="navlink navBarDiv1"
-            style={{
-              width: "205px",
-              height: "100%",
-            }}
           >
             {/* <Logo src={`${EventzeitLogo}`} /> */}
           </NavLink>
@@ -83,9 +66,6 @@ const NavBar = () => {
                   to="/posts"
                   exact={true}
                   activeClassName="active"
-                  style={{
-                    textDecoration: "none",
-                  }}
                 >
                   <p className="navlink">Posts</p>
                 </NavLink>
@@ -94,10 +74,6 @@ const NavBar = () => {
                 <button
                   onClick={demoLogIn}
                   className="navlink"
-                  style={{
-                    border: "0px",
-                    backgroundColor: "white",
-                  }}
                 >
                   Demo User
                 </button>
@@ -106,10 +82,6 @@ const NavBar = () => {
                 <button
                   className="navlink"
                   onClick={() => setShowLogin(true)}
-                  style={{
-                    border: "none",
-                    background: "transparent",
-                  }}
                 >
                   Login
                 </button>
@@ -117,10 +89,6 @@ const NavBar = () => {
               <NavLink
                 to="/signup"
                 activeClassName="active"
-                style={{
-                  textDecoration: "none",
-                  color: "black",
-                }}
               >
                 Signup
               </NavLink>
@@ -132,9 +100,6 @@ const NavBar = () => {
                 <NavLink
                   to="/posts/create"
                   activeClassName="active"
-                  style={{
-                    textDecoration: "none",
-                  }}
                 >
                   <p className="navlink">Create</p>
                 </NavLink>
@@ -143,30 +108,20 @@ const NavBar = () => {
                 <NavLink
                   to="/posts"
                   activeClassName="active"
-                  style={{
-                    textDecoration: "none",
-                  }}
                 >
                   <p className="navlink">Posts</p>
                 </NavLink>
               </div>
               <div>
                 <NavLink
-                  to="/profile"
+                  to="/userposts"
+                  exact={true}
                   activeClassName="active"
-                  style={{
-                    textDecoration: "none",
-                  }}
                 >
                   <p className="navlink">Profile</p>
                 </NavLink>
               </div>
-              <div
-                style={{
-                  color: "#191923",
-                  fontFamily: "Eina-semibold",
-                }}
-              >
+              <div>
                 <UserMenu user={user} />
               </div>
             </>

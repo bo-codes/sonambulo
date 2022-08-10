@@ -13,3 +13,8 @@
     background-color: rgb(52, 43, 75);
     /* outline: 8px solid rgb(0, 91, 183) */
   }
+
+  body {
+    background-color: black;
+    color: white;
+  }

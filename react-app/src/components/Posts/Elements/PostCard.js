@@ -7,6 +7,7 @@ import Comment from "./Comment";
 import LoginFormPosts from "../../auth/LoginFormPosts";
 import SignUpForm from "../../auth/SignUpForm";
 import moment from "moment";
+import "./Postcard.css";
 
 function PostCard({ post, postComments }) {
   // -------- SETTING STATES ------- //
@@ -19,9 +20,11 @@ function PostCard({ post, postComments }) {
   const [showLogin, setShowLogin] = useState(false);
 
   // -------- PULLING INFO FROM THE STATE -------- //
-  const user = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.session.user) || "";
   // const [localDate] = useState(new Date(post.created_at).toString());
   const [localDate] = useState(new Date(post.created_at));
+
+  // -------- RETURN -------- //
   return (
     <div style={{ margin: "30px" }}>
       {/* POST IMAGE ----------- vv*/}
@@ -93,7 +96,6 @@ function PostCard({ post, postComments }) {
           <CreateCommentForm
             post={post}
             setShowCreateComment={setShowCreateComment}
-            userId={user.id}
           />
         )}
         <div>
@@ -110,11 +112,21 @@ function PostCard({ post, postComments }) {
           {/* LIKES END */}
         </div>
         {/* ------------ COMMENTS ------------ vv*/}
-        {postComments &&
-          postComments.map((comment) => {
-            // FOR EACH COMMENT DISPLAY THIS
-            return <Comment key={comment.id} comment={comment} post={post} />;
-          })}
+        <div className="comment-section">
+          {postComments &&
+            postComments.map((comment) => {
+              // FOR EACH COMMENT DISPLAY THIS
+              return (
+                <Comment
+                  className="comment"
+                  key={comment.id}
+                  comment={comment}
+                  post={post}
+                  userId={user.id}
+                />
+              );
+            })}
+        </div>
         {/* ------------ COMMENTS ------------ ^^*/}
       </div>
     </div>
