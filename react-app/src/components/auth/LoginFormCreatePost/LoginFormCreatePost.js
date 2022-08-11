@@ -42,7 +42,14 @@ const LoginFormPosts = (setShowLogin, setShowSignup) => {
       <form onSubmit={onLogin}>
         <div>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div
+              key={ind}
+              style={{
+                color: "black",
+              }}
+            >
+              {error}
+            </div>
           ))}
         </div>
         <div>

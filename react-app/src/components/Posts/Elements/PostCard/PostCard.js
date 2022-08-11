@@ -42,6 +42,8 @@ function PostCard({ post, postComments }) {
           width: "660px",
           backgroundColor: "#3f3f3f",
           padding: "17px",
+          borderTopLeftRadius: "8px",
+          borderTopRightRadius: "8px",
         }}
       >
         {post.user.username}
