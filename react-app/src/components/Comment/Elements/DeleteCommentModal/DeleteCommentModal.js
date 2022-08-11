@@ -19,7 +19,9 @@ const DeleteCommentModal = ({ comment, setShowConfirmDeleteCommentModal, setShow
   return (
     <main>
       <div>
-        <h2>Are you sure you want to delete your post?</h2>
+        <h2 style={{
+          color: "black"
+        }}>Are you sure you want to delete your comment?</h2>
         <div>
           <button onClick={cancelDelete}>Cancel</button>
           <button onClick={deleteComment}>Delete</button>

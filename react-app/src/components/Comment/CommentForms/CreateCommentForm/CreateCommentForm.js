@@ -61,11 +61,22 @@ function CreateCommentForm({
     <div className="comment-create-input">
       <form onSubmit={submit}>
         {!comment && (
-          <div>
+          <div style={{ color: "black" }}>
             <ul className="errors">
               {errors &&
                 errors.map((error) => {
-                  return <li key={error}>{error}</li>;
+                  return (
+                    <li
+                      key={error}
+                      style={{
+                        color: "white",
+                        marginLeft: "20px",
+                        marginBottom: "8px"
+                      }}
+                    >
+                      {error}
+                    </li>
+                  );
                 })}
             </ul>
           </div>

@@ -76,11 +76,14 @@ function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
             {/* <div>
               <h2>Update Your Comment</h2>
             </div> */}
-            <div>
+            <div >
               <ul>
                 {errors &&
                   errors.map((error) => {
-                    return <li key={error}>{error}</li>;
+                    return <li key={error} style={{
+                      color: "white",
+                      marginLeft: "10px"
+                    }}>{error}</li>;
                   })}
               </ul>
             </div>
