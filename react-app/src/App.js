@@ -8,6 +8,7 @@ import CreatePost from "./components/Pages/CreatePostPage/CreatePost";
 import { authenticate } from "./store/session";
 import Signup from "./components/auth/Pages/SignupPage/Signup";
 import Footer from "./components/Global/Elements/Footer/index";
+import ExplorePage from "./components/Pages/ExplorePage/ExplorePage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,7 +30,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path="/" exact={true}>
-          <h1>My Home Page</h1>
+          <ExplorePage />
         </Route>
         <Route path="/posts" exact={true}>
           <Posts />
