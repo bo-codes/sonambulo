@@ -17,7 +17,6 @@ const NavigationBar = styled.div`
   height: 40px;
   align-items: center;
   justify-content: space-around;
-  text-decoration: none;
 `;
 
 const NavBar = () => {
@@ -75,12 +74,12 @@ const NavBar = () => {
           )}
           {loggedIn && user && (
             <>
-              <div>
+              <div className="navlink-container">
                 <NavLink to="/posts/create" activeClassName="active">
                   <p className="navlink">Create</p>
                 </NavLink>
               </div>
-              <div>
+              <div className="navlink-container">
                 <NavLink to="/posts" activeClassName="active">
                   <p className="navlink">Posts</p>
                 </NavLink>

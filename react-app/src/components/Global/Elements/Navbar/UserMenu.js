@@ -10,7 +10,8 @@ const DropDownMenu = styled.div`
   position: absolute;
   box-shadow: 0 0 4px 2px black;
   border-radius: 4px;
-  background-color: white;
+  background-color: black;
+  border: 2px solid grey
   min-width: 150px;
   top: 8px;
   left: 3px;
@@ -70,10 +71,13 @@ function UserMenu({ user }) {
               }}
             ></div>
           </div>
-          <div className="navlink dropdown" style={{
-            paddingTop: "7px",
-            width: "200px"
-            }}>
+          <div
+            className="navlink dropdown"
+            style={{
+              paddingTop: "7px",
+              width: "200px",
+            }}
+          >
             Welcome, {user.username} !
           </div>
         </div>

@@ -70,44 +70,47 @@ function PostCard({ post, postComments }) {
       {/* POST CAPTION ----- ^^*/}
 
       {/* ------ POST EDIT BUTTON ------ vv*/}
-      <div
-        style={{
-          backgroundColor: "#3f3f3f",
-          width: "660px",
-        }}
-      >
+      <div className="create-comment-container">
+        <div>
+          <span>
+            {user ? (
+              <button className="comment-button" onClick={commentButton}>
+                comment
+              </button>
+            ) : (
+              <button
+                className="comment-button"
+                onClick={() => setShowLogin(true)}
+              ></button>
+            )}
+          </span>
+          {post ? (
+            // POST EDIT BUTTON
+            // when clicked, setShowCreatePost will toggle to true
+            <span className="edit-post-button-container">
+              {user && post.user_id === user.id && (
+                <button
+                  onClick={() => setShowCreatePost(true)}
+                  className="edit-post-button"
+                >
+                  ✎
+                </button>
+              )}
+              {/* if setShowCreatePost is set to true, then show the modal which holds the post edit form. */}
+              {showCreatePost && (
+                <PostForm post={post} setShowCreatePost={setShowCreatePost} />
+              )}
+            </span>
+          ) : (
+            <h1>Loading Post</h1>
+          )}
+        </div>
+      </div>
+      <div className="create-comment-container">
         {/* if we dont have a post, we dont error out */}
-        {post ? (
-          // POST EDIT BUTTON
-          // when clicked, setShowCreatePost will toggle to true
-          <div>
-            {user && post.user_id === user.id && (
-              <button onClick={() => setShowCreatePost(true)}>✎</button>
-            )}
-            {/* if setShowCreatePost is set to true, then show the modal which holds the post edit form. */}
-            {showCreatePost && (
-              <PostForm post={post} setShowCreatePost={setShowCreatePost} />
-            )}
-          </div>
-        ) : (
-          <h1>Loading Post</h1>
-        )}
         {/* ------ POST EDIT BUTTON ------ ^^*/}
 
         {/* ----------- CREATE COMMENT BUTTON ----------- */}
-        {user ? (
-          <button
-            className="comment-button"
-            onClick={commentButton}
-          >
-            comment
-          </button>
-        ) : (
-          <button
-            className="comment-button"
-            onClick={() => setShowLogin(true)}
-          ></button>
-        )}
         {showLogin && (
           <Modal onClose={() => setShowLogin(false)}>
             <LoginFormPosts

@@ -30,9 +30,11 @@
 }
 
 .comment-create-input {
-  margin-left: 20px;
-  margin-bottom: 10px;
+  padding-left: 20px;
+  padding-bottom: 10px;
   background-color: transparent;
+  /* border-bottom: 1px solid grey */
+  padding-top: 10px;
 }
 
 .post-date {

@@ -73,3 +73,7 @@
     float: left;
     margin-right: 6px;
 }
+
+.navlink-container {
+    text-decoration: none;
+}

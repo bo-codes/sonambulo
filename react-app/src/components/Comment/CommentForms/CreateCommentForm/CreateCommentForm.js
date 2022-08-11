@@ -17,8 +17,6 @@ function CreateCommentForm({
   const [date, setDate] = useState((comment && comment.created_at) || "");
   const [content, setContent] = useState((comment && comment.content) || "");
   const [errors, setErrors] = useState([]);
-  const [showConfirmDeleteCommentModal, setShowConfirmDeleteCommentModal] =
-    useState(false);
 
   // SETTING UP THE REACT FUNCTIONS
   const history = useHistory();
@@ -44,6 +42,8 @@ function CreateCommentForm({
 
     comment = await dispatch(makeComment(userId, postId, content, date));
     if (comment.id) {
+      setContent("");
+      // setShowCreateComment(false);
       history.push(`/posts`);
       return;
     }
@@ -51,7 +51,8 @@ function CreateCommentForm({
     if (Array.isArray(comment)) {
       setErrors(comment);
     } else {
-      setShowCreateComment(false);
+      setContent("");
+      // setShowCreateComment(false);
       return;
     }
   };
