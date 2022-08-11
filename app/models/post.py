@@ -4,22 +4,6 @@ from .db import db
 from sqlalchemy import DateTime
 from sqlalchemy.sql import func
 
-# user_posts = db.Table(
-#     'user_posts',
-#     db.Column(
-#         'user_id',
-#         db.Integer,
-#         db.ForeignKey('users.id'),
-#         primary_key=True
-#     ),
-#     db.Column(
-#         'post_id',
-#         db.Integer,
-#         db.ForeignKey('posts.id'),
-#         primary_key=True
-#     )
-# )
-
 post_tags = db.Table(
     'post_tags',
     db.Column(
@@ -58,19 +42,6 @@ class Post(db.Model):
     tags = db.relationship(
         'Tag', secondary=post_tags, back_populates='posts')
 
-    def has_liked_post(self, user):
-        user_likes = [user.id for user in self.post_likes]
-        return user.id in user_likes
-
-    def like_post(self, user):
-        if not self.has_liked_post(user):
-            self.post_likes.append(user)
-
-    def unlike_post(self, user):
-        if self.has_liked_post(user):
-            self.post_likes.remove(user)
-
-
 
     def to_dict(self):
         return {
@@ -81,5 +52,4 @@ class Post(db.Model):
             'created_at': self.created_at,
             'user': self.user.to_dict(),
             'comments': [comment.to_dict() for comment in self.comments],
-            'likes': [user.to_dict_short() for user in self.post_likes]
         }

@@ -1,0 +1,46 @@
+.custom-search {
+  position: relative;
+  width: 300px;
+}
+
+.custom-search-input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 100px;
+  padding: 10px 100px 0px 20px;
+  line-height: 1;
+  box-sizing: border-box;
+  outline: none;
+  background-color: rgba(132, 132, 132, 0.395);
+}
+
+.custom-search-button {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  bottom: 3px;
+  border: 0;
+  background: transparent;
+  color: rgb(175, 175, 175);
+  outline: none;
+  margin: 0;
+  padding: 0 10px;
+  border-radius: 100px;
+  z-index: 2;
+}
+
+.comment-create-input {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  background-color: transparent;
+}
+
+.post-date {
+  background-color: #3f3f3f;
+  width: 660px;
+}
+
+.post-caption {
+  background-color: #3f3f3f;
+  width: 660px;
+}

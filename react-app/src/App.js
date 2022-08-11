@@ -7,6 +7,7 @@ import Posts from "./components/Pages/PostsPage/Posts";
 import CreatePost from "./components/Pages/CreatePostPage/CreatePost";
 import { authenticate } from "./store/session";
 import Signup from "./components/auth/Pages/SignupPage/Signup";
+import Footer from "./components/Global/Elements/Footer/index";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,6 +44,7 @@ function App() {
           <Signup />
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

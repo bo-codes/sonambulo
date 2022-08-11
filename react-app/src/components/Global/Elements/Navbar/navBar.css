@@ -15,23 +15,23 @@
     font-family: "Eina-semibold";
     font-size: 16px;
     /* font-style: bold; */
-    color: #65678e;
+    color: #bbbcdb;
     text-decoration: "none";
     background-color: transparent;
     border: none;
 }
 
 .navlink:hover, .navlink:focus {
-    color: #9395b1;
-    font-size: 18px;
+    color: #f1f3ff;
+    /* font-size: 18px; */
 }
 
 .navBarWrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 10%;
-    border-bottom: 3px solid rgba(25, 25, 35, 0.3);
+    padding: 7px 10%;
+    border-bottom: 1px solid rgb(75, 75, 97);
 }
 
 .profile-icon {
@@ -53,13 +53,13 @@
     width: 30px;
     height: 30px;
     border-radius: 15px;
-    background-color: #c7c7c7;
+    background-color: #f1f3ff;
     float: left;
     margin-right: 6px;
 }
 
 .profile-container:hover .navlink {
-    color: #9395b1;
+    color: #f1f3ff;
 }
 
 .user-profile-container {

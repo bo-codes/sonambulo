@@ -1,0 +1,13 @@
+.comment-container {
+  width: fit-content;
+  padding: 6px;
+  border: 2px solid grey;
+  margin: 10px;
+  border-radius: 11px;
+  position: relative;
+}
+
+.comment-dropdown {
+  /* position: relative; */
+  display: inline;
+}

@@ -7,8 +7,7 @@ import PostCard from "../../Posts/Elements/PostCard/PostCard";
 // IMPORT THUNKS WE NEED TO DISPATCH --------
 import { acquireAllComments } from "../../../store/comments";
 import { acquirePosts } from "../../../store/posts";
-import { thunkGetAllUsers } from "../../../store/users";
-import { thunkFollow, thunkUnfollow } from "../../../store/session";
+import "./Posts.css";
 
 // PAGE THAT DISPLAYS ALL OF OUR POSTS
 function Posts() {
@@ -34,22 +33,11 @@ function Posts() {
     dispatch(acquireAllComments());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(thunkGetAllUsers());
-  }, [dispatch]);
-
-  const follow = (username) => {
-    dispatch(thunkFollow(username));
-  };
-  const unfollow = (username) => {
-    dispatch(thunkUnfollow(username));
-  };
-
   return (
     <main>
       {/* TITLE */}
-      <h1>Posts</h1>
-      <div>
+      {/* <h1>Posts</h1> */}
+      <div className="post-list">
         <div>
           {/* <h3>Suggested Users:</h3> */}
           {/* {shuffledUsers.slice(0, 5).map((listedUser) => {

@@ -8,11 +8,13 @@ import LoginFormPosts from "../../../auth/LoginFormCreatePost/LoginFormCreatePos
 import SignUpForm from "../../../auth/SignupForm/SignUpForm";
 import moment from "moment";
 import "./Postcard.css";
+import chatballoon from "../../../../images/chat-balloon.jpg";
 
 function PostCard({ post, postComments }) {
   // -------- SETTING STATES ------- //
   // SHOWING OR HIDING THE EDIT POST MODAL
   const [showCreatePost, setShowCreatePost] = useState(false);
+  const [showComments, setShowComments] = useState(false);
   // SHOWING OR HIDING THE CREATE COMMENT MODAL
   const [showCreateComment, setShowCreateComment] = useState(false);
 
@@ -24,6 +26,10 @@ function PostCard({ post, postComments }) {
   // const [localDate] = useState(new Date(post.created_at).toString());
   const [localDate] = useState(new Date(post.created_at));
   console.log(post);
+  const commentButton = () => {
+    setShowCreateComment(true);
+    setShowComments(true);
+  };
 
   // -------- RETURN -------- //
   return (
@@ -32,37 +38,44 @@ function PostCard({ post, postComments }) {
       <div
         style={{
           color: "white",
-          fontSize: "30px",
+          fontSize: "16px",
+          width: "660px",
+          backgroundColor: "#3f3f3f",
+          padding: "17px",
         }}
       >
         {post.user.username}
       </div>
-      <img
-        style={{ width: "200px", height: "auto" }}
-        src={post.image_url}
-        alt=""
-      />
+      {post.image_url && (
+        <img
+          style={{ width: "660px", height: "auto" }}
+          src={post.image_url}
+          alt=""
+        />
+      )}
       {/* POST IMAGE ----------- ^^*/}
 
       {/* POST DATE ----- vv*/}
       <div>
-        <div>
-          {/* <div>{localDate.split(" ")[1].toUpperCase()}</div> */}
-          {/* <div>{localDate.split(" ")[2]}</div> */}
+        <div className="post-date">
           <div>{moment(localDate).calendar()}</div>
-          {/* <div>{post.created_at}</div> */}
         </div>
       </div>
       {/* POST DATE ----- ^^*/}
 
       {/*  POST CAPTION ----- vv*/}
-      <div>
+      <div className="post-caption">
         <p>{post.caption}</p>
       </div>
       {/* POST CAPTION ----- ^^*/}
 
       {/* ------ POST EDIT BUTTON ------ vv*/}
-      <div>
+      <div
+        style={{
+          backgroundColor: "#3f3f3f",
+          width: "660px",
+        }}
+      >
         {/* if we dont have a post, we dont error out */}
         {post ? (
           // POST EDIT BUTTON
@@ -83,9 +96,17 @@ function PostCard({ post, postComments }) {
 
         {/* ----------- CREATE COMMENT BUTTON ----------- */}
         {user ? (
-          <button onClick={() => setShowCreateComment(true)}>comment</button>
+          <button
+            className="comment-button"
+            onClick={commentButton}
+          >
+            comment
+          </button>
         ) : (
-          <button onClick={() => setShowLogin(true)}>comment</button>
+          <button
+            className="comment-button"
+            onClick={() => setShowLogin(true)}
+          ></button>
         )}
         {showLogin && (
           <Modal onClose={() => setShowLogin(false)}>
@@ -108,35 +129,27 @@ function PostCard({ post, postComments }) {
             userId={user.id}
           />
         )}
-        <div>
-          {/* LIKES  START*/}
-          {/* <div >
-            {user && (
-              <Like
-                event_id={eventId}
-                user_id={user.id}
-                title={title}
-              />
-            )}
-          </div> */}
-          {/* LIKES END */}
-        </div>
-        <div className="comment-section">
-          {postComments &&
-            postComments.map((comment) => {
-              // FOR EACH COMMENT DISPLAY THIS
-              return (
-                <Comment
-                  className="comment"
-                  key={comment.id}
-                  comment={comment}
-                  post={post}
-                  userId={user.id}
-                />
-              );
-            })}
-        </div>
         {/* ------------ COMMENTS ------------ vv*/}
+        {showComments && (
+          <div className="comment-section">
+            {postComments &&
+              postComments.map((comment) => {
+                // FOR EACH COMMENT DISPLAY THIS
+                return (
+                  <Comment
+                    style={{
+                      backgroundColor: "red",
+                    }}
+                    className="comment"
+                    key={comment.id}
+                    comment={comment}
+                    post={post}
+                    userId={user.id}
+                  />
+                );
+              })}
+          </div>
+        )}
         {/* ------------ COMMENTS ------------ ^^*/}
       </div>
     </div>

@@ -73,9 +73,9 @@ function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
         )}
         {comment && (
           <div>
-            <div>
+            {/* <div>
               <h2>Update Your Comment</h2>
-            </div>
+            </div> */}
             <div>
               <ul>
                 {errors &&

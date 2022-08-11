@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 
 // IMPORT THUNKS WE NEED TO DISPATCH --------
 import { makeComment } from "../../../../store/comments";
+import "./CreateCommentForm.css";
 
 // COMMENT FORM THAT WE WILL DISPLAY ON THE POSTS PAGE USING A MODAL AND BUTTON THAT SHOWS MODAL NEXT TO EACH POST
 function CreateCommentForm({
@@ -56,7 +57,7 @@ function CreateCommentForm({
   };
 
   return (
-    <div>
+    <div className="comment-create-input">
       <form onSubmit={submit}>
         {!comment && (
           <div>
@@ -69,17 +70,16 @@ function CreateCommentForm({
           </div>
         )}
         <div>
-          <label htmlFor="content">Content</label>
-          <textarea
-            name="content"
-            type="text"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
-        </div>
-        <div>
-          <div>
-            <button>Create Comment</button>
+          <div className="custom-search">
+            {/* <label htmlFor="content">Content</label> */}
+            <textarea
+              className="custom-search-input"
+              name="content"
+              type="text"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+            <button className="custom-search-button">Reply</button>
           </div>
         </div>
       </form>

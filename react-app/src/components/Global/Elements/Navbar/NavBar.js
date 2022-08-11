@@ -85,11 +85,11 @@ const NavBar = () => {
                   <p className="navlink">Posts</p>
                 </NavLink>
               </div>
-              <div>
+              {/* <div>
                 <NavLink to="/userposts" exact={true} activeClassName="active">
                   <p className="navlink">Profile</p>
                 </NavLink>
-              </div>
+              </div> */}
               <div>
                 <UserMenu user={user} />
               </div>

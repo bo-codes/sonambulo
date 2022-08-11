@@ -1,8 +1,9 @@
 .comment-section {
   max-height: 25vh;
-  max-width: 90%;
+  max-width: 660px;
   background-color: #3f3f3f;
   overflow-y: scroll;
+  margin-left: 20px;
 }
 .comment {
   height: 10%;
@@ -10,4 +11,23 @@
   margin: 2%;
   background-color: #ffff;
   color: black;
+}
+
+.comment-button {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  /* margin: 10px 0px; */
+  border-radius: 11px;
+  padding: 5px;
+  border: none;
+}
+
+.post-caption {
+  padding: 10px;
+}
+
+.post-date {
+  padding-top: 20px;
+  padding-left: 10px;
 }

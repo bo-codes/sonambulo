@@ -58,26 +58,13 @@ class User(db.Model, UserMixin):
             'email': self.email,
         }
 
-    def is_following(self, user):
-        return self.followed.filter(follows.c.followed_id == user.id).count() > 0
-
-    def follow(self, user):
-        if not self.is_following(user):
-            self.followed.append(user)
-
-    def unfollow(self, user):
-        if self.is_following(user):
-            self.followed.remove(user)
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'email': self.email,
-            'username': self.username,
-            'created_at': self.created_at,
-            'followers': [user.to_dict_short() for user in self.follows],
-            'following': [user.to_dict_short() for user in self.followed]
-        }
+    # def to_dict(self):
+    #     return {
+    #         'id': self.id,
+    #         'email': self.email,
+    #         'username': self.username,
+    #         'created_at': self.created_at,
+    #     }
 
     def to_dict_short(self):
         return {
