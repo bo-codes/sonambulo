@@ -34,15 +34,19 @@ function ExplorePage() {
   }, [dispatch]);
 
   return (
-    <div className="imageCard" style={{
-      width: "50vw",
-      height: "100vh",
-      overflow: "scroll",
-      display: "flex",
-      flexWrap: "wrap"
-    }}>
+    <div
+      className="imageCard"
+      style={{
+        width: "50vw",
+        height: "100vh",
+        overflow: "scroll",
+        display: "flex",
+        flexWrap: "wrap",
+      }}
+    >
       {posts.map((post) => {
-        if (post.image_url) return (
+        if (post.image_url)
+          return (
             <div key={post.id} style={{ alignContent: "center" }}>
               {/* <div key={image.id} className="image"> */}
               <Link
@@ -51,7 +55,9 @@ function ExplorePage() {
                 style={{ position: "relative" }}
               >
                 <div className="overlay">
-                  <h3 style={{ color: "white" }}>{post.user.username}</h3>
+                  <div style={{ color: "white", width: "400px" }}>
+                    {post.caption.slice(0, 220)}
+                  </div>
                 </div>
                 <img
                   src={post.image_url}
@@ -61,7 +67,7 @@ function ExplorePage() {
                 ></img>
               </Link>
             </div>
-        );
+          );
       })}
     </div>
   );
