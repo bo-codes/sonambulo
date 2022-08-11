@@ -51,25 +51,17 @@ function Posts() {
       <h1>Posts</h1>
       <div>
         <div>
-          <h3>Suggested Users:</h3>
-          {shuffledUsers.slice(0, 5).map((listedUser) => {
+          {/* <h3>Suggested Users:</h3> */}
+          {/* {shuffledUsers.slice(0, 5).map((listedUser) => {
             return (
               <div key={listedUser.id}>
                 <NavLink to={`/${listedUser.username}`}>
                   <img src={listedUser.profile_pic}></img>
                   <div>{listedUser.username}</div>
                 </NavLink>
-                {/* {user.followers.includes(listedUser.username) && (
-                  <button onClick={dispatch(thunkUnfollow(listedUser.username))}>
-                    unfollow
-                  </button>
-                )}
-                {!user.followers.includes(listedUser.username) && (
-                  <button onClick={dispatch(thunkFollow(listedUser.username))}>follow</button>
-                )} */}
               </div>
             );
-          })}
+          })} */}
         </div>
         {/* CHECK IF THERE ARE POSTS SO THAT THE USESELECTOR DOESNT FUCK US */}
         {posts &&
