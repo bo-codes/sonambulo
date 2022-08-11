@@ -1,5 +1,6 @@
 from .db import db
-
+from sqlalchemy import DateTime
+from sqlalchemy.sql import func
 
 class Comment(db.Model):
     __tablename__ = 'comments'
@@ -10,7 +11,7 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey(
         'posts.id', ondelete="CASCADE"))
     content = db.Column(db.Text, nullable = False)
-    created_at = db.Column(db.DateTime(timezone=False), nullable=False)
+    created_at = db.Column(DateTime(timezone=True), server_default=func.now())
 
     user = db.relationship('User', back_populates='comments')
     post = db.relationship('Post', back_populates='comments')
@@ -22,4 +23,5 @@ class Comment(db.Model):
             'post_id': self.post_id,
             'content': self.content,
             'created_at': self.created_at,
+            'user': self.user.to_dict_short()
         }

@@ -52,13 +52,9 @@ def update_comment(id):
 
     if form.validate_on_submit():
         comment = Comment.query.get(id)
-        comment.user_id=form.data['user_id'],
-        comment.post_id=form.data['post_id'],
         comment.content=form.data['content'],
-        comment.created_at=datetime.datetime.now()
 
         db.session.commit()
-        print(form.data)
         return comment.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 

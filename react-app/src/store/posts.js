@@ -2,6 +2,7 @@
 
 const CREATE_POST = "post/CREATE_POST";
 const READ_POST = "post/READ_POST";
+const GET_FEED_POSTS = "post/GET_FEED_POSTS";
 const UPDATE_POST = "post/UPDATE_POST";
 const DELETE_POST = "post/DELETE_POST";
 
@@ -15,6 +16,11 @@ const createPost = (post) => ({
 const readPost = (posts) => ({
   type: READ_POST,
   payload: posts,
+});
+
+export const actionGetFeedPosts = (posts) => ({
+  type: GET_FEED_POSTS,
+  posts,
 });
 
 const updatePost = (post) => ({
@@ -91,6 +97,16 @@ export const acquirePosts = () => async (dispatch) => {
     }
   } else {
     return ["An error occurred. Please try again."];
+  }
+};
+
+export const thunkGetFeedPosts = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/posts/feed/${userId}`);
+
+  if (response.ok) {
+    const feedPosts = await response.json();
+    dispatch(actionGetFeedPosts(feedPosts));
+    return feedPosts;
   }
 };
 

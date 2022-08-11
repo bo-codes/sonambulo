@@ -16,7 +16,6 @@ class PostForm(FlaskForm):
     image = StringField(
         'image')
     caption = TextAreaField('caption', validators=[DataRequired()])
-    # created_at = StringField('created_at', validators=[DataRequired()])
 
 
 
@@ -25,4 +24,3 @@ class EditPostForm(FlaskForm):
     image = StringField(
         'image')
     caption = TextAreaField('caption', validators=[DataRequired()])
-    # created_at = StringField('created_at', validators=[DataRequired()])

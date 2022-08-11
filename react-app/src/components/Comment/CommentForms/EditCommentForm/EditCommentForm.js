@@ -2,12 +2,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-
+// IMPORT COMPONENTS WE'RE USING --------
+import { Modal } from "../../../Global/Elements/Modal/index";
+import DeleteCommentModal from "../../Elements/DeleteCommentModal/DeleteCommentModal";
 // IMPORT THUNKS WE NEED TO DISPATCH --------
-import { makeComment } from "../../../store/comments";
+import {editComment} from "../../../../store/comments"
 
 // COMMENT FORM THAT WE WILL DISPLAY ON THE POSTS PAGE USING A MODAL AND BUTTON THAT SHOWS MODAL NEXT TO EACH POST
-function CreateCommentForm({ comment = null, post = null, setShowCreateComment }) {
+function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
   // SETTING STATES
   const [date, setDate] = useState(
     (comment && comment.created_at) || ""
@@ -39,22 +41,22 @@ function CreateCommentForm({ comment = null, post = null, setShowCreateComment }
       return;
     }
 
-      comment = await dispatch(
-        makeComment(userId, postId, content, date)
-      );
-      if (comment.id) {
-        history.push(`/posts`);
-        return;
-      }
+    comment = await dispatch(
+      editComment(comment.id, userId, postId, content, date)
+    );
 
     if (Array.isArray(comment)) {
       setErrors(comment);
     } else {
-      setShowCreateComment(false);
+      setShowEditComment(false);
       return;
     }
   };
 
+  // THIS SHOWS THE MODAL WHEN CALLED
+  const deleteCommentModal = () => {
+    setShowConfirmDeleteCommentModal(true);
+  };
 
   return (
     <div>
@@ -69,6 +71,21 @@ function CreateCommentForm({ comment = null, post = null, setShowCreateComment }
             </ul>
           </div>
         )}
+        {comment && (
+          <div>
+            <div>
+              <h2>Update Your Comment</h2>
+            </div>
+            <div>
+              <ul>
+                {errors &&
+                  errors.map((error) => {
+                    return <li key={error}>{error}</li>;
+                  })}
+              </ul>
+            </div>
+          </div>
+        )}
         <div>
           <label htmlFor="content">Content</label>
           <textarea
@@ -78,14 +95,36 @@ function CreateCommentForm({ comment = null, post = null, setShowCreateComment }
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
+
+        {showConfirmDeleteCommentModal && (
+          <Modal onClose={() => setShowConfirmDeleteCommentModal(false)}>
+            <DeleteCommentModal
+              setShowConfirmDeleteCommentModal={
+                setShowConfirmDeleteCommentModal
+              }
+              comment={comment}
+            />
+          </Modal>
+        )}
         <div>
+          {/* IS THERE A COMMENT? IF SO THE BUTTONS WILL CHANGE TO UPDATE AND DELETE */}
+          {comment ? (
+            <div>
+              <button type="submit">Update Comment</button>
+              <button type="button" onClick={deleteCommentModal}>
+                Delete Comment
+              </button>
+            </div>
+          ) : (
+            // IF THERE WAS NO COMMENT THEN ONLY GIVE THE OPTION TO CREATE. YOU"RE NOT UPDATING GOOFY
             <div>
               <button>Create Comment</button>
             </div>
+          )}
         </div>
       </form>
     </div>
   );
 }
 
-export default CreateCommentForm;
+export default EditCommentForm;

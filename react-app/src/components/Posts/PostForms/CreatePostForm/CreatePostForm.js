@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 // IMPORT COMPONENTS WE'RE USING
-import { Modal } from "../../Global/Elements/Modal";
-import DeletePostModal from "../Elements/DeletePostModal";
+import { Modal } from "../../../Global/Elements/Modal";
+import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
 // IMPORT THUNKS WE NEED TO DISPATCH
-import { makePost, editPost } from "../../../store/posts";
+import { makePost, editPost } from "../../../../store/posts";
 
 // THIS IS OUR POST CREATION/EDIT FORM COMPONENT
 function PostForm({ post = null, setShowCreatePost }) {

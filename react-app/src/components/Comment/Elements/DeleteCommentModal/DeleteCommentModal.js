@@ -1,18 +1,18 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { removePost } from "../../../store/posts";
+import { removeComment } from "../../../../store/comments";
 
-const DeletePostModal = ({ post, setShowConfirmDeleteModal }) => {
+const DeleteCommentModal = ({ comment, setShowConfirmDeleteCommentModal, setShowCommentEditModal }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const cancelDelete = () => {
-    setShowConfirmDeleteModal(false);
+    setShowConfirmDeleteCommentModal(false);
   };
 
-  const deletePost = async (e) => {
+  const deleteComment = async (e) => {
     e.preventDefault();
-    await dispatch(removePost(post.id));
+    await dispatch(removeComment(comment.id));
     history.push("/posts");
   };
 
@@ -22,11 +22,11 @@ const DeletePostModal = ({ post, setShowConfirmDeleteModal }) => {
         <h2>Are you sure you want to delete your post?</h2>
         <div>
           <button onClick={cancelDelete}>Cancel</button>
-          <button onClick={deletePost}>Delete</button>
+          <button onClick={deleteComment}>Delete</button>
         </div>
       </div>
     </main>
   );
 };
 
-export default DeletePostModal;
+export default DeleteCommentModal;

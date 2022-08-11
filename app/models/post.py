@@ -1,21 +1,24 @@
 from sqlalchemy import ForeignKey
+from .like import likes
 from .db import db
+from sqlalchemy import DateTime
+from sqlalchemy.sql import func
 
-user_posts = db.Table(
-    'user_posts',
-    db.Column(
-        'user_id',
-        db.Integer,
-        db.ForeignKey('users.id'),
-        primary_key=True
-    ),
-    db.Column(
-        'post_id',
-        db.Integer,
-        db.ForeignKey('posts.id'),
-        primary_key=True
-    )
-)
+# user_posts = db.Table(
+#     'user_posts',
+#     db.Column(
+#         'user_id',
+#         db.Integer,
+#         db.ForeignKey('users.id'),
+#         primary_key=True
+#     ),
+#     db.Column(
+#         'post_id',
+#         db.Integer,
+#         db.ForeignKey('posts.id'),
+#         primary_key=True
+#     )
+# )
 
 post_tags = db.Table(
     'post_tags',
@@ -42,16 +45,32 @@ class Post(db.Model):
         'users.id',  ondelete="CASCADE"), nullable=False)
     image_url = db.Column(db.String(255))
     caption = db.Column(db.Text)
-    created_at = db.Column(db.DateTime)
+    created_at = db.Column(DateTime(timezone=True), server_default=func.now())
 
     comments = db.relationship(
         'Comment', back_populates='post', cascade='all, delete-orphan', passive_deletes=True)
-    likes = db.relationship(
-        'Like', back_populates='post', cascade='all, delete-orphan', passive_deletes=True)
-    users = db.relationship(
-        'User', secondary=user_posts, back_populates='posts')
+    post_likes = db.relationship("User",
+            secondary=likes,
+            back_populates="user_likes",
+    )
+    user = db.relationship(
+        'User', back_populates='posts', lazy='subquery')
     tags = db.relationship(
         'Tag', secondary=post_tags, back_populates='posts')
+
+    def has_liked_post(self, user):
+        user_likes = [user.id for user in self.post_likes]
+        return user.id in user_likes
+
+    def like_post(self, user):
+        if not self.has_liked_post(user):
+            self.post_likes.append(user)
+
+    def unlike_post(self, user):
+        if self.has_liked_post(user):
+            self.post_likes.remove(user)
+
+
 
     def to_dict(self):
         return {
@@ -60,4 +79,7 @@ class Post(db.Model):
             'image_url': self.image_url,
             'caption': self.caption,
             'created_at': self.created_at,
+            'user': self.user.to_dict(),
+            'comments': [comment.to_dict() for comment in self.comments],
+            'likes': [user.to_dict_short() for user in self.post_likes]
         }

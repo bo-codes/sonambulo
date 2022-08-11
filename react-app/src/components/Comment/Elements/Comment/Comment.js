@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import EditCommentForm from "../Forms/editCommentForm";
-import CommentDropdown from "./CommentDropdown";
+import EditCommentForm from "../../CommentForms/EditCommentForm/EditCommentForm";
+import CommentDropdown from "../CommentDropdown/CommentDropdown";
 import moment from "moment";
 
 function Comment({ comment, post, userId }) {
@@ -25,9 +25,10 @@ function Comment({ comment, post, userId }) {
               setShowEditComment={setShowEditComment}
             />
           )}
+          <p>{comment.user.username}</p>
           <p>{comment.content}</p>
           <div>{moment(comment.commentDate).calendar()}</div>
-          <div>{comment.commentDate}</div>
+          {/* <div>{comment.commentDate}</div> */}
         </div>
       )}
     </>

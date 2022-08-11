@@ -1,11 +1,14 @@
 // IMPORT REACT STUFF --------
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 // IMPORT COMPONENTS WE'RE USING --------
-import PostCard from "../Posts/Elements/PostCard";
+import PostCard from "../../Posts/Elements/PostCard/PostCard";
 // IMPORT THUNKS WE NEED TO DISPATCH --------
-import { acquireAllComments } from "../../store/comments";
-import { acquirePosts } from "../../store/posts";
+import { acquireAllComments } from "../../../store/comments";
+import { acquirePosts } from "../../../store/posts";
+import { thunkGetAllUsers } from "../../../store/users";
+import { thunkFollow, thunkUnfollow } from "../../../store/session";
 
 // PAGE THAT DISPLAYS ALL OF OUR POSTS
 function Posts() {
@@ -15,7 +18,13 @@ function Posts() {
   // THIS RUNS FIRST BEFORE USEEFFECT FETCHES OUR DATA WHICH IS WHY WE ALWAYS HAVE TO IMPLEMENT
   // OUR CONDITIONALS (posts && posts.map()) TO HANDLE THE CASES WHERE WE DONT HAVE DATA YET
   const posts = Object.values(useSelector((state) => state.posts));
+
   const comments = Object.values(useSelector((state) => state.comments));
+
+  const user = useSelector((state) => state.session.user);
+  const users = useSelector((state) => Object.values(state.user));
+
+  const shuffledUsers = users.sort(() => Math.random() - 0.5);
 
   // WE ADD DISPATCH TO THE DEPENDENCY ARR SO THAT IT DOESNT RERENDER A MILLION TIMES, I JUST CANT EXPLAIN IT WELL
   useEffect(() => {
@@ -25,11 +34,43 @@ function Posts() {
     dispatch(acquireAllComments());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(thunkGetAllUsers());
+  }, [dispatch]);
+
+  const follow = (username) => {
+    dispatch(thunkFollow(username));
+  };
+  const unfollow = (username) => {
+    dispatch(thunkUnfollow(username));
+  };
+
   return (
     <main>
       {/* TITLE */}
       <h1>Posts</h1>
       <div>
+        <div>
+          <h3>Suggested Users:</h3>
+          {shuffledUsers.slice(0, 5).map((listedUser) => {
+            return (
+              <div key={listedUser.id}>
+                <NavLink to={`/${listedUser.username}`}>
+                  <img src={listedUser.profile_pic}></img>
+                  <div>{listedUser.username}</div>
+                </NavLink>
+                {/* {user.followers.includes(listedUser.username) && (
+                  <button onClick={dispatch(thunkUnfollow(listedUser.username))}>
+                    unfollow
+                  </button>
+                )}
+                {!user.followers.includes(listedUser.username) && (
+                  <button onClick={dispatch(thunkFollow(listedUser.username))}>follow</button>
+                )} */}
+              </div>
+            );
+          })}
+        </div>
         {/* CHECK IF THERE ARE POSTS SO THAT THE USESELECTOR DOESNT FUCK US */}
         {posts &&
           posts.map((post) => {

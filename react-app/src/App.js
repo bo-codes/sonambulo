@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import NavBar from "./components/Navbar/NavBar";
+import NavBar from "./components/Global/Elements/Navbar/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import Posts from "./components/auth/Posts";
-import CreatePost from "./components/auth/CreatePost";
+import Posts from "./components/Pages/PostsPage/Posts";
+import CreatePost from "./components/Pages/CreatePostPage/CreatePost";
 import { authenticate } from "./store/session";
-import Signup from "./components/auth/Pages/Signup";
+import Signup from "./components/auth/Pages/SignupPage/Signup";
 
 function App() {
   const [loaded, setLoaded] = useState(false);

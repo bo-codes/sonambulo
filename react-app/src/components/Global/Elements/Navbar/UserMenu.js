@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import LogoutButton from "../auth/LogoutButton";
+import LogoutButton from "../../../auth/LogoutButton";
 import "./navBar.css";
 
 const DropDownMenu = styled.div`

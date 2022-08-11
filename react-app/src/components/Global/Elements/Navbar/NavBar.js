@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import UserMenu from "./UserMenu";
 // import EventzeitLogo from "../../images/EventzeitMainLogo.png";
-import { login } from "../../store/session";
+import { login } from "../../../../store/session";
 import "./navBar.css";
-import LoginForm from "../auth/LoginForm";
-import { Modal } from "../Global/Elements/Modal";
+import LoginForm from "../../../auth/LoginForm/LoginForm";
+import { Modal } from "../Modal";
 
 const NavigationBar = styled.div`
   margin-left: 20vw;

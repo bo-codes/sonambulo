@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { removeComment } from "../../../store/comments";
+import { removeComment } from "../../../../store/comments";
 
 function CommentDropdown({ setShowEditComment, comment }) {
     const [showDropdown, setShowDropdown] = useState(false);

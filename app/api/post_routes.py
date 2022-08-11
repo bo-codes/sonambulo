@@ -1,29 +1,37 @@
 from flask import Blueprint, redirect, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.api.auth_routes import validation_errors_to_error_messages
-from app.models import Post, Comment, db
+from app.models import Post, db
 from app.forms.newPost_form import PostForm, EditPostForm
 import datetime
-# from datetime import timezone
+
 
 post_routes = Blueprint('posts', __name__)
 
-
+# ----------- VALIDATION ----------- vv#
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
+# ----------- VALIDATION ----------- ^^#
+#
+#
+# ----------- GET POSTS ----------- vv#
 @post_routes.route('/')
 def get_posts():
     posts = Post.query.all()
-    return {'posts': [post.to_dict() for post in posts]}
-
-
-@post_routes.route('/<int:id>/')
-def get_post(id):
-    post = Post.query.get(id)
-    if not post.to_dict:
-        return {"errors": "Post Not Found!"}, 404
-    else:
-        return {"post": post.to_dict()}
-
-
+    data = [post.to_dict() for post in posts]
+    print("\n\n\n", data, "\n\n\n", "DATAAAAAAAA")
+    return {'posts': data}
+# ----------- GET POSTS ----------- ^^#
+#
+#
+# ----------- CREATE POST ----------- vv#
 @post_routes.route('/', methods=["POST"])
 @login_required
 def create_post():
@@ -44,8 +52,10 @@ def create_post():
         return post.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
-
+# ----------- CREATE POST ----------- ^^#
+#
+#
+# ----------- UPDATE POST ----------- vv#
 @post_routes.route("/<int:id>", methods=["PUT"])
 @login_required
 def update_post(id):
@@ -65,8 +75,10 @@ def update_post(id):
         return post.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
-
+# ----------- UPDATE POST ----------- ^^#
+#
+#
+# ----------- DELETE POST ----------- vv#
 @post_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_post(id):
@@ -74,10 +86,26 @@ def delete_post(id):
     post.delete()
     db.session.commit()
     return {'message': 'Post deleted'}
-
-
-# @post_routes.route('/<int:id>/comments')
-# def get_comments(id):
-#     comments = Comment.query.filter(Comment.post_id == id)
-#     print("\n\n\nBOBOBO", comments)
-#     return [comment.to_dict() for comment in comments]
+# ----------- DELETE POST ----------- ^^#
+#
+#
+# ----------- LIKE POST ----------- vv#
+@post_routes.route('/<id>/like', methods=['PUT'])
+@login_required
+def like_post(id):
+    post = Post.query.get(id)
+    post.like_post(current_user)
+    db.session.commit()
+    return post.to_dict()
+# ----------- LIKE POST ----------- ^^#
+#
+#
+# ----------- LIKE POST ----------- vv#
+@post_routes.route('/<id>/unlike', methods=['PUT'])
+@login_required
+def unlike_post(id):
+    post = Post.query.get(id)
+    post.unlike_post(current_user)
+    db.session.commit()
+    return post.to_dict()
+# ----------- LIKE POST ----------- ^^#

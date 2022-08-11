@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
-import { login } from "../../store/session";
+import { login } from "../../../store/session";
 
 const LoginFormPosts = (setShowLogin, setShowSignup) => {
   const [errors, setErrors] = useState([]);
