@@ -81,7 +81,9 @@ function PostCard({ post, postComments }) {
               <button
                 className="comment-button"
                 onClick={() => setShowLogin(true)}
-              ></button>
+              >
+                comment
+              </button>
             )}
           </span>
           {post ? (
