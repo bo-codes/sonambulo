@@ -52,10 +52,15 @@
 
 .edit-post-button-container {
   background-color: #3f3f3f;
+  align-self: center;
+  float: "right";
+  margin-right: 10px;
   /* position: absolute; */
 }
 
 .edit-post-button {
   /* position: absolute; */
+  font-size: 22px;
   margin-left: 9px;
+  float: "right"
 }

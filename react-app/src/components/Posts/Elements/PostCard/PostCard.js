@@ -73,8 +73,11 @@ function PostCard({ post, postComments }) {
 
       {/* ------ POST EDIT BUTTON ------ vv*/}
       <div className="create-comment-container">
-        <div>
-          <span>
+        <div style={{
+          display: "flex",
+          justifyContent: "space-between"
+        }}>
+          <div >
             {user ? (
               <button className="comment-button" onClick={commentButton}>
                 comment
@@ -87,11 +90,11 @@ function PostCard({ post, postComments }) {
                 comment
               </button>
             )}
-          </span>
+          </div>
           {post ? (
             // POST EDIT BUTTON
             // when clicked, setShowCreatePost will toggle to true
-            <span className="edit-post-button-container">
+            <div className="edit-post-button-container">
               {user && post.user_id === user.id && (
                 <button
                   onClick={() => setShowCreatePost(true)}
@@ -104,7 +107,7 @@ function PostCard({ post, postComments }) {
               {showCreatePost && (
                 <PostForm post={post} setShowCreatePost={setShowCreatePost} />
               )}
-            </span>
+            </div>
           ) : (
             <h1>Loading Post</h1>
           )}
