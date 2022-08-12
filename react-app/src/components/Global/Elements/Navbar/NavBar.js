@@ -52,6 +52,11 @@ const NavBar = () => {
         <NavigationBar className="navBarDiv2">
           {!loggedIn && (
             <>
+              <div className="navlink-container">
+                <NavLink to="/" activeClassName="active">
+                  <p className="navlink">Home</p>
+                </NavLink>
+              </div>
               <div>
                 <NavLink to="/posts" exact={true} activeClassName="active">
                   <p className="navlink">Posts</p>
@@ -74,6 +79,11 @@ const NavBar = () => {
           )}
           {loggedIn && user && (
             <>
+              <div className="navlink-container">
+                <NavLink to="/" activeClassName="active">
+                  <p className="navlink">Home</p>
+                </NavLink>
+              </div>
               <div className="navlink-container">
                 <NavLink to="/posts/create" activeClassName="active">
                   <p className="navlink">Create</p>
