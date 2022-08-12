@@ -109,7 +109,15 @@ function PostForm({ post = null, setShowCreatePost }) {
           <ul>
             {errors &&
               errors.map((error) => {
-                return <li key={error}>{error}</li>;
+                let splitError = error.split(":");
+                let firstPart = splitError[0];
+                let firstLetter = firstPart[0].toUpperCase();
+                let secondPart = splitError[1].slice(11, 23);
+                return (
+                  <li key={error}>
+                    {firstLetter + firstPart.slice(1) + secondPart}
+                  </li>
+                );
               })}
           </ul>
         </div>

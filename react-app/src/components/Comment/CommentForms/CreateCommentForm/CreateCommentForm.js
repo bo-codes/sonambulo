@@ -61,20 +61,17 @@ function CreateCommentForm({
     <div className="comment-create-input">
       <form onSubmit={submit}>
         {!comment && (
-          <div style={{ color: "black" }}>
+          <div style={{ marginBottom: "7px", marginLeft: "20px" }}>
             <ul className="errors">
               {errors &&
                 errors.map((error) => {
+                  let splitError = error.split(":");
+                  let firstPart = splitError[0];
+                  let firstLetter = firstPart[0].toUpperCase();
+                  let secondPart = splitError[1].slice(11, 23);
                   return (
-                    <li
-                      key={error}
-                      style={{
-                        color: "white",
-                        marginLeft: "20px",
-                        marginBottom: "8px"
-                      }}
-                    >
-                      {error}
+                    <li key={error}>
+                      {firstLetter + firstPart.slice(1) + secondPart}
                     </li>
                   );
                 })}
