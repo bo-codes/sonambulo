@@ -62,31 +62,39 @@ function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
     <div>
       <form onSubmit={submit}>
         {!comment && (
-          <div>
+          <div style={{ marginBottom: "7px", marginLeft: "20px" }}>
             <ul className="errors">
               {errors &&
                 errors.map((error) => {
-                  return <li key={error}>{error}</li>;
+                  let splitError = error.split(":");
+                  let firstPart = splitError[0];
+                  let firstLetter = firstPart[0].toUpperCase();
+                  let secondPart = splitError[1].slice(11, 23);
+                  return (
+                    <li key={error}>
+                      {firstLetter + firstPart.slice(1) + secondPart}
+                    </li>
+                  );
                 })}
             </ul>
           </div>
         )}
         {comment && (
-          <div>
-            {/* <div>
-              <h2>Update Your Comment</h2>
-            </div> */}
-            <div >
-              <ul>
-                {errors &&
-                  errors.map((error) => {
-                    return <li key={error} style={{
-                      color: "white",
-                      marginLeft: "10px"
-                    }}>{error}</li>;
-                  })}
-              </ul>
-            </div>
+          <div style={{ marginBottom: "7px", marginLeft: "20px" }}>
+            <ul>
+              {errors &&
+                errors.map((error) => {
+                  let splitError = error.split(":");
+                  let firstPart = splitError[0];
+                  let firstLetter = firstPart[0].toUpperCase();
+                  let secondPart = splitError[1].slice(11, 23);
+                  return (
+                    <li key={error}>
+                      {firstLetter + firstPart.slice(1) + secondPart}
+                    </li>
+                  );
+                })}
+            </ul>
           </div>
         )}
         <div>
