@@ -34,41 +34,60 @@ function ExplorePage() {
   }, [dispatch]);
 
   return (
-    <div
-      className="imageCard"
-      style={{
-        width: "50vw",
-        height: "100vh",
-        overflow: "scroll",
-        display: "flex",
-        flexWrap: "wrap",
-      }}
-    >
-      {posts.map((post) => {
-        if (post.image_url)
-          return (
-            <div key={post.id} style={{ alignContent: "center" }}>
-              {/* <div key={image.id} className="image"> */}
-              <Link
-                to={`/posts/`}
-                className="image"
-                style={{ position: "relative" }}
-              >
-                <div className="overlay">
-                  <div style={{ color: "white", width: "400px" }}>
-                    {post.caption.slice(0, 220)}
-                  </div>
-                </div>
-                <img
-                  src={post.image_url}
-                  alt="coverImg"
+    <div id="create-form">
+      <div
+        className="create-form-image"
+        style={{
+          width: "50vw",
+          height: "100vh",
+          overflow: "scroll",
+          display: "flex",
+          flexWrap: "wrap",
+          float: "left",
+        }}
+      >
+        {posts.map((post) => {
+          if (post.image_url)
+            return (
+              <div key={post.id} style={{ alignContent: "center" }}>
+                {/* <div key={image.id} className="image"> */}
+                <Link
+                  to={`/posts/`}
                   className="image"
-                  style={{ padding: 2.5 }}
-                ></img>
-              </Link>
-            </div>
-          );
-      })}
+                  style={{ position: "relative" }}
+                >
+                  <div className="overlay">
+                    <div style={{ color: "white", width: "400px" }}>
+                      {post.caption.slice(0, 220)}
+                    </div>
+                  </div>
+                  <img
+                    src={post.image_url}
+                    alt="coverImg"
+                    className="image"
+                    style={{ padding: 2.5 }}
+                  ></img>
+                </Link>
+              </div>
+            )
+        })}
+      </div>
+      <div
+        className="create-event-page-container"
+        style={{
+          width: "50vw",
+          height: "100vh",
+          overflow: "scroll",
+          display: "flex",
+          color: "white",
+          // float: "right",
+          // backgroundColor: "blue",
+          // fontSize: "100px"
+        }}
+      >
+        <div id="home-title">SONAMBULO</div>
+        <div id="home-subtitle">log your dreams</div>
+      </div>
     </div>
   );
 }

@@ -4,6 +4,32 @@
   box-sizing: border-box;
 }
 
+#create-form {
+  display: grid;
+  grid-template-columns: 50vw 50vw;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "create-form-image create-event-page-container"
+}
+
+.create-form-image {
+  grid-area: create-form-image;
+  display: inline-block;
+  height: 100%;
+  background-size: cover;
+  background-position: -200px;
+  width: 50vw;
+  /* float: left; */
+}
+
+.create-event-page-container {
+  grid-area: create-event-page-container;
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  align-items: center;
+  justify-content: center;
+}
 .image {
   display: block;
   width: 100%;
@@ -31,6 +57,15 @@
 .imageCard {
   columns: 4;
   column-gap: 0px;
+}
+
+#home-title {
+  font-size: 5vw;
+}
+
+#home-subtitle {
+  font-size: 2vw;
+  align-self: right;
 }
 
 @media(max-width:1200px){
