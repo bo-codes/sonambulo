@@ -69,7 +69,7 @@ function ExplorePage() {
                   ></img>
                 </Link>
               </div>
-            )
+            );
         })}
       </div>
       <div
@@ -85,8 +85,16 @@ function ExplorePage() {
           // fontSize: "100px"
         }}
       >
-        <div id="home-title">SONAMBULO</div>
-        <div id="home-subtitle">log your dreams</div>
+        <NavLink
+          to={`/posts/`}
+          style={{
+            textDecoration: "none",
+            color: "white",
+          }}
+        >
+          <div id="home-title">SONAMBULO</div>
+          <div id="home-subtitle">log your dreams</div>
+        </NavLink>
       </div>
     </div>
   );
