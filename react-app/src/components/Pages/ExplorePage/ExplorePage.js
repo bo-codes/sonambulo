@@ -25,6 +25,8 @@ function ExplorePage() {
 
   const shuffledUsers = users.sort(() => Math.random() - 0.5);
 
+  const postImages = posts.filter((post) => post.image_url);
+
   // WE ADD DISPATCH TO THE DEPENDENCY ARR SO THAT IT DOESNT RERENDER A MILLION TIMES, I JUST CANT EXPLAIN IT WELL
   useEffect(() => {
     // GET ALL POSTS THUNK
@@ -34,48 +36,62 @@ function ExplorePage() {
   }, [dispatch]);
 
   return (
-    <div id="create-form">
+    <div className="background" >
       <div
-        className="create-form-image"
-        style={{
-          width: "50vw",
-          height: "100vh",
-          overflow: "scroll",
-          display: "flex",
-          flexWrap: "wrap",
-          float: "left",
-        }}
+      style={{
+        display: 'flex',
+        float: 'right',
+        justifyContent: 'center',
+        width: '54vw',
+        height: '100vh'
+      }}
       >
-        {posts.map((post) => {
-          if (post.image_url)
-            return (
-              <div key={post.id} style={{ alignContent: "center" }}>
-                {/* <div key={image.id} className="image"> */}
-                <Link
-                  to={`/posts/`}
+        <h1
+          id="title"
+          style={{
+            display: 'flex',
+            color: "white",
+            marginTop: "40px",
+            marginLeft: "10px",
+            marginBottom: "20px",
+            fontSize: "5vw",
+            float: "right",
+            alignItems: 'center'
+          }}
+        >
+          SONAMBULO
+        </h1>
+      </div>
+      <div className="imageCard">
+        {postImages.map((image) => {
+          return (
+            <div key={image.id} style={{ justifyContent: "center", display: 'flex' }}>
+              {/* <div key={image.id} className="image"> */}
+              <Link
+                to={`/posts/`}
+                className="image"
+                style={{ position: "relative" }}
+              >
+                <div className="overlay">
+                  <h3 style={{ color: "white", fontSize: '14px', width: '209px', justifyContent: 'center', display: 'flex' }}>
+                    {image.caption.slice(0, 200)}
+                  </h3>
+                </div>
+                <img
+                  src={image.image_url}
+                  alt="coverImg"
                   className="image"
-                  style={{ position: "relative" }}
-                >
-                  <div className="overlay">
-                    <div style={{ color: "white", width: "400px" }}>
-                      {post.caption.slice(0, 220)}
-                    </div>
-                  </div>
-                  <img
-                    src={post.image_url}
-                    alt="coverImg"
-                    className="image"
-                    style={{ padding: 2.5 }}
-                  ></img>
-                </Link>
-              </div>
-            );
+                  style={{ padding: 2.5 }}
+                ></img>
+              </Link>
+            </div>
+          );
         })}
       </div>
-      <div
+      {/* <div
         className="create-event-page-container"
         style={{
-          width: "50vw",
+          // width: "50vw",
           height: "100vh",
           overflow: "scroll",
           display: "flex",
@@ -95,7 +111,7 @@ function ExplorePage() {
           <div id="home-title">SONAMBULO</div>
           <div id="home-subtitle">log your dreams</div>
         </NavLink>
-      </div>
+      </div> */}
     </div>
   );
 }
