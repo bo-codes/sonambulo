@@ -12,6 +12,8 @@ function CreateCommentForm({
   comment = null,
   post = null,
   setShowCreateComment,
+  setShowLogin,
+  userId,
 }) {
   // SETTING STATES
   const [date, setDate] = useState((comment && comment.created_at) || "");
@@ -23,7 +25,7 @@ function CreateCommentForm({
   const dispatch = useDispatch();
 
   // PULLING CURRENT USER FROM STATE
-  const userId = useSelector((state) => state.session.user.id);
+  // const userId = useSelector((state) => state.session.user.id);
 
   // SETTING VARIABLES TO INFO WE'LL USE
   const postId = post.id;
@@ -88,7 +90,16 @@ function CreateCommentForm({
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
-            <button className="custom-search-button">Reply</button>
+            {userId ? (
+              <button className="custom-search-button">Reply</button>
+            ) : (
+              <button
+                className="custom-search-button"
+                onClick={() => setShowLogin(true)}
+              >
+                Reply
+              </button>
+            )}
           </div>
         </div>
       </form>

@@ -6,14 +6,12 @@ import { useHistory } from "react-router-dom";
 import { Modal } from "../../../Global/Elements/Modal/index";
 import DeleteCommentModal from "../../Elements/DeleteCommentModal/DeleteCommentModal";
 // IMPORT THUNKS WE NEED TO DISPATCH --------
-import {editComment} from "../../../../store/comments"
+import { editComment } from "../../../../store/comments";
 
 // COMMENT FORM THAT WE WILL DISPLAY ON THE POSTS PAGE USING A MODAL AND BUTTON THAT SHOWS MODAL NEXT TO EACH POST
 function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
   // SETTING STATES
-  const [date, setDate] = useState(
-    (comment && comment.created_at) || ""
-  );
+  const [date, setDate] = useState((comment && comment.created_at) || "");
   const [content, setContent] = useState((comment && comment.content) || "");
   const [errors, setErrors] = useState([]);
   const [showConfirmDeleteCommentModal, setShowConfirmDeleteCommentModal] =
@@ -97,13 +95,19 @@ function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
             </ul>
           </div>
         )}
-        <div>
+        <div style={{
+          display: "flex",
+          flexDirection: "column"
+        }}>
           <label htmlFor="content">Content</label>
           <textarea
             name="content"
             type="text"
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            style={{
+              width: "fit-content",
+            }}
           />
         </div>
 

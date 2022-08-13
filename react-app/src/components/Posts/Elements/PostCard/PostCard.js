@@ -9,6 +9,7 @@ import SignUpForm from "../../../auth/SignupForm/SignUpForm";
 import moment from "moment";
 import "./Postcard.css";
 import chatballoon from "../../../../images/chat-balloon.jpg";
+import EditPostForm from "../../PostForms/CreatePostForm/EditPostForm";
 
 function PostCard({ post, postComments }) {
   // -------- SETTING STATES ------- //
@@ -40,14 +41,42 @@ function PostCard({ post, postComments }) {
           color: "white",
           fontSize: "16px",
           width: "660px",
+          // height: "55px",
           backgroundColor: "#3f3f3f",
           padding: "17px",
           borderTopLeftRadius: "8px",
           borderTopRightRadius: "8px",
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        {post.user.username}
+        <div className="post-head-container">
+          <span className="post-username">
+            <div>{post.user.username}</div>
+          </span>
+          {/* ------ POST EDIT BUTTON ------ vv*/}
+          <span className="edit-post-container">
+            {post ? (
+              // POST EDIT BUTTON
+              // when clicked, setShowCreatePost will toggle to true
+              <div className="edit-post-button-container">
+                {user && post.user_id === user.id && (
+                  <button
+                    onClick={() => setShowCreatePost(true)}
+                    className="edit-post-button"
+                  >
+                    ...
+                  </button>
+                )}
+                {/* if setShowCreatePost is set to true, then show the modal which holds the post edit form. */}
+              </div>
+            ) : (
+              <h1>Loading Post</h1>
+            )}
+          </span>
+        </div>
       </div>
+      {/* ------ POST EDIT BUTTON ------ ^^*/}
       {post.image_url && (
         <img
           style={{ width: "660px", height: "auto" }}
@@ -66,56 +95,19 @@ function PostCard({ post, postComments }) {
       {/* POST DATE ----- ^^*/}
 
       {/*  POST CAPTION ----- vv*/}
-      <div className="post-caption">
-        <p>{post.caption}</p>
+      {!showCreatePost && (
+        <div className="post-caption">
+          <p>{post.caption}</p>
+        </div>
+      )}
+      <div>
+        {showCreatePost && (
+          <EditPostForm post={post} setShowCreatePost={setShowCreatePost} />
+        )}
       </div>
       {/* POST CAPTION ----- ^^*/}
-
-      {/* ------ POST EDIT BUTTON ------ vv*/}
-      <div className="create-comment-container">
-        <div style={{
-          display: "flex",
-          justifyContent: "space-between"
-        }}>
-          <div >
-            {user ? (
-              <button className="comment-button" onClick={commentButton}>
-                comment
-              </button>
-            ) : (
-              <button
-                className="comment-button"
-                onClick={() => setShowLogin(true)}
-              >
-                comment
-              </button>
-            )}
-          </div>
-          {post ? (
-            // POST EDIT BUTTON
-            // when clicked, setShowCreatePost will toggle to true
-            <div className="edit-post-button-container">
-              {user && post.user_id === user.id && (
-                <button
-                  onClick={() => setShowCreatePost(true)}
-                  className="edit-post-button"
-                >
-                  ✎
-                </button>
-              )}
-              {/* if setShowCreatePost is set to true, then show the modal which holds the post edit form. */}
-              {showCreatePost && (
-                <PostForm post={post} setShowCreatePost={setShowCreatePost} />
-              )}
-            </div>
-          ) : (
-            <h1>Loading Post</h1>
-          )}
-        </div>
-      </div>
       <div className="create-comment-container">
         {/* if we dont have a post, we dont error out */}
-        {/* ------ POST EDIT BUTTON ------ ^^*/}
 
         {/* ----------- CREATE COMMENT BUTTON ----------- */}
         {showLogin && (
@@ -132,34 +124,31 @@ function PostCard({ post, postComments }) {
           </Modal>
         )}
         {/* ----------- CREATE COMMENT BUTTON ----------- */}
-        {showCreateComment && (
-          <CreateCommentForm
-            post={post}
-            setShowCreateComment={setShowCreateComment}
-            userId={user.id}
-          />
-        )}
+        <CreateCommentForm
+          post={post}
+          setShowCreateComment={setShowCreateComment}
+          userId={user.id}
+          setShowLogin={setShowLogin}
+        />
         {/* ------------ COMMENTS ------------ vv*/}
-        {showComments && (
-          <div className="comment-section">
-            {postComments &&
-              postComments.map((comment) => {
-                // FOR EACH COMMENT DISPLAY THIS
-                return (
-                  <Comment
-                    style={{
-                      backgroundColor: "red",
-                    }}
-                    className="comment"
-                    key={comment.id}
-                    comment={comment}
-                    post={post}
-                    userId={user.id}
-                  />
-                );
-              })}
-          </div>
-        )}
+        <div className="comment-section">
+          {postComments &&
+            postComments.map((comment) => {
+              // FOR EACH COMMENT DISPLAY THIS
+              return (
+                <Comment
+                  style={{
+                    backgroundColor: "red",
+                  }}
+                  className="comment"
+                  key={comment.id}
+                  comment={comment}
+                  post={post}
+                  userId={user.id}
+                />
+              );
+            })}
+        </div>
         {/* ------------ COMMENTS ------------ ^^*/}
       </div>
     </div>

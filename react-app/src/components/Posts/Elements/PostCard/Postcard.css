@@ -28,6 +28,7 @@
   padding-bottom: 10px;
   padding-left: 17px;
   padding-right: 17px;
+  word-wrap: break-word;
 }
 
 .post-date {
@@ -46,21 +47,42 @@
 .create-comment-container{
   background-color: #3f3f3f;
   width: 660px;
-  border-top: 1px solid grey;
+  border-top: .5px solid grey;
   /* padding-top: 18px; */
+}
+
+.edit-post-container {
+  position: relative;
+  display: flex;
 }
 
 .edit-post-button-container {
   background-color: #3f3f3f;
+  display: flex;
   align-self: center;
-  float: "right";
-  margin-right: 10px;
+  position: absolute;
+  justify-content: end;
+  width: auto;
   /* position: absolute; */
 }
 
 .edit-post-button {
   /* position: absolute; */
   font-size: 22px;
-  margin-left: 9px;
-  float: "right"
+  font-weight: bold;
+  color: white;
+  /* margin-left: 90%; */
+  background-color: transparent;
+  border: none;
+  /* float: "right" */
+}
+
+/* .post-username {
+  float: left;
+} */
+
+.post-head-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

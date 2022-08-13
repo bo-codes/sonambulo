@@ -28,6 +28,10 @@
   border-radius: 100px;
   z-index: 2;
 }
+.custom-search-button:hover {
+  color: rgb(227, 227, 227);
+  cursor: pointer;
+}
 
 .comment-create-input {
   padding-left: 20px;

@@ -9,7 +9,7 @@ import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
 import { makePost, editPost } from "../../../../store/posts";
 
 // THIS IS OUR POST CREATION/EDIT FORM COMPONENT
-function PostForm({ post = null, setShowCreatePost }) {
+function EditPostForm({ post = null, setShowCreatePost }) {
   // SETTING STATES
   const [date, setDate] = useState((post && post.created_at) || "");
   const [image, setImage] = useState((post && post.image_url) || "");
@@ -124,7 +124,7 @@ function PostForm({ post = null, setShowCreatePost }) {
         {/* -------- ERROR DISPLAY -------- ^^*/}
 
         {/* ----- IMAGE INPUT ----- vv*/}
-        <div>
+        {/* <div>
           <label>Image </label>
           <label htmlFor="image-upload-button">
             Upload
@@ -141,7 +141,7 @@ function PostForm({ post = null, setShowCreatePost }) {
               {image.name}
             </span>
           )}
-        </div>
+        </div> */}
         {/* ----- IMAGE INPUT ----- ^^*/}
 
         {/* ----- CAPTION INPUT ----- vv*/}
@@ -209,4 +209,4 @@ function PostForm({ post = null, setShowCreatePost }) {
   );
 }
 
-export default PostForm;
+export default EditPostForm;
