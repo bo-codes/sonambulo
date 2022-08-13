@@ -7,8 +7,10 @@ function CommentDropdown({ setShowEditComment, showEditComment, comment }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const dispatch = useDispatch();
 
-  const deleteComment = async () => {
+  const deleteComment = async (e) => {
+    e.preventDefault();
     await dispatch(removeComment(comment.id));
+    // history.push("/posts");
   };
 
   useEffect(() => {
