@@ -7,4 +7,12 @@
   <body>
     <div id="root"></div>
   </body>
+  <script>
+    const scrollContainer = document.getElementById("imageCard");
+
+      scrollContainer.addEventListener("wheel", (evt) => {
+        evt.preventDefault();
+        scrollContainer.scrollLeft += evt.deltaY;
+      });
+  </script>
 </html>

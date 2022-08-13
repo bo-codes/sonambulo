@@ -8,6 +8,7 @@ import PostCard from "../../Posts/Elements/PostCard/PostCard";
 import { acquireAllComments } from "../../../store/comments";
 import { acquirePosts } from "../../../store/posts";
 import "./images.css";
+import homepageImg from "../../../images/homepage-img.jpg";
 
 // PAGE THAT DISPLAYS ALL OF OUR POSTS
 function ExplorePage() {
@@ -36,36 +37,42 @@ function ExplorePage() {
   }, [dispatch]);
 
   return (
-    <div className="background" >
+    <div className="background">
       <div
-      style={{
-        display: 'flex',
-        float: 'right',
-        justifyContent: 'center',
-        width: '54vw',
-        height: '100vh'
-      }}
+        style={{
+          display: "flex",
+          float: "right",
+          justifyContent: "center",
+          width: "54vw",
+          height: "100vh",
+          backgroundImage: "url(" + homepageImg + ")",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover"
+        }}
       >
         <h1
           id="title"
           style={{
-            display: 'flex',
+            display: "flex",
             color: "white",
             marginTop: "40px",
             marginLeft: "10px",
             marginBottom: "20px",
             fontSize: "5vw",
             float: "right",
-            alignItems: 'center'
+            alignItems: "center",
           }}
         >
           SONAMBULO
         </h1>
       </div>
-      <div className="imageCard">
+      <div id="imageCard">
         {postImages.map((image) => {
           return (
-            <div key={image.id} style={{ justifyContent: "center", display: 'flex' }}>
+            <div
+              key={image.id}
+              style={{ justifyContent: "center", display: "flex" }}
+            >
               {/* <div key={image.id} className="image"> */}
               <Link
                 to={`/posts/`}
@@ -73,7 +80,15 @@ function ExplorePage() {
                 style={{ position: "relative" }}
               >
                 <div className="overlay">
-                  <h3 style={{ color: "white", fontSize: '14px', width: '209px', justifyContent: 'center', display: 'flex' }}>
+                  <h3
+                    style={{
+                      color: "white",
+                      fontSize: "14px",
+                      width: "209px",
+                      justifyContent: "center",
+                      display: "flex",
+                    }}
+                  >
                     {image.caption.slice(0, 200)}
                   </h3>
                 </div>
