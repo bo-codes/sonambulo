@@ -76,7 +76,7 @@ function ExplorePage() {
             >
               {/* <div key={image.id} className="image"> */}
               <Link
-                to={`/posts/`}
+                to={`/posts#${image.id}`}
                 className="image"
                 style={{ position: "relative" }}
               >

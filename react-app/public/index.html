@@ -15,4 +15,10 @@
         scrollContainer.scrollLeft += evt.deltaY;
       });
   </script>
+  <script type="text/javascript">
+    function setHeight(fieldId) {
+      document.getElementById(fieldId).style.height = document.getElementById(fieldId).scrollHeight + 'px';
+    }
+    setHeight('textBox1');
+  </script>
 </html>

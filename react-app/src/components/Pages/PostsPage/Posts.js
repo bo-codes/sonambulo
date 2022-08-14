@@ -62,9 +62,9 @@ function Posts() {
             // RETURNING A POST CARD WHICH IS A COMPONENT THAT DETERMINES HOW THE POST IS STRUCTURED
             return (
               // EACH ITEM IN A MAP NEEDS ITS OWN UNIQUE KEY
-              <div key={post.id}>
+              <a key={post.id} name={post.id} id={post.id}>
                 <PostCard post={post} postComments={postComments} />
-              </div>
+              </a>
             );
           })}
       </div>

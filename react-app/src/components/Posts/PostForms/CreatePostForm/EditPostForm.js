@@ -105,7 +105,7 @@ function EditPostForm({ post = null, setShowCreatePost }) {
         {/* -------- ERROR DISPLAY -------- vv*/}
         <div>
           {/* IF THERE IS A POST, DISPLAY THE TEXT "Update Your Post" AND LIST ANY ERRORS */}
-          {post && <h2>Update Your Post</h2>}
+          {/* {post && <h2>Update Your Post</h2>} */}
           <ul>
             {errors &&
               errors.map((error) => {
@@ -145,10 +145,26 @@ function EditPostForm({ post = null, setShowCreatePost }) {
         {/* ----- IMAGE INPUT ----- ^^*/}
 
         {/* ----- CAPTION INPUT ----- vv*/}
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <label htmlFor="caption">Caption</label>
           <textarea
+          style={{
+            height: '120px',
+            color: "white",
+            backgroundColor: "#3f3f3f",
+            border: 'none',
+          }}
+            id="textBox1"
+            TextMode="MultiLine"
+            onkeyup="setHeight('textBox1');"
+            onkeydown="setHeight('textBox1');"
             name="caption"
+            oninput='style.height = "";style.height = scrollHeight + 3 + "px"'
             type="text"
             value={caption}
             onChange={(e) => setCaption(e.target.value)}

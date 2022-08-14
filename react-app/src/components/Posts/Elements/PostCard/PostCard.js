@@ -16,6 +16,8 @@ function PostCard({ post, postComments }) {
   // SHOWING OR HIDING THE EDIT POST MODAL
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [showComments, setShowComments] = useState(false);
+  const [showFullCaption, setShowFullCaption] = useState(false);
+
   // SHOWING OR HIDING THE CREATE COMMENT MODAL
   const [showCreateComment, setShowCreateComment] = useState(false);
 
@@ -97,7 +99,31 @@ function PostCard({ post, postComments }) {
       {/*  POST CAPTION ----- vv*/}
       {!showCreatePost && (
         <div className="post-caption">
-          <p>{post.caption}</p>
+          {post.caption.length > 78 ? (
+            <div>
+              {!showFullCaption ? (
+                <p>
+                  {post.caption.slice(0, 78)}{" "}
+                  <span>
+                    <button onClick={() => setShowFullCaption(true)}>
+                      ...
+                    </button>
+                  </span>
+                </p>
+              ) : (
+                <p>
+                  {post.caption}{" "}
+                  <span>
+                    <button onClick={() => setShowFullCaption(false)}>
+                      show less
+                    </button>
+                  </span>
+                </p>
+              )}
+            </div>
+          ) : (
+            <p>{post.caption}</p>
+          )}
         </div>
       )}
       <div>
@@ -106,15 +132,14 @@ function PostCard({ post, postComments }) {
         )}
       </div>
       {/* POST CAPTION ----- ^^*/}
+
       <div className="create-comment-container">
         {/* if we dont have a post, we dont error out */}
 
         {/* ----------- CREATE COMMENT BUTTON ----------- */}
         {showLogin && (
           <Modal onClose={() => setShowLogin(false)}>
-            <LoginFormPosts
-              setShowLogin={setShowLogin}
-            />
+            <LoginFormPosts setShowLogin={setShowLogin} />
           </Modal>
         )}
         {showSignup && (
