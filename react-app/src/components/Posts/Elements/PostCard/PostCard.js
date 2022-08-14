@@ -114,7 +114,6 @@ function PostCard({ post, postComments }) {
           <Modal onClose={() => setShowLogin(false)}>
             <LoginFormPosts
               setShowLogin={setShowLogin}
-              setShowSignup={setShowSignup}
             />
           </Modal>
         )}

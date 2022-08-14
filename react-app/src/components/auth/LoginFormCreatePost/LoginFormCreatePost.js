@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import { login } from "../../../store/session";
 
-const LoginFormPosts = (setShowLogin, setShowSignup) => {
+const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +17,7 @@ const LoginFormPosts = (setShowLogin, setShowSignup) => {
     if (data) {
       setErrors(data);
     }
+    setShowLogin(false);
   };
 
   const updateEmail = (e) => {
