@@ -8,6 +8,7 @@ import { login } from "../../../../store/session";
 import "./navBar.css";
 import LoginForm from "../../../auth/LoginForm/LoginForm";
 import { Modal } from "../Modal";
+import LoginFormPosts from "../../../auth/LoginFormCreatePost/LoginFormCreatePost";
 
 const NavigationBar = styled.div`
   margin-left: 20vw;
@@ -40,9 +41,16 @@ const NavBar = () => {
     <div>
       {showLogin && (
         <Modal onClose={() => setShowLogin(false)}>
-          <LoginForm setShowLogin={setShowLogin} />
+          <LoginFormPosts
+            setShowLogin={setShowLogin}
+          />
         </Modal>
       )}
+      {/* {showLogin && (
+        <Modal onClose={() => setShowLogin(false)}>
+          <LoginForm setShowLogin={setShowLogin} />
+        </Modal>
+      )} */}
       <div className="navBarWrapper">
         <div className="navBarDiv1">
           <NavLink to="/" exact={true} activeClassName="navlink navBarDiv1">
@@ -53,13 +61,26 @@ const NavBar = () => {
           {!loggedIn && (
             <>
               <div className="navlink-container">
-                <NavLink to="/" activeClassName="active">
-                  <p className="navlink">Home</p>
+                <NavLink
+                  to="/"
+                  activeClassName="active"
+                  style={{ textDecoration: "none" }}
+                >
+                  <div style={{ textDecoration: "none" }} className="navlink">
+                    Home
+                  </div>
                 </NavLink>
               </div>
               <div>
-                <NavLink to="/posts" exact={true} activeClassName="active">
-                  <p className="navlink">Posts</p>
+                <NavLink
+                  to="/posts"
+                  exact={true}
+                  activeClassName="active"
+                  style={{ textDecoration: "none" }}
+                >
+                  <div style={{ textDecoration: "none" }} className="navlink">
+                    Posts
+                  </div>
                 </NavLink>
               </div>
               <div>
@@ -72,25 +93,41 @@ const NavBar = () => {
                   Login
                 </button>
               </div>
-              <NavLink to="/signup" activeClassName="active">
-                Signup
+              <NavLink
+                to="/signup"
+                activeClassName="active"
+                style={{ textDecoration: "none" }}
+              >
+                <p className="navlink">Signup</p>
               </NavLink>
             </>
           )}
           {loggedIn && user && (
             <>
               <div className="navlink-container">
-                <NavLink to="/" activeClassName="active">
+                <NavLink
+                  to="/"
+                  activeClassName="active"
+                  style={{ textDecoration: "none" }}
+                >
                   <p className="navlink">Home</p>
                 </NavLink>
               </div>
               <div className="navlink-container">
-                <NavLink to="/posts/create" activeClassName="active">
+                <NavLink
+                  to="/posts/create"
+                  activeClassName="active"
+                  style={{ textDecoration: "none" }}
+                >
                   <p className="navlink">Create</p>
                 </NavLink>
               </div>
               <div className="navlink-container">
-                <NavLink to="/posts" activeClassName="active">
+                <NavLink
+                  to="/posts"
+                  activeClassName="active"
+                  style={{ textDecoration: "none" }}
+                >
                   <p className="navlink">Posts</p>
                 </NavLink>
               </div>

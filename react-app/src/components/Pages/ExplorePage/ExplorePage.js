@@ -47,7 +47,8 @@ function ExplorePage() {
           height: "100vh",
           backgroundImage: "url(" + homepageImg + ")",
           backgroundRepeat: "no-repeat",
-          backgroundSize: "cover"
+          backgroundSize: "cover",
+          backgroundBlendMode: "overlay",
         }}
       >
         <h1

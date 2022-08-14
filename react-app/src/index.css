@@ -18,3 +18,11 @@
     background-color: black;
     color: white;
   }
+
+  ul {
+    list-style-type: none;
+  }
+
+  ul li{
+    margin-left: 14px;
+  }

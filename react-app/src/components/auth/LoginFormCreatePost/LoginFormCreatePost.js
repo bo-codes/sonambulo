@@ -41,16 +41,27 @@ const LoginFormPosts = (setShowLogin, setShowSignup) => {
       <h1>Sign In</h1>
       <form onSubmit={onLogin}>
         <div>
-          {errors.map((error, ind) => (
-            <div
-              key={ind}
-              style={{
-                color: "black",
-              }}
-            >
-              {error}
-            </div>
-          ))}
+          {/* IF THERE IS A POST, DISPLAY THE TEXT "Update Your Post" AND LIST ANY ERRORS */}
+          <ul>
+            {errors &&
+              errors.map((error) => {
+                let splitError = error.split(":");
+                let firstPart = splitError[0];
+                let firstLetter = firstPart[0].toUpperCase();
+                let secondPart = splitError[1].slice(11, 23);
+                return (
+                  <li
+                    key={error}
+                    style={{
+                      color: "black",
+                    }}
+                  >
+                    {/* {firstLetter + firstPart.slice(1) + secondPart} */}
+                    {splitError[1]}
+                  </li>
+                );
+              })}
+          </ul>
         </div>
         <div>
           <label htmlFor="email">Email</label>

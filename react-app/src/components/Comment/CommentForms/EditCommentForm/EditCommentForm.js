@@ -7,6 +7,7 @@ import { Modal } from "../../../Global/Elements/Modal/index";
 import DeleteCommentModal from "../../Elements/DeleteCommentModal/DeleteCommentModal";
 // IMPORT THUNKS WE NEED TO DISPATCH --------
 import { editComment } from "../../../../store/comments";
+import { removeComment } from "../../../../store/comments";
 
 // COMMENT FORM THAT WE WILL DISPLAY ON THE POSTS PAGE USING A MODAL AND BUTTON THAT SHOWS MODAL NEXT TO EACH POST
 function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
@@ -56,49 +57,44 @@ function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
     setShowConfirmDeleteCommentModal(true);
   };
 
+  const deleteComment = async (e) => {
+    e.preventDefault();
+    await dispatch(removeComment(comment.id));
+    // history.push("/posts");
+  };
+
   return (
     <div>
       <form onSubmit={submit}>
-        {!comment && (
-          <div style={{ marginBottom: "7px", marginLeft: "20px" }}>
-            <ul className="errors">
-              {errors &&
-                errors.map((error) => {
-                  let splitError = error.split(":");
-                  let firstPart = splitError[0];
-                  let firstLetter = firstPart[0].toUpperCase();
-                  let secondPart = splitError[1].slice(11, 23);
-                  return (
-                    <li key={error}>
-                      {firstLetter + firstPart.slice(1) + secondPart}
-                    </li>
-                  );
-                })}
-            </ul>
-          </div>
-        )}
-        {comment && (
-          <div style={{ marginBottom: "7px", marginLeft: "20px" }}>
-            <ul>
-              {errors &&
-                errors.map((error) => {
-                  let splitError = error.split(":");
-                  let firstPart = splitError[0];
-                  let firstLetter = firstPart[0].toUpperCase();
-                  let secondPart = splitError[1].slice(11, 23);
-                  return (
-                    <li key={error}>
-                      {firstLetter + firstPart.slice(1) + secondPart}
-                    </li>
-                  );
-                })}
-            </ul>
-          </div>
-        )}
-        <div style={{
-          display: "flex",
-          flexDirection: "column"
-        }}>
+        <div>
+          {/* IF THERE IS A POST, DISPLAY THE TEXT "Update Your Post" AND LIST ANY ERRORS */}
+          <ul>
+            {errors &&
+              errors.map((error) => {
+                let splitError = error.split(":");
+                let firstPart = splitError[0];
+                let firstLetter = firstPart[0].toUpperCase();
+                let secondPart = splitError[1].slice(11, 23);
+                return (
+                  <li
+                    key={error}
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    {/* {firstLetter + firstPart.slice(1) + secondPart} */}
+                    {splitError[1]}
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <label htmlFor="content">Content</label>
           <textarea
             name="content"
@@ -110,8 +106,7 @@ function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
             }}
           />
         </div>
-
-        {showConfirmDeleteCommentModal && (
+        {/* {showConfirmDeleteCommentModal && (
           <Modal onClose={() => setShowConfirmDeleteCommentModal(false)}>
             <DeleteCommentModal
               setShowConfirmDeleteCommentModal={
@@ -120,13 +115,13 @@ function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
               comment={comment}
             />
           </Modal>
-        )}
+        )} */}
         <div>
           {/* IS THERE A COMMENT? IF SO THE BUTTONS WILL CHANGE TO UPDATE AND DELETE */}
           {comment ? (
             <div>
               <button type="submit">Update Comment</button>
-              <button type="button" onClick={deleteCommentModal}>
+              <button type="button" onClick={deleteComment}>
                 Delete Comment
               </button>
             </div>

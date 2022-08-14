@@ -5,17 +5,22 @@ from wtforms.validators import DataRequired, Email, ValidationError, regexp
 # from app.models import Post
 
 
-# def name_length(form, field):
-#     name = field.data
-#     if len(name) > 100:
-#         raise ValidationError('Name must be less than 100 characters.')
+def caption_length(form, field):
+    caption = field.data
+    if len(caption) >= 4000:
+        raise ValidationError('Caption must be less than 4000 characters.')
+
+def caption_required(form, field):
+    caption = field.data
+    if len(caption) <= 0:
+        raise ValidationError('Caption required.')
 
 
 class PostForm(FlaskForm):
     user_id = IntegerField('user_id', validators=[DataRequired()])
     image = StringField(
         'image')
-    caption = TextAreaField('caption', validators=[DataRequired()])
+    caption = TextAreaField('caption', validators=[caption_required, caption_length])
 
 
 
@@ -23,4 +28,4 @@ class EditPostForm(FlaskForm):
     user_id = IntegerField('user_id', validators=[DataRequired()])
     image = StringField(
         'image')
-    caption = TextAreaField('caption', validators=[DataRequired()])
+    caption = TextAreaField('caption', validators=[caption_required, caption_length])

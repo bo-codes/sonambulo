@@ -115,7 +115,8 @@ function PostForm({ post = null, setShowCreatePost }) {
                 let secondPart = splitError[1].slice(11, 23);
                 return (
                   <li key={error}>
-                    {firstLetter + firstPart.slice(1) + secondPart}
+                    {/* {firstLetter + firstPart.slice(1) + secondPart} */}
+                    {splitError[1]}
                   </li>
                 );
               })}

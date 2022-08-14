@@ -62,24 +62,29 @@ function CreateCommentForm({
   return (
     <div className="comment-create-input">
       <form onSubmit={submit}>
-        {!comment && (
-          <div style={{ marginBottom: "7px", marginLeft: "20px" }}>
-            <ul className="errors">
-              {errors &&
-                errors.map((error) => {
-                  let splitError = error.split(":");
-                  let firstPart = splitError[0];
-                  let firstLetter = firstPart[0].toUpperCase();
-                  let secondPart = splitError[1].slice(11, 23);
-                  return (
-                    <li key={error}>
-                      {firstLetter + firstPart.slice(1) + secondPart}
-                    </li>
-                  );
-                })}
-            </ul>
-          </div>
-        )}
+        <div>
+          {/* IF THERE IS A POST, DISPLAY THE TEXT "Update Your Post" AND LIST ANY ERRORS */}
+          <ul>
+            {errors &&
+              errors.map((error) => {
+                let splitError = error.split(":");
+                let firstPart = splitError[0];
+                let firstLetter = firstPart[0].toUpperCase();
+                let secondPart = splitError[1].slice(11, 23);
+                return (
+                  <li
+                    key={error}
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    {/* {firstLetter + firstPart.slice(1) + secondPart} */}
+                    {splitError[1]}
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
         <div>
           <div className="custom-search">
             {/* <label htmlFor="content">Content</label> */}

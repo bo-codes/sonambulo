@@ -9,11 +9,15 @@ main {
 }
 
 footer {
+    position: static;
+    width: 100%;
     padding: 3px 0;
     margin-top: 10px;
     justify-self: flex-end;
     background-color: whitesmoke;
-    box-shadow: 0 0 8px whitesmoke;
+    /* box-shadow: 0 0 8px whitesmoke; */
+    border-top: .5px solid grey;
+    bottom: 0;
 }
 
 footer ul {

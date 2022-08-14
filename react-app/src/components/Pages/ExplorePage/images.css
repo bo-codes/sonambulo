@@ -63,13 +63,13 @@
   max-width: 50vw;
   height: 100vh;
   overflow-y: scroll;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
   /* display: flex;
   flex-wrap: wrap; */
 }
 
 .imageCard-container {
-  height: auto;
+  height: 100vh;
   width: 50%;
 }
 
