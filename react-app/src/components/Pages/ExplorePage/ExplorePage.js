@@ -10,6 +10,8 @@ import { acquirePosts } from "../../../store/posts";
 import "./images.css";
 import homepageImg from "../../../images/homepage-img.jpg";
 
+import { HashLink } from "react-router-hash-link";
+
 // PAGE THAT DISPLAYS ALL OF OUR POSTS
 function ExplorePage() {
   // NEED TO DO THIS TO BE ABLE TO DISPATCH
@@ -74,8 +76,7 @@ function ExplorePage() {
               key={image.id}
               style={{ justifyContent: "center", display: "flex" }}
             >
-              {/* <div key={image.id} className="image"> */}
-              <Link
+              <HashLink
                 to={`/posts#${image.id}`}
                 className="image"
                 style={{ position: "relative" }}
@@ -99,35 +100,11 @@ function ExplorePage() {
                   className="image"
                   style={{ padding: 2.5 }}
                 ></img>
-              </Link>
+              </HashLink>
             </div>
           );
         })}
       </div>
-      {/* <div
-        className="create-event-page-container"
-        style={{
-          // width: "50vw",
-          height: "100vh",
-          overflow: "scroll",
-          display: "flex",
-          color: "white",
-          // float: "right",
-          // backgroundColor: "blue",
-          // fontSize: "100px"
-        }}
-      >
-        <NavLink
-          to={`/posts/`}
-          style={{
-            textDecoration: "none",
-            color: "white",
-          }}
-        >
-          <div id="home-title">SONAMBULO</div>
-          <div id="home-subtitle">log your dreams</div>
-        </NavLink>
-      </div> */}
     </div>
   );
 }
