@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../../store/session";
+import "./SignupForm.css";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -45,77 +46,96 @@ const SignUpForm = () => {
   }
 
   return (
-    <div style={{
-      height: '100vh'
-    }}>
-      <form onSubmit={onSignUp} novalidate="novalidate">
-        <div>
-          {/* IF THERE IS A POST, DISPLAY THE TEXT "Update Your Post" AND LIST ANY ERRORS */}
-          <ul>
-            {errors &&
-              errors.map((error) => {
-                let splitError = error.split(":");
-                let firstPart = splitError[0];
-                let firstLetter = firstPart[0].toUpperCase();
-                let secondPart = splitError[1].slice(11, 23);
-                return (
-                  <li
-                    key={error}
-                    style={{
-                      color: "red",
-                    }}
-                  >
-                    {/* {firstLetter + firstPart.slice(1) + secondPart} */}✖
-                    {splitError[1]}
-                  </li>
-                );
-              })}
-          </ul>
+    <div className="page-container">
+      <div className="form-half">
+        <div className="form-container">
+          <div className="signup-title">SIGN UP</div>
+          <form onSubmit={onSignUp} novalidate="novalidate" className="form">
+            <div className="errors">
+              {/* IF THERE IS A POST, DISPLAY THE TEXT "Update Your Post" AND LIST ANY ERRORS */}
+              <ul>
+                {errors &&
+                  errors.map((error) => {
+                    let splitError = error.split(":");
+                    let firstPart = splitError[0];
+                    let firstLetter = firstPart[0].toUpperCase();
+                    let secondPart = splitError[1].slice(11, 23);
+                    return (
+                      <li
+                        key={error}
+                        style={{
+                          color: "white",
+                        }}
+                      >
+                        {/* {firstLetter + firstPart.slice(1) + secondPart} */}
+                        <span
+                          style={{
+                            color: "#9387bc",
+                          }}
+                        >
+                          ✖
+                        </span>
+                        {splitError[1]}
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+            <div>
+              {/* <div>
+                {errors.map((error, ind) => (
+                  <div key={ind}>{error}</div>
+                ))}
+              </div> */}
+              <div className="login-fields">
+                <label className="login-input-label">User Name</label>
+                <input
+                  className="login-input-box"
+                  type="text"
+                  name="username"
+                  onChange={updateUsername}
+                  value={username}
+                ></input>
+              </div>
+              <div className="login-fields">
+                <label className="login-input-label">Email</label>
+                <input
+                  className="login-input-box"
+                  type="text"
+                  name="email"
+                  onChange={updateEmail}
+                  value={email}
+                ></input>
+              </div>
+              <div className="login-fields">
+                <label className="login-input-label">Password</label>
+                <input
+                  className="login-input-box"
+                  type="password"
+                  name="password"
+                  onChange={updatePassword}
+                  value={password}
+                ></input>
+              </div>
+              <div className="login-fields">
+                <label className="login-input-label">Repeat Password</label>
+                <input
+                  className="login-input-box"
+                  type="password"
+                  name="confirmPassword"
+                  onChange={updateRepeatPassword}
+                  value={repeatPassword}
+                  required={true}
+                ></input>
+              </div>
+            </div>
+            <button className="login-button" type="submit">
+              Sign Up
+            </button>
+          </form>
         </div>
-        {/* <div>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
-        </div> */}
-        <div>
-          <label>User Name</label>
-          <input
-            type="text"
-            name="username"
-            onChange={updateUsername}
-            value={username}
-          ></input>
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            type="text"
-            name="email"
-            onChange={updateEmail}
-            value={email}
-          ></input>
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            onChange={updatePassword}
-            value={password}
-          ></input>
-        </div>
-        <div>
-          <label>Repeat Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            onChange={updateRepeatPassword}
-            value={repeatPassword}
-            required={true}
-          ></input>
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
+      </div>
+      <div className="image-half"></div>
     </div>
   );
 };

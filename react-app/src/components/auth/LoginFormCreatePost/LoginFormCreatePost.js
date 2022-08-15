@@ -57,7 +57,7 @@ const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
                   <li
                     key={error}
                     style={{
-                      color: "black",
+                      color: "white",
                     }}
                   >
                     {/* {firstLetter + firstPart.slice(1) + secondPart} */}

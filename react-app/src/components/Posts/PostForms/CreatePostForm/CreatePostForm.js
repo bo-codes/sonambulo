@@ -78,7 +78,7 @@ function PostForm({ post = null, setShowCreatePost }) {
     if (Array.isArray(post)) {
       setErrors(post);
     } else {
-      setShowCreatePost(false);
+      // setShowCreatePost(false);
       return;
     }
   };

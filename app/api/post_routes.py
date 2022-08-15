@@ -1,8 +1,10 @@
 from flask import Blueprint, redirect, request
 from flask_login import login_required, current_user
+from flask_wtf.csrf import validate_csrf
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.models import Post, db
 from app.forms.newPost_form import PostForm, EditPostForm
+from app.AWS import (allowed_file, upload_file_to_s3, get_unique_filename)
 import datetime
 
 
@@ -35,23 +37,38 @@ def get_posts():
 @post_routes.route('/', methods=["POST"])
 @login_required
 def create_post():
-    form = PostForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
 
-    if form.validate_on_submit():
+    validate_csrf(request.cookies['csrf_token'])
 
-        post = Post(
-            user_id=form.data['user_id'],
-            image_url=form.data['image'],
-            caption=form.data['caption'],
-            created_at=datetime.datetime.now()
-        )
+    if "image" not in request.files:
+      return {'errors': "Please provide an Image"}
 
-        db.session.add(post)
-        db.session.commit()
-        return post.to_dict()
+    image = request.files['image']
 
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    if not allowed_file(image.filename):
+      return {'errors': 'Image must be: jpg, jpeg, or png.'}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if 'url' not in upload:
+       # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+      return upload, 400
+
+    url = upload['url']
+     # flask_login allows us to get the current user from the request
+
+    new_post = Post(
+      user_id=current_user.id,
+      image=url,
+      caption=request.form.get('caption'),
+    )
+    db.session.add(new_post)
+    db.session.commit()
+    return new_post.to_dict()
 # ----------- CREATE POST ----------- ^^#
 #
 #
