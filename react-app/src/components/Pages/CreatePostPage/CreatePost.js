@@ -6,7 +6,6 @@ function CreatePost() {
   return (
     <main>
       <div>
-        <h1>Create Post</h1>
         {/* THE FORM */}
         <PostForm />
       </div>
