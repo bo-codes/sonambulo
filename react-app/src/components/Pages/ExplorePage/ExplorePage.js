@@ -9,6 +9,7 @@ import { acquireAllComments } from "../../../store/comments";
 import { acquirePosts } from "../../../store/posts";
 import "./images.css";
 import homepageImg from "../../../images/homepage-img.jpg";
+import sleepinCat from "../../../images/sleepin-cat.png"
 
 import { HashLink } from "react-router-hash-link";
 
@@ -40,34 +41,77 @@ function ExplorePage() {
 
   return (
     <div className="background">
-      <div
-        style={{
-          display: "flex",
-          float: "right",
-          justifyContent: "center",
-          width: "54vw",
-          height: "100vh",
-          backgroundImage: "url(" + homepageImg + ")",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundBlendMode: "overlay",
-        }}
-      >
-        <h1
-          id="title"
-          style={{
-            display: "flex",
-            color: "white",
-            marginTop: "40px",
-            marginLeft: "10px",
-            marginBottom: "20px",
-            fontSize: "5vw",
-            float: "right",
-            alignItems: "center",
-          }}
+      <div className="container-titles-and-img-divs">
+        <div className="title-container">
+          <h1
+            id="title"
+          >
+            <span>Z</span>
+            <span className="onambulo">O N A M B U L O</span>
+          </h1>
+          <h1
+            id="title"
+          >
+            <span>z</span>
+            <span className="onambulo">O N A M B U L O</span>
+          </h1>
+          <h1
+            id="title"
+          >
+            <span>Z</span>
+            <span className="onambulo">O N A M B U L O</span>
+          </h1>
+          <h1
+            id="title"
+          >
+            <span>z</span>
+            <span className="onambulo">O N A M B U L O</span>
+          </h1>
+          <h1
+            id="title"
+          >
+            <span>z</span>
+            <span className="onambulo">O N A M B U L O</span>
+          </h1>
+          <h1
+            id="title"
+          >
+            <span>Z</span>
+            <span className="onambulo">O N A M B U L O</span>
+          </h1>
+          <h1
+            id="title"
+          >
+            <span>Z</span>
+            <span className="onambulo">O N A M B U L O</span>
+          </h1>
+          <h1
+            id="title"
+          >
+            <span>z</span>
+            <span className="onambulo">O N A M B U L O</span>
+          </h1>
+          <h1
+            id="title"
+          >
+            <span>z</span>
+            <span className="onambulo">O N A M B U L O</span>
+          </h1>
+          <h1
+            id="title"
+          >
+            <span>z</span>
+            <span className="onambulo">O N A M B U L O</span>
+          </h1>
+        </div>
+        <div
+          className="cat-image-container"
         >
-          SONAMBULO
-        </h1>
+          <img style={{
+            width: '15vw',
+            paddingLeft: '2vw'
+          }} src={sleepinCat} />
+        </div>
       </div>
       <div id="imageCard">
         {postImages.map((image) => {
@@ -85,8 +129,8 @@ function ExplorePage() {
                   <h3
                     style={{
                       color: "white",
-                      fontSize: "14px",
-                      width: "209px",
+                      width: "309px",
+                      fontWeight: "initial",
                       justifyContent: "center",
                       display: "flex",
                     }}

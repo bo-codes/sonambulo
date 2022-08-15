@@ -10,13 +10,13 @@ import { acquirePosts } from "../../../store/posts";
 import "./Posts.css";
 
 // PAGE THAT DISPLAYS ALL OF OUR POSTS
-function Posts({posts}) {
+function Posts({}) {
   // NEED TO DO THIS TO BE ABLE TO DISPATCH
   const dispatch = useDispatch();
   // PULLING ALL OF THE INFORMATION FROM OUR STATE
   // THIS RUNS FIRST BEFORE USEEFFECT FETCHES OUR DATA WHICH IS WHY WE ALWAYS HAVE TO IMPLEMENT
   // OUR CONDITIONALS (posts && posts.map()) TO HANDLE THE CASES WHERE WE DONT HAVE DATA YET
-  // const posts = Object.values(useSelector((state) => state.posts));
+  const posts = Object.values(useSelector((state) => state.posts));
 
   const comments = Object.values(useSelector((state) => state.comments));
 

@@ -46,6 +46,6 @@
 
 .closeModal:hover {
     color: white;
-    background-color: #ff521b;
-    border-color: #ff521b;
+    background-color: rgb(92, 69, 113);
+    border-color: rgb(92, 69, 113);
 }

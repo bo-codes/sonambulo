@@ -4,32 +4,6 @@
   box-sizing: border-box;
 }
 
-/* #create-form {
-  display: grid;
-  grid-template-columns: 66vw 34vw;
-  grid-template-rows: auto auto;
-  grid-template-areas:
-    "create-form-image create-event-page-container"
-}
-
-.create-form-image {
-  grid-area: create-form-image;
-  display: inline-block;
-  height: 100%;
-  background-size: cover;
-  background-position: -200px;
-  width: 66vw;
-  /* float: left; */
-/* }
-
-.create-event-page-container {
-  grid-area: create-event-page-container;
-  display: flex;
-  flex-direction: row;
-  width: 34vw;
-  /* align-items: center; */
-  /* justify-content: center; */
-/* }   */
 .image {
   display: block;
   width: 100%;
@@ -38,6 +12,9 @@
 }
 
 .overlay {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'jost';
   position: absolute;
   top: 0;
   left: 0;
@@ -60,8 +37,9 @@
 #imageCard {
   /* columns: 2; */
   column-gap: 0px;
-  max-width: 50vw;
+  max-width: 60vw;
   height: 100vh;
+  /* border: 1px solid purple; */
   overflow-y: scroll;
   /* overflow-x: scroll; */
   /* display: flex;
@@ -73,21 +51,68 @@
   width: 50%;
 }
 
-/* #home-title {
-  font-size: 5vw;
+#title {
+  color: 'white';
+  margin-top: 40px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  font-family: 'syne';
+  font-weight: 800;
+  font-size: 2.8vw;
+  /* font-stretch: ultra-condensed; */
+}
+#title-reflection {
+  font-family: 'syne';
+  font-weight: 800;
+  font-size: 3.2vw;
+  font-stretch: ultra-condensed;
+  /* -moz-transform: scale(1, -1);
+  -webkit-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1); */
 }
 
-#home-subtitle {
-  font-size: 2vw;
-  align-self: right;
-} */
+.onambulo {
+  padding-left: 3vw;
+  color: #5142694e;
+}
 
-/* @media(max-width:1200px){
-  .imageCard {
-    columns: 3;
-    column-gap: 0px;
-  }
-} */
+.container-titles-and-img-divs { /*  RED  */
+  /* border: 1px solid red; */
+  width: 40vw;
+  height: 100vh;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+}
+
+.title-container { /*  BLUE  */
+  display: flex;
+  flex-direction: column;
+  float: right;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 40vw;
+  height: 80vh;
+  overflow: hidden;
+  /* border: 1px solid blue */
+}
+
+.cat-image-container { /*  WHITE  */
+  height: 20vh;
+  width: 20vw;
+  position: absolute;
+  float: left;
+  bottom: -57px;
+  /* border: 1px solid white; */
+}
+
+.background {
+  /* border: 1px solid green; */
+}
 
 @media(max-width:800px){
   #imageCard {

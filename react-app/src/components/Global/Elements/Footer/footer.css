@@ -9,6 +9,8 @@ main {
 }
 
 footer {
+    font-family: 'syne';
+    font-weight: 800;
     position: static;
     width: 100%;
     padding: 3px 0;
@@ -21,24 +23,30 @@ footer {
 }
 
 footer ul {
+    height: 70px;
+    margin-left: 80px;
+    margin-right: 80px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
     align-items: center;
     list-style: none;
 }
 
 footer ul li {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
 }
 
 footer ul li h3{
-    color: #191923;
+    font-family: 'jost';
+    color: white;
     letter-spacing: 1px;
-    font-family: "Eina-semibold";
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 17px;
+    margin-right: 10px;
 }
 
 .footer-links {

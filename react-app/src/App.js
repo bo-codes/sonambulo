@@ -9,6 +9,7 @@ import { authenticate } from "./store/session";
 import Signup from "./components/auth/Pages/SignupPage/Signup";
 import Footer from "./components/Global/Elements/Footer/index";
 import ExplorePage from "./components/Pages/ExplorePage/ExplorePage";
+import ErrorPage from "./components/Pages/404/404";
 import { acquirePosts } from "./store/posts";
 import { acquireAllComments } from "./store/comments";
 
@@ -21,8 +22,6 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      await dispatch(acquirePosts());
-      await dispatch(acquireAllComments());
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -39,7 +38,7 @@ function App() {
           <ExplorePage />
         </Route>
         <Route path="/posts" exact={true}>
-          <Posts posts={posts} />
+          <Posts />
         </Route>
         <Route path="/profile" exact={true}>
           {/* <Posts /> */}
@@ -50,7 +49,9 @@ function App() {
         <Route path="/signup" exact={true}>
           <Signup />
         </Route>
-        <Route path="">404</Route>
+        <Route path="">
+          <ErrorPage />
+        </Route>
       </Switch>
       <Footer />
     </BrowserRouter>

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import { login } from "../../../store/session";
 
+import "./LoginFormCreate.css";
+
 const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
@@ -16,8 +18,9 @@ const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+    } else {
+      setShowLogin(false);
     }
-    setShowLogin(false);
   };
 
   const updateEmail = (e) => {
@@ -34,12 +37,12 @@ const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
   };
 
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to="/posts" />;
   }
 
   return (
     <>
-      <h1>Sign In</h1>
+      <h1 id="login-header">SIGN IN</h1>
       <form onSubmit={onLogin}>
         <div>
           {/* IF THERE IS A POST, DISPLAY THE TEXT "Update Your Post" AND LIST ANY ERRORS */}
@@ -65,28 +68,38 @@ const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
           </ul>
         </div>
         <div>
-          <label htmlFor="email">Email</label>
-          <input
-            name="email"
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={updateEmail}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={updatePassword}
-          />
-          <button type="submit">Login</button>
+          <div className="login-fields">
+            <label className="login-input-label" htmlFor="email">
+              EMAIL
+            </label>
+            <input
+              className="login-input-box"
+              name="email"
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div className="login-fields">
+            <label className="login-input-label" htmlFor="password">
+              PASSWORD
+            </label>
+            <input
+              className="login-input-box"
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={updatePassword}
+            />
+          </div>
+          <button type="submit" className="login-button">
+            Login
+          </button>
         </div>
       </form>
-      <NavLink to={"/signup"}>No Account?</NavLink>
+      <NavLink id="signup-reroute" to={"/signup"} onClick={() => setShowLogin(false)}>NO ACCOUNT?</NavLink>
     </>
   );
 };

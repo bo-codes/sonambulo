@@ -1,0 +1,47 @@
+#login-header {
+  font-family: 'Syne';
+  font-weight: 800;
+  color: black;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.login-fields {
+  font-family: 'Syne';
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+.login-input-box {
+  height: 36px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(92, 69, 113, 0.532);
+}
+
+.login-button {
+  color: white;
+  font-weight: 600;
+  margin-top: 14px;
+  padding: 22px;
+  border-radius: 11px;
+  border: none;
+  background-color: rgb(92, 69, 113);
+  font-kerning: 6px;
+}
+
+.login-input-label {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+#signup-reroute {
+  font-family: 'Syne';
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: none;
+}

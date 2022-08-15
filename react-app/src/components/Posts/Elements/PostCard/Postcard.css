@@ -1,3 +1,7 @@
+* {
+  font-family: 'jost';
+}
+
 .comment-section {
   max-height: 25vh;
   max-width: 660px;
