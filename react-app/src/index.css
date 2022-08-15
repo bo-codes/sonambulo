@@ -26,3 +26,8 @@
   ul li{
     margin-left: 14px;
   }
+
+  button {
+    border: none;
+    background-color: rgb(92, 69, 113);
+  }

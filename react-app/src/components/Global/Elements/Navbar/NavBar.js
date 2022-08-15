@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import UserMenu from "./UserMenu";
 // import EventzeitLogo from "../../images/EventzeitMainLogo.png";
+import sonambulogo from "../../../../images/sleepin-cat.png";
 import { login } from "../../../../store/session";
 import "./navBar.css";
 import LoginForm from "../../../auth/LoginForm/LoginForm";
@@ -18,6 +19,15 @@ const NavigationBar = styled.div`
   height: 40px;
   align-items: center;
   justify-content: space-around;
+`;
+
+const Logo = styled.img`
+  position: absolute;
+  top: 0;
+  width: 4rem;
+  height: auto;
+  padding-top: 0%;
+  align-self: center;
 `;
 
 const NavBar = () => {
@@ -41,9 +51,7 @@ const NavBar = () => {
     <div>
       {showLogin && (
         <Modal onClose={() => setShowLogin(false)}>
-          <LoginFormPosts
-            setShowLogin={setShowLogin}
-          />
+          <LoginFormPosts setShowLogin={setShowLogin} />
         </Modal>
       )}
       {/* {showLogin && (
@@ -54,7 +62,7 @@ const NavBar = () => {
       <div className="navBarWrapper">
         <div className="navBarDiv1">
           <NavLink to="/" exact={true} activeClassName="navlink navBarDiv1">
-            {/* <Logo src={`${EventzeitLogo}`} /> */}
+            <Logo src={`${sonambulogo}`} />
           </NavLink>
         </div>
         <NavigationBar className="navBarDiv2">
