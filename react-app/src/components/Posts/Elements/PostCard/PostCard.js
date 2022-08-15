@@ -105,7 +105,10 @@ function PostCard({ post, postComments }) {
                 <p>
                   {post.caption.slice(0, 78)}{" "}
                   <span>
-                    <button onClick={() => setShowFullCaption(true)}>
+                    <button
+                      className="show-more"
+                      onClick={() => setShowFullCaption(true)}
+                    >
                       ...
                     </button>
                   </span>
@@ -114,7 +117,10 @@ function PostCard({ post, postComments }) {
                 <p>
                   {post.caption}{" "}
                   <span>
-                    <button onClick={() => setShowFullCaption(false)}>
+                    <button
+                      className="show-more"
+                      onClick={() => setShowFullCaption(false)}
+                    >
                       show less
                     </button>
                   </span>

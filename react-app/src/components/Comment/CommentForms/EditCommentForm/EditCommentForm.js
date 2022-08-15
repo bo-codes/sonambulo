@@ -119,10 +119,31 @@ function EditCommentForm({ comment = null, post = null, setShowEditComment }) {
         <div>
           {/* IS THERE A COMMENT? IF SO THE BUTTONS WILL CHANGE TO UPDATE AND DELETE */}
           {comment ? (
-            <div>
-              <button type="submit">Update Comment</button>
-              <button type="button" onClick={deleteComment}>
-                Delete Comment
+            <div
+              style={{
+                marginTop: "4px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <button
+                style={{
+                  width: "48%",
+                  color: "white",
+                }}
+                type="submit"
+              >
+                Update
+              </button>
+              <button
+                style={{
+                  width: "48%",
+                  color: "white",
+                }}
+                type="button"
+                onClick={deleteComment}
+              >
+                Delete
               </button>
             </div>
           ) : (

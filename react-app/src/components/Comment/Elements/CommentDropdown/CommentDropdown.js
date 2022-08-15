@@ -4,6 +4,7 @@ import { removeComment } from "../../../../store/comments";
 import { Modal } from "../../../Global/Elements/Modal/index";
 import DeleteCommentModal from "../../Elements/DeleteCommentModal/DeleteCommentModal";
 import "../../Elements/Comment/Comment.css";
+import "./CommentDropdown.css"
 
 function CommentDropdown({ setShowEditComment, showEditComment, comment }) {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -33,22 +34,27 @@ function CommentDropdown({ setShowEditComment, showEditComment, comment }) {
 
   return (
     <>
-      <div style={{ position: "relative" }}>
-        <button
-          className="comment-dropdown"
+      <div style={{ position: "relative", zIndex: '1' }}>
+        <button className="comment-dropdown"
           onClick={() => setShowDropdown(!showDropdown)}
         >
           ...
         </button>
         {showDropdown && !showEditComment && (
-          <div style={{ position: "absolute" }} className="dropdown">
+          <div style={{ position: "absolute", backgroundColor: 'grey'}} className="dropdown">
             <button
+            style={{
+              color: 'white'
+            }}
               className="comment-menu-button"
               onClick={() => setShowEditComment(true)}
             >
               Edit
             </button>
             <button
+            style={{
+              color: 'white'
+            }}
               type="button"
               className="comment-menu-button"
               onClick={deleteComment}

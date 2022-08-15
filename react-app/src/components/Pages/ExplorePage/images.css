@@ -114,6 +114,14 @@
   /* border: 1px solid green; */
 }
 
+.home-subtitle {
+  font-family: 'syne';
+  position: absolute;
+  right: 40px;
+  bottom: 0;
+  font-size: 44px;
+}
+
 @media(max-width:800px){
   #imageCard {
     columns: 2;

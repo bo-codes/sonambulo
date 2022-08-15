@@ -109,9 +109,11 @@ function ExplorePage() {
         >
           <img style={{
             width: '15vw',
-            paddingLeft: '2vw'
+            paddingLeft: '2vw',
+            float:'left'
           }} src={sleepinCat} />
         </div>
+        <div className="home-subtitle">Log Your Dreams</div>
       </div>
       <div id="imageCard">
         {postImages.map((image) => {

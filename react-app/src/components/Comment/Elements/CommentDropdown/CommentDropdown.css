@@ -1,0 +1,23 @@
+.comment-dropdown {
+  margin-top: 4px;
+  border: 1px solid grey;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 6px;
+}
+
+.comment-dropdown:hover {
+  border: 1px solid grey;
+  background-color: #5c457191;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+}
