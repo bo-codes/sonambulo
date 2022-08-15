@@ -7,6 +7,7 @@ import { Modal } from "../../../Global/Elements/Modal";
 import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
 // IMPORT THUNKS WE NEED TO DISPATCH
 import { makePost, editPost } from "../../../../store/posts";
+import "../../../auth/SignupForm/SignupForm.css";
 
 // THIS IS OUR POST CREATION/EDIT FORM COMPONENT
 function PostForm({ post = null, setShowCreatePost }) {
@@ -96,115 +97,123 @@ function PostForm({ post = null, setShowCreatePost }) {
   };
 
   return (
-    <div>
-      {/* ----------------------FORM ---------------------- vv*/}
-      <form onSubmit={submit}>
-        {/* IF POST IS FALSEY, AKA IF NOTHING WAS RETURNED FROM THE DISPATCH AND REASSIGNED THE VALUE OF THE
-        POST VARAIBLE FROM ITS DEFAULT NULL VALUE TO SOMETHING TRUTHY, JUST DISPLAY ANY ERRORS */}
+    <div
+      className="page-container"
+      style={{
+        width: "100vw",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <div className="form-half">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+          className="form-container"
+        >
+          <div
+            className="signup-title"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: 'center',
+              marginLeft: '20px'
+            }}
+          >
+            CREATE POST
+          </div>
+          {/* ----------------------FORM ---------------------- vv*/}
+          <form onSubmit={submit}>
+            {/* IF POST IS FALSEY, AKA IF NOTHING WAS RETURNED FROM THE DISPATCH AND REASSIGNED THE VALUE OF THE
+              POST VARAIBLE FROM ITS DEFAULT NULL VALUE TO SOMETHING TRUTHY, JUST DISPLAY ANY ERRORS */}
 
-        {/* -------- ERROR DISPLAY -------- vv*/}
-        <div>
-          {/* IF THERE IS A POST, DISPLAY THE TEXT "Update Your Post" AND LIST ANY ERRORS */}
-          {post && <h2>Update Your Post</h2>}
-          <ul>
-            {errors &&
-              errors.map((error) => {
-                let splitError = error.split(":");
-                let firstPart = splitError[0];
-                let firstLetter = firstPart[0].toUpperCase();
-                let secondPart = splitError[1].slice(11, 23);
-                return (
-                  <li key={error}>
-                    {/* {firstLetter + firstPart.slice(1) + secondPart} */}
-                    {splitError[1]}
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
-        {/* -------- ERROR DISPLAY -------- ^^*/}
-
-        {/* ----- IMAGE INPUT ----- vv*/}
-        <div>
-          <label>Image </label>
-          <label htmlFor="image-upload-button">
-            Upload
-            <input
-              id="image-upload-button"
-              name="image"
-              type="file"
-              accept="image/*"
-              onChange={updateImage}
-            />
-          </label>
-          {image && (
-            <span htmlFor="image-upload-button" name="image">
-              {image.name}
-            </span>
-          )}
-        </div>
-        {/* ----- IMAGE INPUT ----- ^^*/}
-
-        {/* ----- CAPTION INPUT ----- vv*/}
-        <div>
-          <label htmlFor="caption">Caption</label>
-          <textarea
-            name="caption"
-            type="text"
-            value={caption}
-            onChange={(e) => setCaption(e.target.value)}
-          />
-        </div>
-        {/* ----- CAPTION INPUT ----- ^^*/}
-
-        {/* IF THE DELETE BUTTON IS CLICKED AND THE showConfirmModal SLICE IS SET TO TRUE, SHOW THE DELETE CONFIRMATION MODAL */}
-        {showConfirmDeleteModal && (
-          <Modal onClose={() => setShowConfirmDeleteModal(false)}>
-            <DeletePostModal
-              setShowConfirmDeleteModal={setShowConfirmDeleteModal}
-              post={post}
-            />
-          </Modal>
-        )}
-
-        {/* IF THERE'S A POST ALREADY WHEN FILLING OUT THE FORM, WHICH MEANS THAT WE PASSED IN THE A POST INTO THE
-        postForm WHICH WE DO IN THE POSTCARD ELEMENT WHEN EDITING, ADD AN UPDATE BUTTON AND A DELETE BUTTON */}
-        <div>
-          {post ? (
+            {/* -------- ERROR DISPLAY -------- vv*/}
             <div>
-              {/* ----- UPDATE POST BUTTON ----- vv*/}
-              {imageLoading ? (
-                <button disabled>Loading . . .</button>
-              ) : (
-                <button type="submit">Update Post</button>
-              )}
-              {/* ----- UPDATE POST BUTTON ----- ^^*/}
-
-              {/* ---------- DELETE BUTTON ---------- vv*/}
-              <button
-                type="button"
-                // DELETE BUTTON SETS showDeletePostModal TO TRUE AND SHOWS THE DELETE CONFIRMATION PAGE
-                onClick={deletePostModal}
-                disabled={imageLoading}
-              >
-                Delete Post
-              </button>
-              {/* ---------- DELETE BUTTON ---------- ^^*/}
+              {/* IF THERE IS A POST, DISPLAY THE TEXT "Update Your Post" AND LIST ANY ERRORS */}
+              <ul>
+                {errors &&
+                  errors.map((error) => {
+                    let splitError = error.split(":");
+                    let firstPart = splitError[0];
+                    let firstLetter = firstPart[0].toUpperCase();
+                    let secondPart = splitError[1].slice(11, 23);
+                    return (
+                      <li key={error}>
+                        {/* {firstLetter + firstPart.slice(1) + secondPart} */}
+                        <span
+                          style={{
+                            color: "#9387bc",
+                          }}
+                        >
+                          ✖
+                        </span>
+                        {splitError[1]}
+                      </li>
+                    );
+                  })}
+              </ul>
             </div>
-          ) : (
-            // IF THERES NOT A POST AKA NO POST WAS PASSED INTO THIS COMPONENT SO "post" IS THE DEFAULT NULL VALUE
-            // ----- CREATE BUTTON ----- vv//
-            <div>
-              {imageLoading ? (
-                <button disabled>Loading . . .</button>
-              ) : (
-                <button>Create Post</button>
+            {/* -------- ERROR DISPLAY -------- ^^*/}
+
+            {/* ----- IMAGE INPUT ----- vv*/}
+            <div
+              className="input-section"
+              style={{
+                marginBottom: "10px",
+                width: '300px'
+              }}
+            >
+              <label htmlFor="image-upload-button" className="imput-label" >
+                Image
+                <input
+                  id="image-upload-button"
+                  name="image"
+                  type="file"
+                  accept="image/*"
+                  onChange={updateImage}
+                />
+              </label>
+              {image && (
+                <span
+                  htmlFor="image-upload-button"
+                  name="image"
+                  className="imput-label"
+                >
+                  {/* {image.name} */}
+                </span>
               )}
             </div>
-            // ----- CREATE BUTTON ----- ^^//
-          )}
+            {/* ----- IMAGE INPUT ----- ^^*/}
+
+            {/* ----- CAPTION INPUT ----- vv*/}
+            <div
+              className="input-section"
+              style={{
+                marginBottom: "10px",
+              }}
+            >
+              <label htmlFor="caption">Caption</label>
+              <textarea
+              style={{
+                width: '230px'
+              }}
+                name="caption"
+                type="text"
+                value={caption}
+                onChange={(e) => setCaption(e.target.value)}
+              />
+            </div>
+            {/* ----- CAPTION INPUT ----- ^^*/}
+            <div>
+              <div>
+                <button className="login-button">Create Post</button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
       {/* ---------------------- FORM ---------------------- ^^*/}
     </div>
   );

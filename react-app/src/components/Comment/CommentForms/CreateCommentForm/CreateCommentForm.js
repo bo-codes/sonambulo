@@ -89,6 +89,9 @@ function CreateCommentForm({
           <div className="custom-search">
             {/* <label htmlFor="content">Content</label> */}
             <textarea
+            style={{
+              color: 'white'
+            }}
               className="custom-search-input"
               name="content"
               type="text"

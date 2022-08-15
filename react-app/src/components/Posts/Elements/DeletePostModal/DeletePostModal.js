@@ -19,12 +19,36 @@ const DeletePostModal = ({ post, setShowConfirmDeleteModal }) => {
   return (
     <main>
       <div>
-        <h2 style={{
-          color: "black"
-        }}>Are you sure you want to delete your post?</h2>
+        <h2
+          style={{
+            color: "white",
+            marginTop: '8px'
+          }}
+        >
+          Are you sure you want to delete your post?
+        </h2>
         <div>
-          <button onClick={cancelDelete}>Cancel</button>
-          <button onClick={deletePost}>Delete</button>
+          <button
+            onClick={cancelDelete}
+            style={{
+              color: "white",
+              marginRight: "5px",
+              padding: "3px",
+              borderRadius: "4px",
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={deletePost}
+            style={{
+              color: "white",
+              padding: "3px",
+              borderRadius: "4px",
+            }}
+          >
+            Delete
+          </button>
         </div>
       </div>
     </main>

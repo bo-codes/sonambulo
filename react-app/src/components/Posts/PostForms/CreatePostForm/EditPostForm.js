@@ -153,12 +153,12 @@ function EditPostForm({ post = null, setShowCreatePost }) {
         >
           <label htmlFor="caption">Caption</label>
           <textarea
-          style={{
-            height: '120px',
-            color: "white",
-            backgroundColor: "#3f3f3f",
-            border: 'none',
-          }}
+            style={{
+              height: "120px",
+              color: "white",
+              backgroundColor: "#8f8f8f",
+              border: "none",
+            }}
             id="textBox1"
             TextMode="MultiLine"
             onkeyup="setHeight('textBox1');"
@@ -191,7 +191,14 @@ function EditPostForm({ post = null, setShowCreatePost }) {
               {imageLoading ? (
                 <button disabled>Loading . . .</button>
               ) : (
-                <button type="submit">Update Post</button>
+                <button
+                  type="submit"
+                  style={{
+                    color: "white",
+                  }}
+                >
+                  Update Post
+                </button>
               )}
               {/* ----- UPDATE POST BUTTON ----- ^^*/}
 
@@ -201,6 +208,9 @@ function EditPostForm({ post = null, setShowCreatePost }) {
                 // DELETE BUTTON SETS showDeletePostModal TO TRUE AND SHOWS THE DELETE CONFIRMATION PAGE
                 onClick={deletePostModal}
                 disabled={imageLoading}
+                style={{
+                  color: "white",
+                }}
               >
                 Delete Post
               </button>

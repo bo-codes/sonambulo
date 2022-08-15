@@ -60,6 +60,13 @@ const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
                       color: "white",
                     }}
                   >
+                    <span
+                      style={{
+                        color: "#9387bc",
+                      }}
+                    >
+                      ✖
+                    </span>
                     {/* {firstLetter + firstPart.slice(1) + secondPart} */}
                     {splitError[1]}
                   </li>
@@ -70,7 +77,7 @@ const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
         <div>
           <div className="login-fields">
             <label className="login-input-label" htmlFor="email">
-              EMAIL
+              EMAIL<span style={{ color: "red" }}> *</span>
             </label>
             <input
               className="login-input-box"
@@ -83,7 +90,7 @@ const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
           </div>
           <div className="login-fields">
             <label className="login-input-label" htmlFor="password">
-              PASSWORD
+              PASSWORD<span style={{ color: "red" }}>  *</span>
             </label>
             <input
               className="login-input-box"
@@ -99,7 +106,13 @@ const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
           </button>
         </div>
       </form>
-      <NavLink id="signup-reroute" to={"/signup"} onClick={() => setShowLogin(false)}>NO ACCOUNT?</NavLink>
+      <NavLink
+        id="signup-reroute"
+        to={"/signup"}
+        onClick={() => setShowLogin(false)}
+      >
+        NO ACCOUNT?
+      </NavLink>
     </>
   );
 };

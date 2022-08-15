@@ -88,7 +88,9 @@ const SignUpForm = () => {
                 ))}
               </div> */}
               <div className="login-fields">
-                <label className="login-input-label">User Name</label>
+                <label className="login-input-label">
+                  User Name <span style={{ color: "red" }}> *</span>
+                </label>
                 <input
                   className="login-input-box"
                   type="text"
@@ -98,7 +100,9 @@ const SignUpForm = () => {
                 ></input>
               </div>
               <div className="login-fields">
-                <label className="login-input-label">Email</label>
+                <label className="login-input-label">
+                  Email<span style={{ color: "red" }}> *</span>
+                </label>
                 <input
                   className="login-input-box"
                   type="text"
@@ -108,7 +112,9 @@ const SignUpForm = () => {
                 ></input>
               </div>
               <div className="login-fields">
-                <label className="login-input-label">Password</label>
+                <label className="login-input-label">
+                  Password<span style={{ color: "red" }}> *</span>
+                </label>
                 <input
                   className="login-input-box"
                   type="password"
@@ -118,7 +124,9 @@ const SignUpForm = () => {
                 ></input>
               </div>
               <div className="login-fields">
-                <label className="login-input-label">Repeat Password</label>
+                <label className="login-input-label">
+                  Repeat Password<span style={{ color: "red" }}> *</span>
+                </label>
                 <input
                   className="login-input-box"
                   type="password"
