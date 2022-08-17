@@ -2,10 +2,41 @@
   font-family: 'jost';
 }
 
+#outermost-card {
+  margin: 30px;
+  color: white;
+  width: 660px;
+  height: fit-content;
+  /* background-color: #ffffff; */
+  background-color: #3f3f3f;
+  /* padding: 17px; */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#postcard {
+  /* color: white;
+  width: 660px;
+  background-color: #3f3f3f;
+  padding: 17px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  align-items: center; */
+}
+
+#postcard-image {
+  width: 100%;
+  height: auto;
+}
+
 .comment-section {
   max-height: 25vh;
   max-width: 660px;
-  background-color: #3f3f3f;
+  /* background-color: #3f3f3f; */
   overflow-y: scroll;
   margin-left: 20px;
 }
@@ -33,6 +64,7 @@
   padding-left: 17px;
   padding-right: 17px;
   word-wrap: break-word;
+  border: 1px solid greenyellow;
 }
 
 .post-date {
@@ -40,16 +72,17 @@
   padding-top: 10px;
   padding-bottom: 14px;
   padding-left: 17px;
+  border: 1px solid aqua;
 }
 
 .create-comment-container:first-child {
-  background-color: #3f3f3f;
+  /* background-color: #3f3f3f; */
   width: 660px;
   border-top: 1px solid grey;
 }
 
 .create-comment-container{
-  background-color: #3f3f3f;
+  /* background-color: #3f3f3f; */
   width: 660px;
   border-top: .5px solid grey;
   /* padding-top: 18px; */
@@ -61,12 +94,12 @@
 }
 
 .edit-post-button-container {
-  background-color: #3f3f3f;
+  /* border: 1px solid purple; */
+  margin-right: 10px;
+  margin-bottom: 10px;
   display: flex;
   align-self: center;
-  position: absolute;
-  justify-content: end;
-  width: auto;
+  justify-content: center;
   /* position: absolute; */
 }
 
@@ -75,20 +108,25 @@
   font-size: 22px;
   font-weight: bold;
   color: white;
-  margin-left: 555px;
   background-color: transparent;
   border: none;
-  top: 0
   /* float: "right" */
 }
 
-/* .post-username {
-  float: left;
-} */
+.post-username {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  /* border: 1px solid blue; */
+}
 
 .post-head-container {
+  border: .1px solid orange;
   display: flex;
-  flex-direction: row;
+  height: 50px;
+  width: 100%;
+  /* flex-direction: row; */
   justify-content: space-between;
 }
 
@@ -115,4 +153,8 @@
   padding-right: 4px;
   border-radius: 6px;
   cursor: pointer;
+}
+
+#post-form-container {
+  width: 100%;
 }

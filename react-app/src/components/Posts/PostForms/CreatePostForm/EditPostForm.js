@@ -8,6 +8,8 @@ import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
 // IMPORT THUNKS WE NEED TO DISPATCH
 import { makePost, editPost } from "../../../../store/posts";
 
+import "./EditPostForm.css";
+
 // THIS IS OUR POST CREATION/EDIT FORM COMPONENT
 function EditPostForm({ post = null, setShowCreatePost }) {
   // SETTING STATES
@@ -96,7 +98,7 @@ function EditPostForm({ post = null, setShowCreatePost }) {
   };
 
   return (
-    <div>
+    <div id="edit-post-form-container">
       {/* ----------------------FORM ---------------------- vv*/}
       <form onSubmit={submit}>
         {/* IF POST IS FALSEY, AKA IF NOTHING WAS RETURNED FROM THE DISPATCH AND REASSIGNED THE VALUE OF THE
@@ -145,26 +147,16 @@ function EditPostForm({ post = null, setShowCreatePost }) {
         {/* ----- IMAGE INPUT ----- ^^*/}
 
         {/* ----- CAPTION INPUT ----- vv*/}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+        <div>
           <label htmlFor="caption">Caption</label>
           <textarea
-            style={{
-              height: "120px",
-              color: "white",
-              backgroundColor: "#8f8f8f",
-              border: "none",
-            }}
+            className="post-edit-caption"
             id="textBox1"
             TextMode="MultiLine"
-            onkeyup="setHeight('textBox1');"
-            onkeydown="setHeight('textBox1');"
+            onKeyup="setHeight('textBox1');"
+            onKeydown="setHeight('textBox1');"
             name="caption"
-            oninput='style.height = "";style.height = scrollHeight + 3 + "px"'
+            onInput='style.height = "";style.height = scrollHeight + 3 + "px"'
             type="text"
             value={caption}
             onChange={(e) => setCaption(e.target.value)}

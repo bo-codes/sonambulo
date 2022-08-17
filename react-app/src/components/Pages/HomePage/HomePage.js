@@ -78,14 +78,15 @@ function HomePage() {
           </h1>
         </div>
         <div className="cat-image-and-title-container">
-          <div className="cat-image-container" style={{
-            backgroundImage: 'url(' + sleepinCat + ')',
-            backgroundPosition: 'center',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat'
-          }}>
-            {/* <img id="cat-image" src={sleepinCat} /> */}
-          </div>
+          <div
+            className="cat-image-container"
+            style={{
+              backgroundImage: "url(" + sleepinCat + ")",
+              backgroundPosition: "center",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></div>
           <div className="home-subtitle-container">
             <div className="home-subtitle">Log Your Dreams</div>
           </div>
@@ -104,23 +105,12 @@ function HomePage() {
                 style={{ position: "relative" }}
               >
                 <div className="overlay">
-                  <h3
-                    style={{
-                      color: "white",
-                      width: "309px",
-                      fontWeight: "initial",
-                      justifyContent: "center",
-                      display: "flex",
-                    }}
-                  >
-                    {image.caption.slice(0, 200)}
-                  </h3>
+                  <h3>{image.caption.slice(0, 200)}</h3>
                 </div>
                 <img
                   src={image.image_url}
                   alt="coverImg"
                   className="image"
-                  style={{ padding: 2.5 }}
                 ></img>
               </HashLink>
             </div>

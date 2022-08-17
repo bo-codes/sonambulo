@@ -7,8 +7,7 @@
 .image {
   display: block;
   width: 100%;
-  padding: 1px;
-  /* max-width: 600px; */
+  padding: 2.5px;
 }
 
 .overlay {
@@ -28,6 +27,14 @@
   transition: 0.5s;
 }
 
+.overlay h3 {
+  color: white;
+  width: 309px;
+  font-weight: initial;
+  display: flex;
+  justify-content: center;
+}
+
 .image:hover .overlay {
   display: flex;
   opacity: 1;
@@ -35,15 +42,15 @@
 }
 
 #imageCard {
-  /* columns: 2; */
   column-gap: 0px;
   max-width: 60vw;
   height: 100vh;
-  /* border: 1px solid purple; */
   overflow-y: scroll;
+  /* columns: 2; */
   /* overflow-x: scroll; */
   /* display: flex;
   flex-wrap: wrap; */
+  /* border: 1px solid purple; */
 }
 
 .imageCard-container {
@@ -59,8 +66,8 @@
   font-family: 'syne';
   font-weight: 800;
   font-size: 2.8vw;
-  /* font-stretch: ultra-condensed; */
 }
+
 #title-reflection {
   font-family: 'syne';
   font-weight: 800;
@@ -81,13 +88,12 @@
 }
 
 .container-titles-and-img-divs { /*  RED  */
-  /* border: 1px solid red; */
   width: 40vw;
   height: 100vh;
   float: right;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
+  /* border: 1px solid red; */
 }
 
 .title-container { /*  BLUE  */
@@ -108,7 +114,6 @@
   width: 40vw;
   position: absolute;
   float: left;
-  /* padding-left: 2vw; */
   bottom: -55px;
   /* border: 1px solid white; */
 }
@@ -126,13 +131,9 @@
 #cat-image {
   height: 100%;
   max-height: 100%;
-  /* padding-top: 1vw; */
   /* border: 1px solid green; */
 }
 
-.background {
-  /* border: 1px solid green; */
-}
 
 .home-subtitle-container {
   font-family: 'syne';
@@ -140,18 +141,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* right: 40px; */
   float: right;
   width: 64%;
   height: 100%;
   bottom: 0;
-  /* font-size: 100%; */
   /* border: 1px solid violet; */
 }
 
 .home-subtitle {
-  /* width: 80%;
-  height: 80%; */
   display: flex;
   justify-content: center;
   align-items: center;

@@ -2,24 +2,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-// IMPORT COMPONENTS WE'RE USING --------
+// --------COMPONENTS -------- //
 import PostCard from "../../Posts/Elements/PostCard/PostCard";
-// IMPORT THUNKS WE NEED TO DISPATCH --------
+// -------- THUNKS -------- //
 import { getAllCommentsThunk } from "../../../store/comments";
 import { getAllPostsThunk } from "../../../store/posts";
+// -------- CSS/IMAGES -------- //
 import "./Posts.css";
 
-// PAGE THAT DISPLAYS ALL OF OUR POSTS
 function Posts({}) {
-  // NEED TO DO THIS TO BE ABLE TO DISPATCH
   const dispatch = useDispatch();
   // PULLING ALL OF THE INFORMATION FROM OUR STATE
   // THIS RUNS FIRST BEFORE USEEFFECT FETCHES OUR DATA WHICH IS WHY WE ALWAYS HAVE TO IMPLEMENT
   // OUR CONDITIONALS (posts && posts.map()) TO HANDLE THE CASES WHERE WE DONT HAVE DATA YET
   const posts = Object.values(useSelector((state) => state.posts));
-
   const comments = Object.values(useSelector((state) => state.comments));
-
   const user = useSelector((state) => state.session.user);
   const users = useSelector((state) => Object.values(state.user));
 
@@ -27,18 +24,16 @@ function Posts({}) {
 
   // WE ADD DISPATCH TO THE DEPENDENCY ARR SO THAT IT DOESNT RERENDER A MILLION TIMES, I JUST CANT EXPLAIN IT WELL
   useEffect(() => {
-    // GET ALL POSTS THUNK
+    // GET ALL POSTS
     dispatch(getAllPostsThunk());
-    // GET ALL COMMENTS THUNK
+    // GET ALL COMMENTS
     dispatch(getAllCommentsThunk());
   }, [dispatch]);
 
   return (
     <main>
-      {/* TITLE */}
-      {/* <h1>Posts</h1> */}
       <div className="post-list">
-        <div>
+        <div className="suggested-users">
           {/* <h3>Suggested Users:</h3> */}
           {/* {shuffledUsers.slice(0, 5).map((listedUser) => {
             return (
@@ -51,7 +46,7 @@ function Posts({}) {
             );
           })} */}
         </div>
-        {/* CHECK IF THERE ARE POSTS SO THAT THE USESELECTOR DOESNT FUCK US */}
+        {/* CHECK IF THERE ARE POSTS SO THAT THE USESELECTOR DOESNT MESS US UP */}
         {posts &&
           posts.map((post) => {
             // WE FILTER THROUGH ALL COMMENTS EVER TO ONLY GRAB THE ONES ASSOCIATED WITH THIS POST

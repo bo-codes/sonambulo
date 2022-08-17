@@ -1,15 +1,18 @@
+// IMPORT REACT STUFF --------
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Modal } from "../../../Global/Elements/Modal";
-import PostForm from "../../PostForms/CreatePostForm/CreatePostForm";
-import CreateCommentForm from "../../../Comment/CommentForms/CreateCommentForm/CreateCommentForm";
-import Comment from "../../../Comment/Elements/Comment/Comment";
-import LoginFormPosts from "../../../auth/LoginFormCreatePost/LoginFormCreatePost";
-import SignUpForm from "../../../auth/SignupForm/SignUpForm";
 import moment from "moment";
+// --------COMPONENTS -------- //
+import Comment from "../../../Comment/Elements/Comment/Comment";
+// --------FORMS -------- //
+import LoginFormPosts from "../../../auth/LoginFormCreatePost/LoginFormCreatePost";
+import CreateCommentForm from "../../../Comment/CommentForms/CreateCommentForm/CreateCommentForm";
+import EditPostForm from "../../PostForms/CreatePostForm/EditPostForm";
+import SignUpForm from "../../../auth/SignupForm/SignUpForm";
+// -------- CSS/IMAGES -------- //
 import "./Postcard.css";
 import chatballoon from "../../../../images/chat-balloon.jpg";
-import EditPostForm from "../../PostForms/CreatePostForm/EditPostForm";
 
 function PostCard({ post, postComments }) {
   // -------- SETTING STATES ------- //
@@ -26,73 +29,51 @@ function PostCard({ post, postComments }) {
 
   // -------- PULLING INFO FROM THE STATE -------- //
   const user = useSelector((state) => state.session.user) || "";
-  // const [localDate] = useState(new Date(post.created_at).toString());
   const [localDate] = useState(new Date(post.created_at));
-  console.log(post);
+
   const commentButton = () => {
     setShowCreateComment(true);
     setShowComments(true);
   };
 
-  // -------- RETURN -------- //
   return (
-    <div style={{ margin: "30px" }}>
-      {/* POST IMAGE ----------- vv*/}
-      <div
-        style={{
-          color: "white",
-          fontSize: "16px",
-          width: "660px",
-          // height: "55px",
-          backgroundColor: "#3f3f3f",
-          padding: "17px",
-          borderTopLeftRadius: "8px",
-          borderTopRightRadius: "8px",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <div className="post-head-container">
-          <span className="post-username">
-            <div>{post.user.username}</div>
-          </span>
-          {/* ------ POST EDIT BUTTON ------ vv*/}
-          <span className="edit-post-container">
-            {post ? (
-              // POST EDIT BUTTON
-              // when clicked, setShowCreatePost will toggle to true
-              <div className="edit-post-button-container">
-                {user && post.user_id === user.id && (
-                  <button
-                    onClick={() => setShowCreatePost(true)}
-                    className="edit-post-button"
-                  >
-                    ...
-                  </button>
-                )}
-                {/* if setShowCreatePost is set to true, then show the modal which holds the post edit form. */}
-              </div>
-            ) : (
-              <h1>Loading Post</h1>
-            )}
-          </span>
+    <div id="outermost-card">
+      <div className="post-head-container">
+        <div className="post-username">
+          <div>{post.user.username}</div>
         </div>
+        {/* ------ POST EDIT BUTTON ------ vv*/}
+        <div className="edit-post-container">
+          {post ? (
+            // POST EDIT BUTTON
+            // when clicked, setShowCreatePost will toggle to true
+            <div className="edit-post-button-container">
+              {user && post.user_id === user.id && (
+                <button
+                  onClick={() => setShowCreatePost(true)}
+                  className="edit-post-button"
+                >
+                  ...
+                </button>
+              )}
+              {/* if setShowCreatePost is set to true, then show the modal which holds the post edit form. */}
+            </div>
+          ) : (
+            <h1>Loading Post</h1>
+          )}
+        </div>
+        {/* ------ POST EDIT BUTTON ------ ^^*/}
       </div>
-      {/* ------ POST EDIT BUTTON ------ ^^*/}
+
+      {/* ----------- POST IMAGE ----------- vv*/}
       {post.image_url && (
-        <img
-          style={{ width: "660px", height: "auto" }}
-          src={post.image_url}
-          alt=""
-        />
+        <img id="postcard-image" src={post.image_url} alt="" />
       )}
-      {/* POST IMAGE ----------- ^^*/}
+      {/* ----------- POST IMAGE ----------- ^^*/}
 
       {/* POST DATE ----- vv*/}
-      <div>
-        <div className="post-date">
-          <div>{moment(localDate).calendar()}</div>
-        </div>
+      <div className="post-date">
+        <div>{moment(localDate).calendar()}</div>
       </div>
       {/* POST DATE ----- ^^*/}
 
@@ -132,17 +113,17 @@ function PostCard({ post, postComments }) {
           )}
         </div>
       )}
-      <div>
+      {/* POST CAPTION ----- ^^*/}
+      {/* ----------- EDIT POST BUTTON ----------- vv*/}
+      <div id="post-form-container">
         {showCreatePost && (
           <EditPostForm post={post} setShowCreatePost={setShowCreatePost} />
         )}
       </div>
-      {/* POST CAPTION ----- ^^*/}
+      {/* ----------- EDIT POST BUTTON ----------- ^^*/}
 
       <div className="create-comment-container">
-        {/* if we dont have a post, we dont error out */}
-
-        {/* ----------- CREATE COMMENT BUTTON ----------- */}
+        {/* ----------- CREATE COMMENT BUTTON ----------- vv*/}
         {showLogin && (
           <Modal onClose={() => setShowLogin(false)}>
             <LoginFormPosts setShowLogin={setShowLogin} />
@@ -153,13 +134,17 @@ function PostCard({ post, postComments }) {
             <SignUpForm setShowSignup={setShowSignup} />
           </Modal>
         )}
-        {/* ----------- CREATE COMMENT BUTTON ----------- */}
+        {/* ----------- CREATE COMMENT BUTTON ----------- ^^*/}
+
+        {/* ----------- CREATE COMMENT FORM ----------- vv*/}
         <CreateCommentForm
           post={post}
           setShowCreateComment={setShowCreateComment}
           userId={user.id}
           setShowLogin={setShowLogin}
         />
+        {/* ----------- CREATE COMMENT FORM ----------- ^^*/}
+
         {/* ------------ COMMENTS ------------ vv*/}
         <div className="comment-section">
           {postComments &&
