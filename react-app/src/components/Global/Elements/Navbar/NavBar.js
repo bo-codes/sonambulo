@@ -24,7 +24,7 @@ const NavigationBar = styled.div`
 const Logo = styled.img`
   position: absolute;
   top: 0;
-  width: 4rem;
+  width: 3rem;
   height: auto;
   padding-top: 0%;
   align-self: center;

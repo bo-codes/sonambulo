@@ -8,10 +8,9 @@ import CreatePost from "./components/Pages/CreatePostPage/CreatePost";
 import { authenticate } from "./store/session";
 import Signup from "./components/auth/Pages/SignupPage/Signup";
 import Footer from "./components/Global/Elements/Footer/index";
-import ExplorePage from "./components/Pages/ExplorePage/ExplorePage";
+import HomePage from "./components/Pages/HomePage/HomePage";
 import ErrorPage from "./components/Pages/404/404";
-import { acquirePosts } from "./store/posts";
-import { acquireAllComments } from "./store/comments";
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,7 +34,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path="/" exact={true}>
-          <ExplorePage />
+          <HomePage />
         </Route>
         <Route path="/posts" exact={true}>
           <Posts />

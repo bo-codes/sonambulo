@@ -5,8 +5,8 @@ import { NavLink } from "react-router-dom";
 // IMPORT COMPONENTS WE'RE USING --------
 import PostCard from "../../Posts/Elements/PostCard/PostCard";
 // IMPORT THUNKS WE NEED TO DISPATCH --------
-import { acquireAllComments } from "../../../store/comments";
-import { acquirePosts } from "../../../store/posts";
+import { getAllCommentsThunk } from "../../../store/comments";
+import { getAllPostsThunk } from "../../../store/posts";
 import "./Posts.css";
 
 // PAGE THAT DISPLAYS ALL OF OUR POSTS
@@ -28,9 +28,9 @@ function Posts({}) {
   // WE ADD DISPATCH TO THE DEPENDENCY ARR SO THAT IT DOESNT RERENDER A MILLION TIMES, I JUST CANT EXPLAIN IT WELL
   useEffect(() => {
     // GET ALL POSTS THUNK
-    dispatch(acquirePosts());
+    dispatch(getAllPostsThunk());
     // GET ALL COMMENTS THUNK
-    dispatch(acquireAllComments());
+    dispatch(getAllCommentsThunk());
   }, [dispatch]);
 
   return (

@@ -29,7 +29,7 @@ const deleteComment = (commentId) => ({
 });
 
 /***************************** THUNKS ***************************************/
-export const acquireAllComments = () => async (dispatch) => {
+export const getAllCommentsThunk = () => async (dispatch) => {
   const response = await fetch(`/api/comments/all`);
 
   if (response.ok) {
