@@ -8,6 +8,7 @@
   border: 1px solid #ccc;
   border-radius: 100px;
   padding: 10px 100px 0px 20px;
+  height: fit-content;
   line-height: 1;
   box-sizing: border-box;
   outline: none;
@@ -37,16 +38,21 @@
   padding-left: 20px;
   padding-bottom: 10px;
   background-color: transparent;
-  /* border-bottom: 1px solid grey */
+  /* border-bottom: 1px solid grey; */
   padding-top: 10px;
 }
 
-.post-date {
+.post-edit {
   background-color: #3f3f3f;
+  height: 50px;
   width: 660px;
 }
 
 .post-caption {
   background-color: #3f3f3f;
   width: 660px;
+}
+
+#edit-post-btn {
+  width: '10px'
 }

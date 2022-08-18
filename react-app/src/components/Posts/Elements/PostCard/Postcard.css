@@ -5,7 +5,7 @@
 #outermost-card {
   margin: 30px;
   color: white;
-  width: 660px;
+  width: 560px;
   height: fit-content;
   /* background-color: #ffffff; */
   background-color: #3f3f3f;
@@ -34,11 +34,12 @@
 }
 
 .comment-section {
-  max-height: 25vh;
-  max-width: 660px;
+  max-height: 444px;
+  width: 100%;
   /* background-color: #3f3f3f; */
   overflow-y: scroll;
   margin-left: 20px;
+  padding-bottom: 28px;
 }
 .comment {
   height: 10%;
@@ -59,12 +60,13 @@
 }
 
 .post-caption {
+  width: 100%;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 17px;
   padding-right: 17px;
   word-wrap: break-word;
-  border: 1px solid greenyellow;
+  /* border: 1px solid greenyellow; */
 }
 
 .post-date {
@@ -83,7 +85,8 @@
 
 .create-comment-container{
   /* background-color: #3f3f3f; */
-  width: 660px;
+  width: 100%;
+  min-height: 444px;
   border-top: .5px solid grey;
   /* padding-top: 18px; */
 }
@@ -111,6 +114,36 @@
   background-color: transparent;
   border: none;
   /* float: "right" */
+}
+
+#post-edit-btn-img {
+  background-image: url('../../../../images/edit.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 28px;
+  height: 28px;
+}
+
+.post-edit-delete {
+  width: 100%;
+  /* border: 1px solid purple; */
+  display: flex;
+  justify-content: end;
+}
+
+#post-delete-btn-img {
+  background-image: url('../../../../images/delete.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 28px;
+  height: 28px;
+}
+
+.post-btns {
+  background-color: transparent;
+  margin: 11px 14px;
 }
 
 .post-username {
@@ -157,4 +190,32 @@
 
 #post-form-container {
   width: 100%;
+}
+
+.comment-btns {
+  /* border: 1px solid orange; */
+  border-top: 1px solid grey;
+  width: 100%;
+  height: 55px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+#comment-btn {
+  background-image: url('../../../../images/chat-balloon.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+}
+
+#heart-btn {
+  background-image: url('../../../../images/heart.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
 }

@@ -5,6 +5,7 @@ import { Modal } from "../../../Global/Elements/Modal";
 import moment from "moment";
 // --------COMPONENTS -------- //
 import Comment from "../../../Comment/Elements/Comment/Comment";
+import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
 // --------FORMS -------- //
 import LoginFormPosts from "../../../auth/LoginFormCreatePost/LoginFormCreatePost";
 import CreateCommentForm from "../../../Comment/CommentForms/CreateCommentForm/CreateCommentForm";
@@ -12,7 +13,6 @@ import EditPostForm from "../../PostForms/CreatePostForm/EditPostForm";
 import SignUpForm from "../../../auth/SignupForm/SignUpForm";
 // -------- CSS/IMAGES -------- //
 import "./Postcard.css";
-import chatballoon from "../../../../images/chat-balloon.jpg";
 
 function PostCard({ post, postComments }) {
   // -------- SETTING STATES ------- //
@@ -20,6 +20,7 @@ function PostCard({ post, postComments }) {
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [showFullCaption, setShowFullCaption] = useState(false);
+  const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
 
   // SHOWING OR HIDING THE CREATE COMMENT MODAL
   const [showCreateComment, setShowCreateComment] = useState(false);
@@ -34,6 +35,14 @@ function PostCard({ post, postComments }) {
   const commentButton = () => {
     setShowCreateComment(true);
     setShowComments(true);
+  };
+
+  const areWeShowingComments = () => {
+    if (showComments) {
+      setShowComments(false);
+    } else {
+      setShowComments(true);
+    }
   };
 
   return (
@@ -71,20 +80,20 @@ function PostCard({ post, postComments }) {
       )}
       {/* ----------- POST IMAGE ----------- ^^*/}
 
-      {/* POST DATE ----- vv*/}
-      <div className="post-date">
+      {/* ----- POST DATE ----- vv*/}
+      {/* <div className="post-date">
         <div>{moment(localDate).calendar()}</div>
-      </div>
-      {/* POST DATE ----- ^^*/}
+      </div> */}
+      {/* ----- POST DATE ----- ^^ */}
 
       {/*  POST CAPTION ----- vv*/}
       {!showCreatePost && (
         <div className="post-caption">
-          {post.caption.length > 78 ? (
+          {post.caption.length > 138 ? (
             <div>
               {!showFullCaption ? (
                 <p>
-                  {post.caption.slice(0, 78)}{" "}
+                  {post.caption.slice(0, 138)}{" "}
                   <span>
                     <button
                       className="show-more"
@@ -114,58 +123,102 @@ function PostCard({ post, postComments }) {
         </div>
       )}
       {/* POST CAPTION ----- ^^*/}
+      {/* ----------- POST EDIT BUTTONS ----------- vv*/}
+      <div className="post-edit-delete">
+        {user && post.user_id === user.id && (
+          <div>
+            <button
+              className="post-btns"
+              onClick={() => setShowConfirmDeleteModal(true)}
+            >
+              <div id="post-delete-btn-img"></div>
+            </button>
+            <button
+              className="post-btns"
+              onClick={() => setShowCreatePost(true)}
+            >
+              <div id="post-edit-btn-img"></div>
+            </button>
+          </div>
+        )}
+      </div>
+      {/* ----------- POST EDIT BUTTONS ----------- ^^*/}
       {/* ----------- EDIT POST BUTTON ----------- vv*/}
       <div id="post-form-container">
         {showCreatePost && (
-          <EditPostForm post={post} setShowCreatePost={setShowCreatePost} />
+          <Modal onClose={() => setShowCreatePost(false)}>
+            <EditPostForm
+              post={post}
+              setShowCreatePost={setShowCreatePost}
+              setShowConfirmDeleteModal={setShowConfirmDeleteModal}
+            />
+          </Modal>
+        )}
+        {showConfirmDeleteModal && (
+          <Modal onClose={() => setShowConfirmDeleteModal(false)}>
+            <DeletePostModal
+              setShowConfirmDeleteModal={setShowConfirmDeleteModal}
+              showConfirmDeleteModal={showConfirmDeleteModal}
+              post={post}
+            />
+          </Modal>
         )}
       </div>
       {/* ----------- EDIT POST BUTTON ----------- ^^*/}
-
-      <div className="create-comment-container">
-        {/* ----------- CREATE COMMENT BUTTON ----------- vv*/}
-        {showLogin && (
-          <Modal onClose={() => setShowLogin(false)}>
-            <LoginFormPosts setShowLogin={setShowLogin} />
-          </Modal>
-        )}
-        {showSignup && (
-          <Modal onClose={() => setShowSignup(false)}>
-            <SignUpForm setShowSignup={setShowSignup} />
-          </Modal>
-        )}
-        {/* ----------- CREATE COMMENT BUTTON ----------- ^^*/}
-
-        {/* ----------- CREATE COMMENT FORM ----------- vv*/}
-        <CreateCommentForm
-          post={post}
-          setShowCreateComment={setShowCreateComment}
-          userId={user.id}
-          setShowLogin={setShowLogin}
-        />
-        {/* ----------- CREATE COMMENT FORM ----------- ^^*/}
-
-        {/* ------------ COMMENTS ------------ vv*/}
-        <div className="comment-section">
-          {postComments &&
-            postComments.map((comment) => {
-              // FOR EACH COMMENT DISPLAY THIS
-              return (
-                <Comment
-                  style={{
-                    backgroundColor: "red",
-                  }}
-                  className="comment"
-                  key={comment.id}
-                  comment={comment}
-                  post={post}
-                  userId={user.id}
-                />
-              );
-            })}
-        </div>
-        {/* ------------ COMMENTS ------------ ^^*/}
+      <div className="comment-btns">
+        <button className="post-btns" onClick={areWeShowingComments}>
+          <div id="comment-btn"></div>
+        </button>
+        <button className="post-btns" onClick={() => setShowComments(true)}>
+          <div id="heart-btn"></div>
+        </button>
       </div>
+      {showComments && (
+        <div className="create-comment-container">
+          {/* ----------- CREATE COMMENT BUTTON ----------- vv*/}
+          {showLogin && (
+            <Modal onClose={() => setShowLogin(false)}>
+              <LoginFormPosts setShowLogin={setShowLogin} />
+            </Modal>
+          )}
+          {showSignup && (
+            <Modal onClose={() => setShowSignup(false)}>
+              <SignUpForm setShowSignup={setShowSignup} />
+            </Modal>
+          )}
+          {/* ----------- CREATE COMMENT BUTTON ----------- ^^*/}
+
+          {/* ----------- CREATE COMMENT FORM ----------- vv*/}
+          <CreateCommentForm
+            post={post}
+            setShowCreateComment={setShowCreateComment}
+            userId={user.id}
+            setShowLogin={setShowLogin}
+          />
+          {/* ----------- CREATE COMMENT FORM ----------- ^^*/}
+
+          {/* ------------ COMMENTS ------------ vv*/}
+          <div className="comment-section">
+            {postComments &&
+              postComments.map((comment) => {
+                // FOR EACH COMMENT DISPLAY THIS
+                return (
+                  <Comment
+                    style={{
+                      backgroundColor: "red",
+                    }}
+                    className="comment"
+                    key={comment.id}
+                    comment={comment}
+                    post={post}
+                    userId={user.id}
+                  />
+                );
+              })}
+          </div>
+          {/* ------------ COMMENTS ------------ ^^*/}
+        </div>
+      )}
     </div>
   );
 }

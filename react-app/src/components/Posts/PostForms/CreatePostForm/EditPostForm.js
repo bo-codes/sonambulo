@@ -11,14 +11,14 @@ import { makePost, editPost } from "../../../../store/posts";
 import "./EditPostForm.css";
 
 // THIS IS OUR POST CREATION/EDIT FORM COMPONENT
-function EditPostForm({ post = null, setShowCreatePost }) {
+function EditPostForm({ post = null, setShowCreatePost, setShowConfirmDeleteModal, showConfirmDeleteModal }) {
   // SETTING STATES
   const [date, setDate] = useState((post && post.created_at) || "");
   const [image, setImage] = useState((post && post.image_url) || "");
   const [caption, setCaption] = useState((post && post.caption) || "");
   const [errors, setErrors] = useState([]);
   const [imageLoading, setImageLoading] = useState(false);
-  const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
+  // const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
 
   // SETTING UP THE useHistory AND useDispatch FUNCTIONS
   const history = useHistory();

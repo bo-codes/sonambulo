@@ -1,13 +1,12 @@
-// IMPORT REACT STUFF --------
+// -------- REACT --------
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-// IMPORT THUNKS WE NEED TO DISPATCH --------
+// -------- THUNKS --------
 import { makeComment } from "../../../../store/comments";
 import "./CreateCommentForm.css";
 
-// COMMENT FORM THAT WE WILL DISPLAY ON THE POSTS PAGE USING A MODAL AND BUTTON THAT SHOWS MODAL NEXT TO EACH POST
 function CreateCommentForm({
   comment = null,
   post = null,
@@ -32,6 +31,7 @@ function CreateCommentForm({
   let created_at;
   if (comment) created_at = comment.created_at;
 
+  // -------- ONSUBMIT -------- vv//
   const submit = async (e) => {
     e.preventDefault();
     setErrors([]);
@@ -50,20 +50,23 @@ function CreateCommentForm({
       return;
     }
 
+    // IF WE GET ERRORS BACK BECAUSE THATS THE ONLY ARR WED GET BACK. COMMENT WOULD BE AN OBJECT.
     if (Array.isArray(comment)) {
+      // SET OUT ERROR STATE TO OUR NEW ERRORS WE GOT FROM SUBMITTAL
       setErrors(comment);
+      // IF IT FAILS TO CREATE A COMMENT BUT DOESNT RETURN ERRORS IN THE ARRAY
     } else {
       setContent("");
       // setShowCreateComment(false);
       return;
     }
   };
+  // -------- ONSUBMIT -------- ^^//
 
   return (
     <div className="comment-create-input">
       <form onSubmit={submit}>
         <div>
-          {/* IF THERE IS A POST, DISPLAY THE TEXT "Update Your Post" AND LIST ANY ERRORS */}
           <ul>
             {errors &&
               errors.map((error) => {
@@ -71,44 +74,30 @@ function CreateCommentForm({
                 let firstPart = splitError[0];
                 let firstLetter = firstPart[0].toUpperCase();
                 let secondPart = splitError[1].slice(11, 23);
-                return (
-                  <li
-                    key={error}
-                    style={{
-                      color: "white",
-                    }}
-                  >
-                    {/* {firstLetter + firstPart.slice(1) + secondPart} */}
-                    {splitError[1]}
-                  </li>
-                );
+                return <li key={error}>{splitError[1]}</li>;
               })}
           </ul>
         </div>
-        <div>
-          <div className="custom-search">
-            {/* <label htmlFor="content">Content</label> */}
-            <textarea
-            style={{
-              color: 'white'
-            }}
-              className="custom-search-input"
-              name="content"
-              type="text"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-            {userId ? (
-              <button className="custom-search-button">Reply</button>
-            ) : (
-              <button
-                className="custom-search-button"
-                onClick={() => setShowLogin(true)}
-              >
-                Reply
-              </button>
-            )}
-          </div>
+        <div className="custom-search">
+          <textarea
+            onKeyup="if (this.scrollHeight > this.clientHeight) this.style.height = this.scrollHeight + 'px';"
+            style={{ overflow: "hidden", transition: "height 0.2s ease-out" }}
+            className="custom-search-input"
+            name="content"
+            type="text"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+          {userId ? (
+            <button className="custom-search-button">Reply</button>
+          ) : (
+            <button
+              className="custom-search-button"
+              onClick={() => setShowLogin(true)}
+            >
+              Reply
+            </button>
+          )}
         </div>
       </form>
     </div>
