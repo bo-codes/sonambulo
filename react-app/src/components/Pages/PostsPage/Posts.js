@@ -55,7 +55,7 @@ function Posts({}) {
         {posts &&
           posts.map((post) => {
             // WE FILTER THROUGH ALL COMMENTS EVER TO ONLY GRAB THE ONES ASSOCIATED WITH THIS POST
-            console.log(likes, "LIKES BEFORE EVEN FILTERING");
+            // console.log(likes, "LIKES BEFORE EVEN FILTERING");
             let postComments = comments.filter((comment) => {
               return parseInt(comment.post_id) === parseInt(post.id);
             });

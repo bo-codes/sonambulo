@@ -37,7 +37,7 @@ export const getAllLikes = () => async (dispatch) => {
   const response = await fetch(`/api/likes/`);
   if (response.ok) {
     const likes = await response.json();
-    console.log("GET ALL LIKES THUNK RESPONSE", likes.likes);
+    // console.log("GET ALL LIKES THUNK RESPONSE", likes.likes);
     dispatch(load(likes));
   }
 };
@@ -64,10 +64,10 @@ const likesReducer = (state = initialState, action) => {
       return newState;
     case GET_ALL_LIKES:
       newState = {};
-      console.log("ACTION.LIKES IN REDUCER", action.likes);
+      // console.log("ACTION.LIKES IN REDUCER", action.likes);
       // this is normallizing. youre setting the id as the key for the value of the like O of 1 lookup time
       action.likes.likes.forEach((like) => {
-        console.log("like post id", like.post_id);
+        // console.log("like post id", like.post_id);
         newState[like.id] = like;
       });
       return newState;

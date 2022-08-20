@@ -6,6 +6,7 @@ from sqlalchemy import DateTime
 # from .post import user_posts
 from .follow import follows
 from .like import Like
+from .post import Post
 
 class User(db.Model, UserMixin):
 
@@ -31,7 +32,6 @@ class User(db.Model, UserMixin):
         backref=db.backref('follows', lazy='dynamic'), lazy='dynamic')
 
 
-
     @property
     def password(self):
         return self.hashed_password
@@ -48,6 +48,9 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
+            'created_at': self.created_at,
+            'followers': [user.to_dict_short() for user in self.follows],
+            'following': [user.to_dict_short() for user in self.followed]
         }
 
     # def to_dict(self):
@@ -65,3 +68,21 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'created_at': self.created_at,
         }
+
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
+
+    def unfollow(self, user):
+        if self.is_following(user):
+            self.followed.remove(user)
+
+    def is_following(self, user):
+        return self.followed.filter(
+            follows.c.followed_id == user.id).count() > 0
+
+    def followed_posts(self):
+        return Post.query.join(
+            follows, (follows.c.followed_id == Post.user_id)).filter(
+                follows.c.follower_id == self.id).order_by(
+                    Post.timestamp.desc())

@@ -165,7 +165,7 @@ export const removePost = (postId) => async (dispatch) => {
   const response = await fetch(`/api/posts/${postId}`, {
     method: "DELETE",
   });
-  console.log(postId);
+  // console.log(postId);
 
   if (response.ok) {
     dispatch(deletePost(postId));
@@ -193,7 +193,7 @@ export default function reducer(state = initialState, action) {
       newState[action.payload.id] = action.payload;
       return newState;
     case DELETE_POST:
-      console.log(action);
+      // console.log(action);
       delete newState[action.postId];
       return newState;
     default:

@@ -1,0 +1,13 @@
+button {
+  background-color: transparent;
+  margin-left: 10px;
+  color: rgb(46, 10, 105);
+  font-size: 17px;
+}
+
+button:hover {
+  background-color: transparent;
+  margin-left: 10px;
+  color: rgb(142, 115, 186);
+  font-size: 17px;
+}

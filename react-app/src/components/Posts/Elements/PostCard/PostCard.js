@@ -6,6 +6,7 @@ import moment from "moment";
 // --------COMPONENTS -------- //
 import Comment from "../../../Comment/Elements/Comment/Comment";
 import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
+import Follows from "../../../Follows/Follows";
 // --------FORMS -------- //
 import LoginFormPosts from "../../../auth/LoginFormCreatePost/LoginFormCreatePost";
 import CreateCommentForm from "../../../Comment/CommentForms/CreateCommentForm/CreateCommentForm";
@@ -17,7 +18,7 @@ import { addOneLike, getAllLikes } from "../../../../store/likes";
 import Like from "../../../Like/Like";
 
 function PostCard({ post, postComments, likes }) {
-  console.log("POST LIKES BEFORE EVEN RETURNING", likes);
+  // console.log("POST LIKES BEFORE EVEN RETURNING", likes);
   const dispatch = useDispatch();
   // -------- SETTING STATES ------- //
   // SHOWING OR HIDING THE EDIT POST MODAL
@@ -47,10 +48,11 @@ function PostCard({ post, postComments, likes }) {
 
   return (
     <div id="outermost-card">
-      {console.log("POST LIKES IN POSTCARD.JS BEFORE RETURN", likes)}
+      {/* {console.log("POST LIKES IN POSTCARD.JS BEFORE RETURN", likes)} */}
       <div className="post-head-container">
         <div className="post-username">
           <div>{post.user.username}</div>
+          <Follows profileUsername={post.user.username} />
         </div>
         {/* ------ POST EDIT BUTTON ------ vv*/}
         <div className="edit-post-container">
@@ -150,9 +152,7 @@ function PostCard({ post, postComments, likes }) {
         <button className="post-btns" onClick={areWeShowingComments}>
           <div id="comment-btn"></div>
         </button>
-        {user && (
-          <Like post_id={post.id} user_id={user.id} likes={likes} />
-        )}
+        {user && <Like post_id={post.id} user_id={user.id} likes={likes} />}
       </div>
       {showComments && (
         <div className="create-comment-container">

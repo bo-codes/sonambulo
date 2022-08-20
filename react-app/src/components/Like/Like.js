@@ -30,7 +30,7 @@ function Like({ post_id, user_id = null, likes }) {
 
   useEffect(() => {
     // console.log(likes);
-    console.log("LIKE.js RIGHT BEFORE SET LIKE", postLikes);
+    // console.log("LIKE.js RIGHT BEFORE SET LIKE", postLikes);
     //set bookmark to the first bookmark in state that matches the post_id
     setLike(
       Object.values(postLikes).filter((like) => {
@@ -45,7 +45,7 @@ function Like({ post_id, user_id = null, likes }) {
   // }, [dispatch, user_id]);
 
   const clickButton = () => {
-    console.log("IS THERE A LIKE WHEN BUTTON IS CLICKED", like);
+    // console.log("IS THERE A LIKE WHEN BUTTON IS CLICKED", like);
     //if bookmark is falsey create a bookmark
     if (!like) dispatch(addOneLike({ post_id, user_id }));
     //else remove the bookmark

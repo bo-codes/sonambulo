@@ -87,25 +87,3 @@ def delete_post(id):
     db.session.commit()
     return {'message': 'Post deleted'}
 # ----------- DELETE POST ----------- ^^#
-#
-#
-# # ----------- LIKE POST ----------- vv#
-# @post_routes.route('/<id>/like', methods=['PUT'])
-# @login_required
-# def like_post(id):
-#     post = Post.query.get(id)
-#     post.like_post(current_user)
-#     db.session.commit()
-#     return post.to_dict()
-# # ----------- LIKE POST ----------- ^^#
-# #
-# #
-# # ----------- LIKE POST ----------- vv#
-# @post_routes.route('/<id>/unlike', methods=['PUT'])
-# @login_required
-# def unlike_post(id):
-#     post = Post.query.get(id)
-#     post.unlike_post(current_user)
-#     db.session.commit()
-#     return post.to_dict()
-# # ----------- LIKE POST ----------- ^^#
