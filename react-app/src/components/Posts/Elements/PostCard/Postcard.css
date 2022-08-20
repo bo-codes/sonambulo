@@ -8,7 +8,8 @@
   width: 560px;
   height: fit-content;
   /* background-color: #ffffff; */
-  background-color: #3f3f3f;
+  background-color: #2d2d2d;
+  /* background-color: #3f3f3f; */
   /* padding: 17px; */
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -66,6 +67,7 @@
   padding-left: 17px;
   padding-right: 17px;
   word-wrap: break-word;
+  font-weight: 300;
   /* border: 1px solid greenyellow; */
 }
 
@@ -143,7 +145,7 @@
 
 .post-btns {
   background-color: transparent;
-  margin: 11px 14px;
+  margin: 11px 12px;
 }
 
 .post-username {
@@ -151,6 +153,7 @@
   justify-content: center;
   align-items: center;
   margin-left: 10px;
+  font-weight: 400;
   /* border: 1px solid blue; */
 }
 
@@ -218,13 +221,15 @@
   background-repeat: no-repeat;
   width: 30px;
   height: 30px;
+  margin-right: 8px;
 }
 
 #filled-heart-btn {
-  background-image: url('../../../../images/filled-heart.png');
+  background-image: url('../../../../images/filled-heart-red.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 30px;
   height: 30px;
+  margin-right: 8px;
 }

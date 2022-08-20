@@ -1,13 +1,18 @@
-button {
+.follow-btn {
   background-color: transparent;
   margin-left: 10px;
-  color: rgb(46, 10, 105);
+  color: rgb(107, 86, 142);
+  /* color: rgb(119, 90, 166); */
+  /* color: rgb(98, 50, 255); */
+  /* color: rgb(122, 50, 255); */
+  /* color: rgb(46, 10, 105); */
   font-size: 17px;
 }
 
-button:hover {
+.follow-btn:hover {
   background-color: transparent;
   margin-left: 10px;
-  color: rgb(142, 115, 186);
+  color: rgb(180, 133, 255);
+  /* color: rgb(142, 115, 186); */
   font-size: 17px;
 }

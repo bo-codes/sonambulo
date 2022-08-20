@@ -52,7 +52,7 @@ function PostCard({ post, postComments, likes }) {
       <div className="post-head-container">
         <div className="post-username">
           <div>{post.user.username}</div>
-          <Follows profileUsername={post.user.username} />
+          {user && <Follows profileUsername={post.user.username} />}
         </div>
         {/* ------ POST EDIT BUTTON ------ vv*/}
         <div className="edit-post-container">
@@ -152,23 +152,20 @@ function PostCard({ post, postComments, likes }) {
         <button className="post-btns" onClick={areWeShowingComments}>
           <div id="comment-btn"></div>
         </button>
-        {user && <Like post_id={post.id} user_id={user.id} likes={likes} />}
+        {user ?
+        <Like post_id={post.id} user_id={user.id} likes={likes} />
+        :
+        <button className="post-btns" onClick={() => setShowLogin(true)}>
+          <div id="heart-btn"></div>
+        </button>}
       </div>
+      {showLogin && (
+        <Modal onClose={() => setShowLogin(false)}>
+          <LoginFormPosts setShowLogin={setShowLogin} />
+        </Modal>
+      )}
       {showComments && (
         <div className="create-comment-container">
-          {/* ----------- CREATE COMMENT BUTTON ----------- vv*/}
-          {showLogin && (
-            <Modal onClose={() => setShowLogin(false)}>
-              <LoginFormPosts setShowLogin={setShowLogin} />
-            </Modal>
-          )}
-          {showSignup && (
-            <Modal onClose={() => setShowSignup(false)}>
-              <SignUpForm setShowSignup={setShowSignup} />
-            </Modal>
-          )}
-          {/* ----------- CREATE COMMENT BUTTON ----------- ^^*/}
-
           {/* ----------- CREATE COMMENT FORM ----------- vv*/}
           <CreateCommentForm
             post={post}
