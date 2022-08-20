@@ -1,5 +1,5 @@
 from sqlalchemy import ForeignKey
-from .like import likes
+from .like import Like
 from .db import db
 from sqlalchemy import DateTime
 from sqlalchemy.sql import func
@@ -33,9 +33,9 @@ class Post(db.Model):
 
     comments = db.relationship(
         'Comment', back_populates='post', cascade='all, delete-orphan', passive_deletes=True)
-    post_likes = db.relationship("User",
-            secondary=likes,
-            back_populates="user_likes",
+    likes = db.relationship("Like",
+            back_populates="post",
+            cascade='all, delete-orphan', passive_deletes=True
     )
     user = db.relationship(
         'User', back_populates='posts', lazy='subquery')
@@ -52,4 +52,5 @@ class Post(db.Model):
             'created_at': self.created_at,
             'user': self.user.to_dict(),
             'comments': [comment.to_dict() for comment in self.comments],
+            'likes': [like.to_dict() for like in self.likes],
         }

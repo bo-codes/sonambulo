@@ -155,7 +155,7 @@
 }
 
 .post-head-container {
-  border: .1px solid orange;
+  /* border: .1px solid orange; */
   display: flex;
   height: 50px;
   width: 100%;
@@ -213,6 +213,15 @@
 
 #heart-btn {
   background-image: url('../../../../images/heart.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+}
+
+#filled-heart-btn {
+  background-image: url('../../../../images/filled-heart.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

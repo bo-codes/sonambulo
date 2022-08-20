@@ -5,15 +5,9 @@ from sqlalchemy.sql import func
 from sqlalchemy import DateTime
 # from .post import user_posts
 from .follow import follows
-from .like import likes
+from .like import Like
 
 class User(db.Model, UserMixin):
-
-    user_likes = db.relationship("Post",
-            secondary=likes,
-            back_populates="post_likes",
-            cascade="all, delete"
-    )
 
     __tablename__ = 'users'
 
@@ -26,10 +20,8 @@ class User(db.Model, UserMixin):
 
     comments = db.relationship('Comment', back_populates='user')
     posts = db.relationship('Post', back_populates='user', cascade='all, delete', passive_deletes=True)
-    user_likes = db.relationship("Post",
-            secondary=likes,
-            back_populates="post_likes",
-            cascade="all, delete"
+    likes = db.relationship("Like",
+            back_populates="user",
     )
 
     followed = db.relationship(

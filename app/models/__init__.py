@@ -3,5 +3,5 @@ from .user import User
 from .comment import Comment
 from .post import Post
 from .tag import Tag
-from .like import likes
+from .like import Like
 from .follow import follows

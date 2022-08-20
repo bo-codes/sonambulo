@@ -34,7 +34,7 @@ export const getAllCommentsThunk = () => async (dispatch) => {
 
   if (response.ok) {
     const comments = await response.json();
-    console.log(comments);
+    // console.log(comments);
     dispatch(getComments(comments.Comments));
     return comments;
   } else if (response.status < 500) {

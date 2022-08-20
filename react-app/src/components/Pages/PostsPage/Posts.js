@@ -7,6 +7,7 @@ import PostCard from "../../Posts/Elements/PostCard/PostCard";
 // -------- THUNKS -------- //
 import { getAllCommentsThunk } from "../../../store/comments";
 import { getAllPostsThunk } from "../../../store/posts";
+import { getAllLikes } from "../../../store/likes";
 // -------- CSS/IMAGES -------- //
 import "./Posts.css";
 
@@ -19,15 +20,19 @@ function Posts({}) {
   const comments = Object.values(useSelector((state) => state.comments));
   const user = useSelector((state) => state.session.user);
   const users = useSelector((state) => Object.values(state.user));
+  const likes = Object.values(useSelector((state) => state.likes));
 
   const shuffledUsers = users.sort(() => Math.random() - 0.5);
 
   // WE ADD DISPATCH TO THE DEPENDENCY ARR SO THAT IT DOESNT RERENDER A MILLION TIMES, I JUST CANT EXPLAIN IT WELL
   useEffect(() => {
+    // console.log(likes);
     // GET ALL POSTS
     dispatch(getAllPostsThunk());
     // GET ALL COMMENTS
     dispatch(getAllCommentsThunk());
+    // GET ALL LIKES
+    dispatch(getAllLikes());
   }, [dispatch]);
 
   return (
@@ -50,7 +55,8 @@ function Posts({}) {
         {posts &&
           posts.map((post) => {
             // WE FILTER THROUGH ALL COMMENTS EVER TO ONLY GRAB THE ONES ASSOCIATED WITH THIS POST
-            const postComments = comments.filter((comment) => {
+            console.log(likes, "LIKES BEFORE EVEN FILTERING");
+            let postComments = comments.filter((comment) => {
               return parseInt(comment.post_id) === parseInt(post.id);
             });
 
@@ -58,7 +64,11 @@ function Posts({}) {
             return (
               // EACH ITEM IN A MAP NEEDS ITS OWN UNIQUE KEY
               <a key={post.id} name={post.id} id={post.id}>
-                <PostCard post={post} postComments={postComments} />
+                <PostCard
+                  post={post}
+                  postComments={postComments}
+                  likes={likes}
+                />
               </a>
             );
           })}

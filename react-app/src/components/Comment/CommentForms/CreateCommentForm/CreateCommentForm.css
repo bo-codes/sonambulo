@@ -8,6 +8,7 @@
   border: 1px solid #ccc;
   border-radius: 100px;
   padding: 10px 100px 0px 20px;
+  min-height: 36px;
   height: fit-content;
   line-height: 1;
   box-sizing: border-box;

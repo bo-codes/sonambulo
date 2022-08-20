@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import TextareaAutosize from "react-textarea-autosize";
 
 // -------- THUNKS --------
 import { makeComment } from "../../../../store/comments";
@@ -61,6 +62,11 @@ function CreateCommentForm({
       return;
     }
   };
+
+  // const adjustTextBox = () => {
+  //   if (this.scrollHeight > this.clientHeight)
+  //     this.style.height = this.scrollHeight + "px";
+  // };
   // -------- ONSUBMIT -------- ^^//
 
   return (
@@ -79,9 +85,9 @@ function CreateCommentForm({
           </ul>
         </div>
         <div className="custom-search">
-          <textarea
-            onKeyup="if (this.scrollHeight > this.clientHeight) this.style.height = this.scrollHeight + 'px';"
-            style={{ overflow: "hidden", transition: "height 0.2s ease-out" }}
+          <TextareaAutosize
+            // onKeyUp={adjustTextBox}
+            // style={{ overflow: "hidden", transition: "height 0.2s ease-out" }}
             className="custom-search-input"
             name="content"
             type="text"

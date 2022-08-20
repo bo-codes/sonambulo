@@ -1,6 +1,6 @@
 // IMPORT REACT STUFF --------
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Modal } from "../../../Global/Elements/Modal";
 import moment from "moment";
 // --------COMPONENTS -------- //
@@ -13,8 +13,12 @@ import EditPostForm from "../../PostForms/CreatePostForm/EditPostForm";
 import SignUpForm from "../../../auth/SignupForm/SignUpForm";
 // -------- CSS/IMAGES -------- //
 import "./Postcard.css";
+import { addOneLike, getAllLikes } from "../../../../store/likes";
+import Like from "../../../Like/Like";
 
-function PostCard({ post, postComments }) {
+function PostCard({ post, postComments, likes }) {
+  console.log("POST LIKES BEFORE EVEN RETURNING", likes);
+  const dispatch = useDispatch();
   // -------- SETTING STATES ------- //
   // SHOWING OR HIDING THE EDIT POST MODAL
   const [showCreatePost, setShowCreatePost] = useState(false);
@@ -29,13 +33,9 @@ function PostCard({ post, postComments }) {
   const [showLogin, setShowLogin] = useState(false);
 
   // -------- PULLING INFO FROM THE STATE -------- //
+  // const likes = useSelector((state) => state.likes) || ""; //Grab likes state
   const user = useSelector((state) => state.session.user) || "";
   const [localDate] = useState(new Date(post.created_at));
-
-  const commentButton = () => {
-    setShowCreateComment(true);
-    setShowComments(true);
-  };
 
   const areWeShowingComments = () => {
     if (showComments) {
@@ -47,6 +47,7 @@ function PostCard({ post, postComments }) {
 
   return (
     <div id="outermost-card">
+      {console.log("POST LIKES IN POSTCARD.JS BEFORE RETURN", likes)}
       <div className="post-head-container">
         <div className="post-username">
           <div>{post.user.username}</div>
@@ -123,26 +124,6 @@ function PostCard({ post, postComments }) {
         </div>
       )}
       {/* POST CAPTION ----- ^^*/}
-      {/* ----------- POST EDIT BUTTONS ----------- vv*/}
-      <div className="post-edit-delete">
-        {user && post.user_id === user.id && (
-          <div>
-            <button
-              className="post-btns"
-              onClick={() => setShowConfirmDeleteModal(true)}
-            >
-              <div id="post-delete-btn-img"></div>
-            </button>
-            <button
-              className="post-btns"
-              onClick={() => setShowCreatePost(true)}
-            >
-              <div id="post-edit-btn-img"></div>
-            </button>
-          </div>
-        )}
-      </div>
-      {/* ----------- POST EDIT BUTTONS ----------- ^^*/}
       {/* ----------- EDIT POST BUTTON ----------- vv*/}
       <div id="post-form-container">
         {showCreatePost && (
@@ -169,9 +150,9 @@ function PostCard({ post, postComments }) {
         <button className="post-btns" onClick={areWeShowingComments}>
           <div id="comment-btn"></div>
         </button>
-        <button className="post-btns" onClick={() => setShowComments(true)}>
-          <div id="heart-btn"></div>
-        </button>
+        {user && (
+          <Like post_id={post.id} user_id={user.id} likes={likes} />
+        )}
       </div>
       {showComments && (
         <div className="create-comment-container">

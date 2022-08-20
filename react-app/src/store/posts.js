@@ -85,7 +85,7 @@ export const makePost =
 
 export const getAllPostsThunk = () => async (dispatch) => {
   const response = await fetch("/api/posts/");
-  console.log("inside getAllPostsThunk thunk", response);
+  // console.log("inside getAllPostsThunk thunk", response);
   if (response.ok) {
     const data = await response.json();
     dispatch(readPost(data));

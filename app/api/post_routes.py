@@ -26,7 +26,7 @@ def validation_errors_to_error_messages(validation_errors):
 def get_posts():
     posts = Post.query.all()
     data = [post.to_dict() for post in posts]
-    print("\n\n\n", data, "\n\n\n", "DATAAAAAAAA")
+    # print("\n\n\n", data, "\n\n\n", "DATAAAAAAAA")
     return {'posts': data}
 # ----------- GET POSTS ----------- ^^#
 #
@@ -89,23 +89,23 @@ def delete_post(id):
 # ----------- DELETE POST ----------- ^^#
 #
 #
-# ----------- LIKE POST ----------- vv#
-@post_routes.route('/<id>/like', methods=['PUT'])
-@login_required
-def like_post(id):
-    post = Post.query.get(id)
-    post.like_post(current_user)
-    db.session.commit()
-    return post.to_dict()
-# ----------- LIKE POST ----------- ^^#
-#
-#
-# ----------- LIKE POST ----------- vv#
-@post_routes.route('/<id>/unlike', methods=['PUT'])
-@login_required
-def unlike_post(id):
-    post = Post.query.get(id)
-    post.unlike_post(current_user)
-    db.session.commit()
-    return post.to_dict()
-# ----------- LIKE POST ----------- ^^#
+# # ----------- LIKE POST ----------- vv#
+# @post_routes.route('/<id>/like', methods=['PUT'])
+# @login_required
+# def like_post(id):
+#     post = Post.query.get(id)
+#     post.like_post(current_user)
+#     db.session.commit()
+#     return post.to_dict()
+# # ----------- LIKE POST ----------- ^^#
+# #
+# #
+# # ----------- LIKE POST ----------- vv#
+# @post_routes.route('/<id>/unlike', methods=['PUT'])
+# @login_required
+# def unlike_post(id):
+#     post = Post.query.get(id)
+#     post.unlike_post(current_user)
+#     db.session.commit()
+#     return post.to_dict()
+# # ----------- LIKE POST ----------- ^^#

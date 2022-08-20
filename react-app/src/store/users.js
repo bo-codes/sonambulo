@@ -31,7 +31,7 @@ export const thunkGetUser = (username) => async (dispatch) => {
 const initialState = {};
 
 const userReducer = (state = initialState, action) => {
-  console.log("BEFORE ACTION", action, "ACTION HERE BOZO");
+  // console.log("BEFORE ACTION", action, "ACTION HERE BOZO");
   let newState = { ...state };
   switch (action.type) {
     case GET_SINGLE_USER:
@@ -41,7 +41,7 @@ const userReducer = (state = initialState, action) => {
 
     case GET_ALL_USERS:
       newState = {};
-      console.log("ACTION", action);
+      // console.log("ACTION", action);
       action.users.users.forEach((user) => {
         newState[user.id] = user;
       });

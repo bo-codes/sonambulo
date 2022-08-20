@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import TextareaAutosize from "react-textarea-autosize";
 // IMPORT COMPONENTS WE'RE USING
 import { Modal } from "../../../Global/Elements/Modal";
 import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
@@ -11,7 +12,12 @@ import { makePost, editPost } from "../../../../store/posts";
 import "./EditPostForm.css";
 
 // THIS IS OUR POST CREATION/EDIT FORM COMPONENT
-function EditPostForm({ post = null, setShowCreatePost, setShowConfirmDeleteModal, showConfirmDeleteModal }) {
+function EditPostForm({
+  post = null,
+  setShowCreatePost,
+  setShowConfirmDeleteModal,
+  showConfirmDeleteModal,
+}) {
   // SETTING STATES
   const [date, setDate] = useState((post && post.created_at) || "");
   const [image, setImage] = useState((post && post.image_url) || "");
@@ -149,14 +155,10 @@ function EditPostForm({ post = null, setShowCreatePost, setShowConfirmDeleteModa
         {/* ----- CAPTION INPUT ----- vv*/}
         <div>
           <label htmlFor="caption">Caption</label>
-          <textarea
+          <TextareaAutosize
             className="post-edit-caption"
             id="textBox1"
-            TextMode="MultiLine"
-            onKeyup="setHeight('textBox1');"
-            onKeydown="setHeight('textBox1');"
             name="caption"
-            onInput='style.height = "";style.height = scrollHeight + 3 + "px"'
             type="text"
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
