@@ -21,6 +21,54 @@
     border: none;
 }
 
+.posts-link {
+    background-image: url("../../../../images/explore-icon1.png");
+    background-size: cover;
+    opacity: 70%;
+    width: 22px;
+    height: 22px;
+}
+
+.posts-link:hover {
+    background-image: url("../../../../images/explore-icon1.png");
+    background-size: cover;
+    opacity: 100%;
+    width: 22px;
+    height: 22px;
+}
+
+.home-link {
+    background-image: url("../../../../images/home-icon.png");
+    background-size: cover;
+    opacity: 70%;
+    width: 22px;
+    height: 22px;
+}
+
+.home-link:hover {
+    background-image: url("../../../../images/home-icon.png");
+    background-size: cover;
+    opacity: 100%;
+    width: 22px;
+    height: 22px;
+}
+
+.create-link {
+    background-image: url("../../../../images/create-icon.png");
+    background-size: cover;
+    opacity: 70%;
+    width: 22px;
+    height: 22px;
+}
+
+.create-link:hover {
+    background-image: url("../../../../images/create-icon.png");
+    background-size: cover;
+    opacity: 100%;
+    width: 22px;
+    height: 22px;
+}
+
 .navlink:hover, .navlink:focus {
     color: #f1f3ff;
     /* font-size: 18px; */

@@ -189,6 +189,12 @@ export default function reducer(state = initialState, action) {
         newState[post.id] = post;
       });
       return newState;
+    case GET_FEED_POSTS:
+      newState = {};
+      action.posts.posts.forEach((post) => {
+        newState[post.id] = post;
+      });
+      return newState;
     case UPDATE_POST:
       newState[action.payload.id] = action.payload;
       return newState;

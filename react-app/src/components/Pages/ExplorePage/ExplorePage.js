@@ -9,7 +9,7 @@ import { getAllCommentsThunk } from "../../../store/comments";
 import { getAllPostsThunk } from "../../../store/posts";
 import { getAllLikes } from "../../../store/likes";
 // -------- CSS/IMAGES -------- //
-import "./Posts.css";
+import "./ExplorePage.css";
 
 function Posts({}) {
   const dispatch = useDispatch();
@@ -23,6 +23,9 @@ function Posts({}) {
   const likes = Object.values(useSelector((state) => state.likes));
 
   const shuffledUsers = users.sort(() => Math.random() - 0.5);
+  // const orderedPosts = posts.sort(function compareDates(a, b) {
+  //   return a.id - b.id;
+  // });
 
   // WE ADD DISPATCH TO THE DEPENDENCY ARR SO THAT IT DOESNT RERENDER A MILLION TIMES, I JUST CANT EXPLAIN IT WELL
   useEffect(() => {

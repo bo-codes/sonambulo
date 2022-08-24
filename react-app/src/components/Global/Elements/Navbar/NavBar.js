@@ -70,13 +70,14 @@ const NavBar = () => {
             <>
               <div className="navlink-container">
                 <NavLink
-                  to="/"
+                  to="/home"
                   activeClassName="active"
                   style={{ textDecoration: "none" }}
                 >
-                  <div style={{ textDecoration: "none" }} className="navlink">
-                    Home
-                  </div>
+                  <div
+                    style={{ textDecoration: "none" }}
+                    className="navlink home-link"
+                  ></div>
                 </NavLink>
               </div>
               <div>
@@ -86,9 +87,10 @@ const NavBar = () => {
                   activeClassName="active"
                   style={{ textDecoration: "none" }}
                 >
-                  <div style={{ textDecoration: "none" }} className="navlink">
-                    Posts
-                  </div>
+                  <div
+                    style={{ textDecoration: "none" }}
+                    className="navlink posts-link"
+                  ></div>
                 </NavLink>
               </div>
               <div>
@@ -114,11 +116,14 @@ const NavBar = () => {
             <>
               <div className="navlink-container">
                 <NavLink
-                  to="/"
+                  to="/home"
                   activeClassName="active"
                   style={{ textDecoration: "none" }}
                 >
-                  <p className="navlink">Home</p>
+                  <div
+                    style={{ textDecoration: "none" }}
+                    className="navlink home-link"
+                  ></div>
                 </NavLink>
               </div>
               <div className="navlink-container">
@@ -127,16 +132,23 @@ const NavBar = () => {
                   activeClassName="active"
                   style={{ textDecoration: "none" }}
                 >
-                  <p className="navlink">Create</p>
+                  <div
+                    style={{ textDecoration: "none" }}
+                    className="navlink create-link"
+                  ></div>
                 </NavLink>
               </div>
               <div className="navlink-container">
                 <NavLink
                   to="/posts"
+                  exact={true}
                   activeClassName="active"
                   style={{ textDecoration: "none" }}
                 >
-                  <p className="navlink">Posts</p>
+                  <div
+                    style={{ textDecoration: "none" }}
+                    className="navlink posts-link"
+                  ></div>
                 </NavLink>
               </div>
               {/* <div>

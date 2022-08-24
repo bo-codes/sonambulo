@@ -3,6 +3,7 @@ const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const FOLLOW = "session/follow";
 const UNFOLLOW = "session/unfollow";
+const GET_FOLLOWED_POSTS = "session/GET_FOLLOWED_POSTS";
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -24,6 +25,13 @@ export const actionUnfollowUser = (user) => {
   return {
     type: UNFOLLOW,
     user,
+  };
+};
+
+export const actionGetFollowedPosts = (followedPosts) => {
+  return {
+    type: GET_FOLLOWED_POSTS,
+    followedPosts,
   };
 };
 
@@ -136,6 +144,17 @@ export const thunkUnfollow = (username) => async (dispatch) => {
   }
 };
 
+export const thunkGetFollowedPosts = (id) => async (dispatch) => {
+  console.log(id, "thunkGetFollowedPosts");
+  const response = await fetch(`/api/users/${id}/follows`);
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(actionGetFollowedPosts(data));
+    return data;
+  }
+};
+
 const initialState = { user: null };
 
 export default function reducer(state = initialState, action) {
@@ -145,6 +164,13 @@ export default function reducer(state = initialState, action) {
       return { user: action.payload };
     case REMOVE_USER:
       return { user: null };
+    case GET_FOLLOWED_POSTS:
+      console.log(action.followedPosts, "FOLLOWED POSTS REDUCER");
+      newState = {};
+      action.followedPosts.followedPosts.forEach((followedPost) => {
+        newState[followedPost.id] = followedPost;
+      });
+      return newState;
     case FOLLOW:
       newState.user.following.push(action.user);
       return newState;

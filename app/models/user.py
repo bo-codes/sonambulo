@@ -80,9 +80,3 @@ class User(db.Model, UserMixin):
     def is_following(self, user):
         return self.followed.filter(
             follows.c.followed_id == user.id).count() > 0
-
-    def followed_posts(self):
-        return Post.query.join(
-            follows, (follows.c.followed_id == Post.user_id)).filter(
-                follows.c.follower_id == self.id).order_by(
-                    Post.timestamp.desc())

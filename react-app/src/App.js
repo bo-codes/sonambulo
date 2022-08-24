@@ -3,14 +3,14 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "./components/Global/Elements/Navbar/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import Posts from "./components/Pages/PostsPage/Posts";
+import Posts from "./components/Pages/ExplorePage/ExplorePage";
 import CreatePost from "./components/Pages/CreatePostPage/CreatePost";
 import { authenticate } from "./store/session";
 import Signup from "./components/auth/Pages/SignupPage/Signup";
 import Footer from "./components/Global/Elements/Footer/index";
 import HomePage from "./components/Pages/HomePage/HomePage";
+import SplashPage from "./components/Pages/SplashPage/SplashPage";
 import ErrorPage from "./components/Pages/404/404";
-
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -34,6 +34,9 @@ function App() {
       <NavBar />
       <Switch>
         <Route path="/" exact={true}>
+          <SplashPage />
+        </Route>
+        <Route path="/home" exact={true}>
           <HomePage />
         </Route>
         <Route path="/posts" exact={true}>
