@@ -50,14 +50,18 @@ const Follows = ({ profileUsername }) => {
   return (
     <>
       {sessionUser.username === profileUsername && <div></div>}
-      {!follow ? (
-        <button onClick={followButton} className="follow-btn">
-          Follow
-        </button>
-      ) : (
-        <button onClick={unfollowButton} className="follow-btn">
-          Unfollow
-        </button>
+      {sessionUser.username !== profileUsername && (
+        <div>
+          {!follow ? (
+            <button onClick={followButton} className="follow-btn">
+              Follow
+            </button>
+          ) : (
+            <button onClick={unfollowButton} className="follow-btn">
+              Unfollow
+            </button>
+          )}
+        </div>
       )}
     </>
   );
