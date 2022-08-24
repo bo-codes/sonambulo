@@ -22,7 +22,7 @@
 }
 
 .posts-link {
-    background-image: url("../../../../images/explore-icon1.png");
+    background-image: url("../../../../images/explore-icon1-transparent.png");
     background-size: cover;
     /* opacity: 70%; */
     width: 22px;
@@ -38,7 +38,7 @@
 }
 
 .home-link {
-    background-image: url("../../../../images/home-icon.png");
+    background-image: url("../../../../images/home-icon-transparent.png");
     background-size: cover;
     /* opacity: 70%; */
     width: 22px;
@@ -54,7 +54,7 @@
 }
 
 .create-link {
-    background-image: url("../../../../images/create-icon.png");
+    background-image: url("../../../../images/create-icon-transparent.png");
     background-size: cover;
     /* opacity: 70%; */
     width: 22px;
