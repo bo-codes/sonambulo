@@ -6,10 +6,9 @@ import UserMenu from "./UserMenu";
 // import EventzeitLogo from "../../images/EventzeitMainLogo.png";
 import sonambulogo from "../../../../images/sleepin-cat.png";
 import { login } from "../../../../store/session";
-import "./navBar.css";
-import LoginForm from "../../../auth/LoginForm/LoginForm";
 import { Modal } from "../Modal";
 import LoginFormPosts from "../../../auth/LoginFormCreatePost/LoginFormCreatePost";
+import "./navBar.css";
 
 const NavigationBar = styled.div`
   margin-left: 20vw;
