@@ -100,7 +100,8 @@ function SplashPage() {
               style={{ justifyContent: "center", display: "flex" }}
             >
               <HashLink
-                to={`/explore#${image.id}`}
+                to={`/explore`}
+                // to={`/explore#${image.id}`}
                 className="image"
                 style={{ position: "relative" }}
               >
