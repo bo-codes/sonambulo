@@ -17,7 +17,7 @@ const NavigationBar = styled.div`
   width: 80vw;
   height: 40px;
   align-items: center;
-  justify-content: space-around;
+  justify-content: end;
 `;
 
 const Logo = styled.img`
