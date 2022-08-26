@@ -30,7 +30,7 @@
 
 .imageCard {
   columns: 4;
-  column-gap: 30px;
+  column-gap: 22px;
   padding-left: 18vw;
   /* padding-left: 500px; */
   padding-right: 18vw;
