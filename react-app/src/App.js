@@ -12,6 +12,7 @@ import HomePage from "./components/Pages/HomePage/HomePage";
 import SplashPage from "./components/Pages/SplashPage/SplashPage";
 import ErrorPage from "./components/Pages/404/404";
 import ProfilePage from "./components/Pages/ProfilePage/ProfilePage";
+import UsersProfilePage from "./components/Pages/usersProfilePage/UsersProfilePage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,6 +37,9 @@ function App() {
       <Switch>
         <Route path="/" exact={true}>
           <SplashPage />
+        </Route>
+        <Route path="/users">
+          <UsersProfilePage />
         </Route>
         <Route path="/home" exact={true}>
           <HomePage />

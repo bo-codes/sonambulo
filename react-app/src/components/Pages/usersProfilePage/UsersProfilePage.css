@@ -1,0 +1,8 @@
+.users-name {
+  display: flex;
+  font-size: 50px;
+  font-weight: 600;
+  justify-content: start;
+  margin-top: 20px;
+  padding-left: 220px;
+}

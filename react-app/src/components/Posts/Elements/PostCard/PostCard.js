@@ -177,7 +177,7 @@ function PostCard({ post, postComments, likes }) {
 
           {/* ------------ COMMENTS ------------ vv*/}
           <div className="comment-section">
-            {postComments &&
+            {postComments ? (
               postComments.map((comment) => {
                 // FOR EACH COMMENT DISPLAY THIS
                 return (
@@ -192,7 +192,10 @@ function PostCard({ post, postComments, likes }) {
                     userId={user.id}
                   />
                 );
-              })}
+              })) : (
+                <div className="no-comment-message">No Comments Yet, Want To Leave One?</div>
+              )
+            }
           </div>
           {/* ------------ COMMENTS ------------ ^^*/}
         </div>

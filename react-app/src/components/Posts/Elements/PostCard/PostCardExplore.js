@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Modal } from "../../../Global/Elements/Modal";
 import moment from "moment";
+import { Link } from "react-router-dom";
 // --------COMPONENTS -------- //
 import Comment from "../../../Comment/Elements/Comment/Comment";
 import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
@@ -51,7 +52,13 @@ function PostCardExplore({ post, postComments, likes }) {
       {/* {console.log("POST LIKES IN POSTCARD.JS BEFORE RETURN", likes)} */}
       <div className="post-head-container">
         <div className="post-username">
-          <div>{post.user.username}</div>
+          <Link
+            to={`/users/${post.user.username}`}
+            style={{ textDecoration: "none", color: "white" }}
+            className="post-username"
+          >
+            <div className="post-username">{post.user.username}</div>
+          </Link>
           {user && <Follows profileUsername={post.user.username} />}
         </div>
         {/* ------ POST EDIT BUTTON ------ vv*/}
@@ -85,7 +92,7 @@ function PostCardExplore({ post, postComments, likes }) {
           {post.caption.length > 138 ? (
             <div>
               {!showFullCaption ? (
-                <p>
+                <p className="post-caption">
                   {post.caption.slice(0, 138)}{" "}
                   <span>
                     <button
@@ -97,7 +104,7 @@ function PostCardExplore({ post, postComments, likes }) {
                   </span>
                 </p>
               ) : (
-                <p>
+                <p className="post-caption">
                   {post.caption}{" "}
                   <span>
                     <button
@@ -111,7 +118,7 @@ function PostCardExplore({ post, postComments, likes }) {
               )}
             </div>
           ) : (
-            <p>{post.caption}</p>
+            <p className="post-caption">{post.caption}</p>
           )}
         </div>
       )}

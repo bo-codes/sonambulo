@@ -3,6 +3,7 @@
 const CREATE_POST = "post/CREATE_POST";
 const READ_POST = "post/READ_POST";
 const GET_FEED_POSTS = "post/GET_FEED_POSTS";
+const GET_ONE_USERS_POSTS = "post/GET_ONE_USERS_POSTS";
 const UPDATE_POST = "post/UPDATE_POST";
 const DELETE_POST = "post/DELETE_POST";
 
@@ -20,6 +21,11 @@ const readPost = (posts) => ({
 
 export const actionGetFeedPosts = (posts) => ({
   type: GET_FEED_POSTS,
+  posts,
+});
+
+export const actionGetOneUsersPosts = (posts) => ({
+  type: GET_ONE_USERS_POSTS,
   posts,
 });
 
@@ -89,6 +95,23 @@ export const getAllPostsThunk = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(readPost(data));
+    return data;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+};
+
+export const getOneUserPostsThunk = (username) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${username}`);
+  // console.log("inside getAllPostsThunk thunk", response);
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(actionGetOneUsersPosts(data));
     return data;
   } else if (response.status < 500) {
     const data = await response.json();
@@ -195,11 +218,18 @@ export default function reducer(state = initialState, action) {
         newState[post.id] = post;
       });
       return newState;
+    case GET_ONE_USERS_POSTS:
+      newState = {};
+      // console.log(action, "CURRENT ACTION");
+      action.posts.posts.forEach((post) => {
+        // console.log(post.id);
+        newState[post.id] = post;
+      });
+      return newState;
     case UPDATE_POST:
       newState[action.payload.id] = action.payload;
       return newState;
     case DELETE_POST:
-      // console.log(action);
       delete newState[action.postId];
       return newState;
     default:

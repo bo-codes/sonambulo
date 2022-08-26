@@ -56,6 +56,13 @@ function Posts({}) {
             });
             return (
               <div key={post.id} style={{ alignContent: "center" }}>
+                <PostCardExplore
+                  id="image"
+                  style={{ position: "relative" }}
+                  post={post}
+                  postComments={postComments}
+                  likes={likes}
+                />
                 {/* <div key={image.id} className="image"> */}
                 {/* <Link
                   to={`/images/${post.id}`}
@@ -72,13 +79,6 @@ function Posts({}) {
                     style={{ padding: 2.5 }}
                   ></img>
                 </Link> */}
-                <PostCardExplore
-                  id="image"
-                  style={{ position: "relative" }}
-                  post={post}
-                  postComments={postComments}
-                  likes={likes}
-                />
               </div>
             );
           })}
