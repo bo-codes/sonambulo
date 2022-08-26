@@ -59,7 +59,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: fit-content;
   height: fit-content;
   border: 1.5px solid rgb(54, 15, 131);
   border-radius: 11px;
@@ -102,6 +102,6 @@
 .signup-title {
   margin-top: 20px;
   font-family: 'syne';
-  font-size: 2.5vw;
+  font-size: 300%;
   font-weight: 800;
 }

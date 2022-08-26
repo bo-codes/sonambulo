@@ -81,7 +81,7 @@ const SignUpForm = () => {
                   })}
               </ul>
             </div>
-            <div>
+            <div style={{padding: '20px'}}>
               {/* <div>
                 {errors.map((error, ind) => (
                   <div key={ind}>{error}</div>

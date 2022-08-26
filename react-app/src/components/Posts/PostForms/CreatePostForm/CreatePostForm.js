@@ -120,7 +120,8 @@ function PostForm({ post = null, setShowCreatePost }) {
               display: "flex",
               justifyContent: "center",
               alignItems: 'center',
-              marginLeft: '20px'
+              marginLeft: '20px',
+              width: '400px'
             }}
           >
             CREATE POST
