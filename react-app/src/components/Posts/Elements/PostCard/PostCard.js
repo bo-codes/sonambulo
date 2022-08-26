@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Modal } from "../../../Global/Elements/Modal";
 import moment from "moment";
+import { Link } from "react-router-dom";
 // --------COMPONENTS -------- //
 import Comment from "../../../Comment/Elements/Comment/Comment";
 import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
@@ -51,7 +52,13 @@ function PostCard({ post, postComments, likes }) {
       {/* {console.log("POST LIKES IN POSTCARD.JS BEFORE RETURN", likes)} */}
       <div className="post-head-container">
         <div className="post-username">
-          <div>{post.user.username}</div>
+          <Link
+            to={`/users/${post.user.username}`}
+            style={{ textDecoration: "none", color: "white" }}
+            className="post-username"
+          >
+            <div className="post-username">{post.user.username}</div>
+          </Link>
           {user && <Follows profileUsername={post.user.username} />}
         </div>
         {/* ------ POST EDIT BUTTON ------ vv*/}
@@ -152,12 +159,13 @@ function PostCard({ post, postComments, likes }) {
         <button className="post-btns" onClick={areWeShowingComments}>
           <div id="comment-btn"></div>
         </button>
-        {user ?
-        <Like post_id={post.id} user_id={user.id} likes={likes} />
-        :
-        <button className="post-btns" onClick={() => setShowLogin(true)}>
-          <div id="heart-btn"></div>
-        </button>}
+        {user ? (
+          <Like post_id={post.id} user_id={user.id} likes={likes} />
+        ) : (
+          <button className="post-btns" onClick={() => setShowLogin(true)}>
+            <div id="heart-btn"></div>
+          </button>
+        )}
       </div>
       {showLogin && (
         <Modal onClose={() => setShowLogin(false)}>
@@ -192,10 +200,12 @@ function PostCard({ post, postComments, likes }) {
                     userId={user.id}
                   />
                 );
-              })) : (
-                <div className="no-comment-message">No Comments Yet, Want To Leave One?</div>
-              )
-            }
+              })
+            ) : (
+              <div className="no-comment-message">
+                No Comments Yet, Want To Leave One?
+              </div>
+            )}
           </div>
           {/* ------------ COMMENTS ------------ ^^*/}
         </div>
