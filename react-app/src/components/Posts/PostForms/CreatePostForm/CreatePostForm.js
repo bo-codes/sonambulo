@@ -1,7 +1,7 @@
 // IMPORT REACT STUFF
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 // IMPORT COMPONENTS WE'RE USING
 import { Modal } from "../../../Global/Elements/Modal";
 import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
@@ -22,6 +22,7 @@ function PostForm({ post = null, setShowCreatePost }) {
   // SETTING UP THE useHistory AND useDispatch FUNCTIONS
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   // PULLING THE CURRENT USER IN OUR STATE
   const userId = useSelector((state) => state.session.user.id);
@@ -59,7 +60,7 @@ function PostForm({ post = null, setShowCreatePost }) {
 
       // IF THE DISPATCH SUCCESSFULLY CREATES AND RETURNS A POST, THEN RETURN TO END THE FUNCTION
       if (post.id) {
-        history.push(`/posts`);
+        history.push(`/profile`);
         return;
       }
     }

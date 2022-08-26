@@ -11,6 +11,7 @@ import Footer from "./components/Global/Elements/Footer/index";
 import HomePage from "./components/Pages/HomePage/HomePage";
 import SplashPage from "./components/Pages/SplashPage/SplashPage";
 import ErrorPage from "./components/Pages/404/404";
+import ProfilePage from "./components/Pages/ProfilePage/ProfilePage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -39,13 +40,13 @@ function App() {
         <Route path="/home" exact={true}>
           <HomePage />
         </Route>
-        <Route path="/posts" exact={true}>
+        <Route path="/explore" exact={true}>
           <Posts />
         </Route>
         <Route path="/profile" exact={true}>
-          {/* <Posts /> */}
+          <ProfilePage />
         </Route>
-        <ProtectedRoute path="/posts/create" exact={true}>
+        <ProtectedRoute path="/create" exact={true}>
           <CreatePost />
         </ProtectedRoute>
         <Route path="/signup" exact={true}>

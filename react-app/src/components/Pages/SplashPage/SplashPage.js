@@ -32,7 +32,6 @@ function SplashPage() {
     dispatch(getAllCommentsThunk());
   }, [dispatch]);
 
-
   return (
     <div className="background">
       <div className="container-titles-and-img-divs">
@@ -101,7 +100,7 @@ function SplashPage() {
               style={{ justifyContent: "center", display: "flex" }}
             >
               <HashLink
-                to={`/posts#${image.id}`}
+                to={`/explore#${image.id}`}
                 className="image"
                 style={{ position: "relative" }}
               >

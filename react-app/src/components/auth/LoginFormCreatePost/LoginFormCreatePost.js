@@ -37,7 +37,7 @@ const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
   };
 
   if (user) {
-    return <Redirect to="/posts" />;
+    return <Redirect to="/home" />;
   }
 
   return (
@@ -90,7 +90,7 @@ const LoginFormPosts = ({ setShowLogin, setShowSignup }) => {
           </div>
           <div className="login-fields">
             <label className="login-input-label" htmlFor="password">
-              PASSWORD<span style={{ color: "red" }}>  *</span>
+              PASSWORD<span style={{ color: "red" }}> *</span>
             </label>
             <input
               className="login-input-box"

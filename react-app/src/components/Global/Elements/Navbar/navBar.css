@@ -11,6 +11,25 @@
     padding: 0;
 }
 
+.logo-link {
+    width: 60px;
+    height: 40px;
+    background-image: url("../../../../images/sleepin-cat.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.logo-link:hover {
+    width: 60px;
+    height: 40px;
+    background-image: url("../../../../images/sleepin-cat-animated.gif");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation-fill-mode: forwards;
+}
+
 .navlink {
     font-family: "syne";
     font-size: 13px;
@@ -21,7 +40,7 @@
     border: none;
 }
 
-.posts-link {
+.explore-link {
     background-image: url("../../../../images/explore-icon1-transparent.png");
     background-size: cover;
     /* opacity: 70%; */
@@ -29,7 +48,15 @@
     height: 22px;
 }
 
-.posts-link:hover {
+.explore-link:hover {
+    background-image: url("../../../../images/explore-icon1.png");
+    background-size: cover;
+    /* opacity: 100%; */
+    width: 22px;
+    height: 22px;
+}
+
+.explore-link-selected {
     background-image: url("../../../../images/explore-icon1.png");
     background-size: cover;
     /* opacity: 100%; */
@@ -53,6 +80,14 @@
     height: 22px;
 }
 
+.home-link-selected {
+    background-image: url("../../../../images/home-icon.png");
+    background-size: cover;
+    /* opacity: 100%; */
+    width: 22px;
+    height: 22px;
+}
+
 .create-link {
     background-image: url("../../../../images/create-icon-transparent.png");
     background-size: cover;
@@ -63,6 +98,38 @@
 
 .create-link:hover {
     background-image: url("../../../../images/create-icon.png");
+    background-size: cover;
+    /* opacity: 100%; */
+    width: 22px;
+    height: 22px;
+}
+
+.create-link-selected {
+    background-image: url("../../../../images/create-icon.png");
+    background-size: cover;
+    /* opacity: 100%; */
+    width: 22px;
+    height: 22px;
+}
+
+.profile-link {
+    background-image: url("../../../../images/profile-icon-transparent.png");
+    background-size: cover;
+    /* opacity: 70%; */
+    width: 22px;
+    height: 22px;
+}
+
+.profile-link:hover {
+    background-image: url("../../../../images/profile-icon.png");
+    background-size: cover;
+    /* opacity: 100%; */
+    width: 22px;
+    height: 22px;
+}
+
+.profile-link-selected {
+    background-image: url("../../../../images/profile-icon.png");
     background-size: cover;
     /* opacity: 100%; */
     width: 22px;

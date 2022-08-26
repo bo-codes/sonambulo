@@ -233,3 +233,13 @@
   height: 30px;
   margin-right: 8px;
 }
+
+.postcard-explore {
+  overflow: scroll;
+  background-color: #2d2d2d;
+  margin-bottom: 50px;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}

@@ -1,7 +1,7 @@
 // IMPORT REACT STUFF --------
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 // --------COMPONENTS -------- //
 import PostCard from "../../Posts/Elements/PostCard/PostCard";
 // -------- THUNKS -------- //
@@ -10,6 +10,8 @@ import { getAllPostsThunk } from "../../../store/posts";
 import { getAllLikes } from "../../../store/likes";
 // -------- CSS/IMAGES -------- //
 import "./ExplorePage.css";
+import "./images.css";
+import PostCardExplore from "../../Posts/Elements/PostCard/PostCardExplore";
 
 function Posts({}) {
   const dispatch = useDispatch();
@@ -22,6 +24,12 @@ function Posts({}) {
   const users = useSelector((state) => Object.values(state.user));
   const likes = Object.values(useSelector((state) => state.likes));
 
+  let nonUserPosts
+  if (user) {
+    nonUserPosts = posts.filter(post => post.user_id !== user.id)
+  } else {
+    nonUserPosts = posts
+  }
   const shuffledUsers = users.sort(() => Math.random() - 0.5);
   // const orderedPosts = posts.sort(function compareDates(a, b) {
   //   return a.id - b.id;
@@ -40,41 +48,41 @@ function Posts({}) {
 
   return (
     <main>
-      <div className="post-list">
-        <div className="suggested-users">
-          {/* <h3>Suggested Users:</h3> */}
-          {/* {shuffledUsers.slice(0, 5).map((listedUser) => {
-            return (
-              <div key={listedUser.id}>
-                <NavLink to={`/${listedUser.username}`}>
-                  <img src={listedUser.profile_pic}></img>
-                  <div>{listedUser.username}</div>
-                </NavLink>
-              </div>
-            );
-          })} */}
-        </div>
-        {/* CHECK IF THERE ARE POSTS SO THAT THE USESELECTOR DOESNT MESS US UP */}
-        {posts &&
-          posts.map((post) => {
-            // WE FILTER THROUGH ALL COMMENTS EVER TO ONLY GRAB THE ONES ASSOCIATED WITH THIS POST
-            // console.log(likes, "LIKES BEFORE EVEN FILTERING");
+      <div className="">
+        <div className="imageCard">
+          {nonUserPosts.map((post) => {
             let postComments = comments.filter((comment) => {
               return parseInt(comment.post_id) === parseInt(post.id);
             });
-
-            // RETURNING A POST CARD WHICH IS A COMPONENT THAT DETERMINES HOW THE POST IS STRUCTURED
             return (
-              // EACH ITEM IN A MAP NEEDS ITS OWN UNIQUE KEY
-              <a key={post.id} name={post.id} id={post.id}>
-                <PostCard
+              <div key={post.id} style={{ alignContent: "center" }}>
+                {/* <div key={image.id} className="image"> */}
+                {/* <Link
+                  to={`/images/${post.id}`}
+                  className="image"
+                  style={{ position: "relative" }}
+                >
+                  <div className="overlay">
+                    <h3 style={{ color: "white" }}>{post.caption.slice(0, 130)}...</h3>
+                  </div>
+                  <img
+                    src={post.image_url}
+                    alt="coverImg"
+                    className="image"
+                    style={{ padding: 2.5 }}
+                  ></img>
+                </Link> */}
+                <PostCardExplore
+                  id="image"
+                  style={{ position: "relative" }}
                   post={post}
                   postComments={postComments}
                   likes={likes}
                 />
-              </a>
+              </div>
             );
           })}
+        </div>
       </div>
     </main>
   );

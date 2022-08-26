@@ -13,7 +13,7 @@ const DeletePostModal = ({ post, setShowConfirmDeleteModal }) => {
   const deletePost = async (e) => {
     e.preventDefault();
     await dispatch(removePost(post.id));
-    history.push("/posts");
+    history.push("/profile");
   };
 
   return (

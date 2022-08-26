@@ -1,7 +1,7 @@
 // -------- REACT --------
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
 
 // -------- THUNKS --------
@@ -23,6 +23,7 @@ function CreateCommentForm({
   // SETTING UP THE REACT FUNCTIONS
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   // PULLING CURRENT USER FROM STATE
   // const userId = useSelector((state) => state.session.user.id);
@@ -47,7 +48,7 @@ function CreateCommentForm({
     if (comment.id) {
       setContent("");
       // setShowCreateComment(false);
-      history.push(`/posts`);
+      history.push(window.location.pathname);
       return;
     }
 
@@ -85,15 +86,19 @@ function CreateCommentForm({
           </ul>
         </div>
         <div className="custom-search">
-          <TextareaAutosize
-            // onKeyUp={adjustTextBox}
-            // style={{ overflow: "hidden", transition: "height 0.2s ease-out" }}
-            className="custom-search-input"
-            name="content"
-            type="text"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
+          <div className="custom-outer-div"></div>
+          <div className="text-area-container">
+            <TextareaAutosize
+              // onKeyUp={adjustTextBox}
+              // style={{ overflow: "hidden", transition: "height 0.2s ease-out" }}
+              className="custom-search-input"
+              name="content"
+              type="text"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </div>
+          <div className="custom-outer-div-bottom"></div>
           {userId ? (
             <button className="custom-search-button">Reply</button>
           ) : (

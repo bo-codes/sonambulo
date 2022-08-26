@@ -66,7 +66,7 @@ function EditPostForm({
 
       // IF THE DISPATCH SUCCESSFULLY CREATES AND RETURNS A POST, THEN RETURN TO END THE FUNCTION
       if (post.id) {
-        history.push(`/posts`);
+        history.push(window.location.pathname);
         return;
       }
     }

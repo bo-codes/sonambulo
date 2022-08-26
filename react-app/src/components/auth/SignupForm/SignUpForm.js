@@ -42,7 +42,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/posts" />;
+    return <Redirect to="/explore" />;
   }
 
   return (

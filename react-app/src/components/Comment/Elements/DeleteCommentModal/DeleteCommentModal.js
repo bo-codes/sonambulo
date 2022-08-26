@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { removeComment } from "../../../../store/comments";
 
 const DeleteCommentModal = ({ comment, setShowConfirmDeleteCommentModal, setShowCommentEditModal }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
   const cancelDelete = () => {
     setShowConfirmDeleteCommentModal(false);
@@ -13,7 +14,7 @@ const DeleteCommentModal = ({ comment, setShowConfirmDeleteCommentModal, setShow
   const deleteComment = async (e) => {
     e.preventDefault();
     await dispatch(removeComment(comment.id));
-    history.push("/posts");
+    history.push(window.location.pathname);
   };
 
   return (
