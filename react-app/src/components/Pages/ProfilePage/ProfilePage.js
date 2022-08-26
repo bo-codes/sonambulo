@@ -24,7 +24,10 @@ function ProfilePage({}) {
   // const users = useSelector((state) => Object.values(state.user));
   const likes = Object.values(useSelector((state) => state.likes));
 
-  const userPosts = posts.filter((post) => post.user_id === user.id);
+  let userPosts;
+  if (user) {
+    userPosts = posts.filter((post) => post.user_id === user.id);
+  }
 
   // const shuffledUsers = users.sort(() => Math.random() - 0.5);
 
