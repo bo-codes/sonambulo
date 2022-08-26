@@ -47,13 +47,12 @@ function PostCardExplore({ post, postComments, likes }) {
   };
 
   return (
-    <div
-      className="postcard-explore"
-    >
+    <div className="postcard-explore">
       {/* {console.log("POST LIKES IN POSTCARD.JS BEFORE RETURN", likes)} */}
       <div className="post-head-container">
         <div className="post-username">
           <div>{post.user.username}</div>
+          {user && <Follows profileUsername={post.user.username} />}
         </div>
         {/* ------ POST EDIT BUTTON ------ vv*/}
         {/* <div className="edit-post-container">
