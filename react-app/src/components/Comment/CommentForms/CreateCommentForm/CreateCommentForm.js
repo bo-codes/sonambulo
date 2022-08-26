@@ -95,6 +95,7 @@ function CreateCommentForm({
               name="content"
               type="text"
               value={content}
+              placeholder={`Tell ${post.user.username} something ...`}
               onChange={(e) => setContent(e.target.value)}
             />
           </div>
