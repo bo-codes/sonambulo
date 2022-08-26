@@ -243,3 +243,7 @@
 ::-webkit-scrollbar {
   width: 0;
 }
+
+.explore-caption {
+  padding: 11px;
+}

@@ -78,8 +78,42 @@ function PostCardExplore({ post, postComments, likes }) {
       </div>
 
       {/* ----------- POST IMAGE ----------- vv*/}
-      {post.image_url && (
+      {post.image_url ? (
         <img id="postcard-image" src={post.image_url} alt="" />
+      ) : (
+        <div className="explore-caption">
+          {post.caption.length > 138 ? (
+            <div>
+              {!showFullCaption ? (
+                <p>
+                  {post.caption.slice(0, 138)}{" "}
+                  <span>
+                    <button
+                      className="show-more"
+                      onClick={() => setShowFullCaption(true)}
+                    >
+                      ...
+                    </button>
+                  </span>
+                </p>
+              ) : (
+                <p>
+                  {post.caption}{" "}
+                  <span>
+                    <button
+                      className="show-more"
+                      onClick={() => setShowFullCaption(false)}
+                    >
+                      show less
+                    </button>
+                  </span>
+                </p>
+              )}
+            </div>
+          ) : (
+            <p>{post.caption}</p>
+          )}
+        </div>
       )}
       {/* ----------- POST IMAGE ----------- ^^*/}
 
