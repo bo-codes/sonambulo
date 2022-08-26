@@ -43,7 +43,7 @@
   min-height: 36px;
   max-height: 100px;
   height: fit-content;
-  line-height: 1;
+  line-height: 1.5;
   box-sizing: border-box;
   outline: none;
   background-color: #2d2d2d;
