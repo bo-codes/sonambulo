@@ -4,6 +4,7 @@ const CREATE_POST = "post/CREATE_POST";
 const READ_POST = "post/READ_POST";
 const GET_FEED_POSTS = "post/GET_FEED_POSTS";
 const GET_ONE_USERS_POSTS = "post/GET_ONE_USERS_POSTS";
+const GET_ONE_POST = "post/GET_ONE_POST";
 const UPDATE_POST = "post/UPDATE_POST";
 const DELETE_POST = "post/DELETE_POST";
 
@@ -27,6 +28,11 @@ export const actionGetFeedPosts = (posts) => ({
 export const actionGetOneUsersPosts = (posts) => ({
   type: GET_ONE_USERS_POSTS,
   posts,
+});
+
+export const actionGetOnePost = (post) => ({
+  type: GET_ONE_POST,
+  post,
 });
 
 const updatePost = (post) => ({
@@ -133,6 +139,16 @@ export const thunkGetFeedPosts = (userId) => async (dispatch) => {
   }
 };
 
+export const thunkGetOnePost = (postId) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${postId}`);
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(actionGetOnePost(data));
+    return data;
+  }
+};
+
 export const editPost =
   (post_id, user_id, image, caption, created_at) => async (dispatch) => {
     if (typeof image === "object") {
@@ -223,6 +239,13 @@ export default function reducer(state = initialState, action) {
       // console.log(action, "CURRENT ACTION");
       action.posts.posts.forEach((post) => {
         // console.log(post.id);
+        newState[post.id] = post;
+      });
+      return newState;
+    case GET_ONE_POST:
+      newState = {};
+      console.log(action);
+      action.post.post.forEach((post) => {
         newState[post.id] = post;
       });
       return newState;
