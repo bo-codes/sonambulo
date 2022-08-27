@@ -6,7 +6,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 // --------COMPONENTS -------- //
 import Comment from "../../../Comment/Elements/Comment/Comment";
-import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
+import DeletePostModal from "../DeletePostModal/DeletePostModal";
 import Follows from "../../../Follows/Follows";
 // --------FORMS -------- //
 import LoginFormPosts from "../../../auth/LoginFormCreatePost/LoginFormCreatePost";
@@ -18,7 +18,7 @@ import "./Postcard.css";
 import { addOneLike, getAllLikes } from "../../../../store/likes";
 import Like from "../../../Like/Like";
 
-function PostCardExplore({ post, postComments, likes }) {
+function PostCardDetail({ post, postComments=null, likes }) {
   // console.log("POST LIKES BEFORE EVEN RETURNING", likes);
   const dispatch = useDispatch();
   // -------- SETTING STATES ------- //
@@ -29,26 +29,16 @@ function PostCardExplore({ post, postComments, likes }) {
   const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
 
   // SHOWING OR HIDING THE CREATE COMMENT MODAL
-  const [showCreateComment, setShowCreateComment] = useState(false);
 
-  const [showSignup, setShowSignup] = useState(false);
+
   const [showLogin, setShowLogin] = useState(false);
 
   // -------- PULLING INFO FROM THE STATE -------- //
   // const likes = useSelector((state) => state.likes) || ""; //Grab likes state
   const user = useSelector((state) => state.session.user) || "";
-  const [localDate] = useState(new Date(post.created_at));
-
-  const areWeShowingComments = () => {
-    if (showComments) {
-      setShowComments(false);
-    } else {
-      setShowComments(true);
-    }
-  };
 
   return (
-    <div className="postcard-explore">
+    <div id="outermost-card">
       {/* {console.log("POST LIKES IN POSTCARD.JS BEFORE RETURN", likes)} */}
       <div className="post-head-container">
         <div className="post-username">
@@ -62,7 +52,7 @@ function PostCardExplore({ post, postComments, likes }) {
           {user && <Follows profileUsername={post.user.username} />}
         </div>
         {/* ------ POST EDIT BUTTON ------ vv*/}
-        {/* <div className="edit-post-container">
+        <div className="edit-post-container">
           {post ? (
             // POST EDIT BUTTON
             // when clicked, setShowCreatePost will toggle to true
@@ -75,60 +65,19 @@ function PostCardExplore({ post, postComments, likes }) {
                   ...
                 </button>
               )}
-
+              {/* if setShowCreatePost is set to true, then show the modal which holds the post edit form. */}
             </div>
           ) : (
             <h1>Loading Post</h1>
           )}
-        </div> */}
+        </div>
         {/* ------ POST EDIT BUTTON ------ ^^*/}
       </div>
 
       {/* ----------- POST IMAGE ----------- vv*/}
-      <Link
-      style={{
-        textDecoration: 'none',
-        color: 'white'
-      }}
-      to={`/posts/${post.id}`}>
-        {post.image_url ? (
-          <img id="postcard-image" src={post.image_url} alt="" />
-        ) : (
-          <div className="explore-caption">
-            {post.caption.length > 138 ? (
-              <div>
-                {!showFullCaption ? (
-                  <p className="post-caption">
-                    {post.caption.slice(0, 138)}{" "}
-                    <span>
-                      <button
-                        className="show-more"
-                        onClick={() => setShowFullCaption(true)}
-                      >
-                        ...
-                      </button>
-                    </span>
-                  </p>
-                ) : (
-                  <p className="post-caption">
-                    {post.caption}{" "}
-                    <span>
-                      <button
-                        className="show-more"
-                        onClick={() => setShowFullCaption(false)}
-                      >
-                        show less
-                      </button>
-                    </span>
-                  </p>
-                )}
-              </div>
-            ) : (
-              <p className="post-caption">{post.caption}</p>
-            )}
-          </div>
-        )}
-      </Link>
+      {post.image_url && (
+        <img id="postcard-image" src={post.image_url} alt="" />
+      )}
       {/* ----------- POST IMAGE ----------- ^^*/}
 
       {/* ----- POST DATE ----- vv*/}
@@ -138,7 +87,7 @@ function PostCardExplore({ post, postComments, likes }) {
       {/* ----- POST DATE ----- ^^ */}
 
       {/*  POST CAPTION ----- vv*/}
-      {/* {!showCreatePost && (
+      {!showCreatePost && (
         <div className="post-caption">
           {post.caption.length > 138 ? (
             <div>
@@ -172,11 +121,11 @@ function PostCardExplore({ post, postComments, likes }) {
             <p>{post.caption}</p>
           )}
         </div>
-      )} */}
+      )}
       {/* POST CAPTION ----- ^^*/}
       {/* ----------- EDIT POST BUTTON ----------- vv*/}
       <div id="post-form-container">
-        {/* {showCreatePost && (
+        {showCreatePost && (
           <Modal onClose={() => setShowCreatePost(false)}>
             <EditPostForm
               post={post}
@@ -184,7 +133,7 @@ function PostCardExplore({ post, postComments, likes }) {
               setShowConfirmDeleteModal={setShowConfirmDeleteModal}
             />
           </Modal>
-        )} */}
+        )}
         {showConfirmDeleteModal && (
           <Modal onClose={() => setShowConfirmDeleteModal(false)}>
             <DeletePostModal
@@ -197,6 +146,9 @@ function PostCardExplore({ post, postComments, likes }) {
       </div>
       {/* ----------- EDIT POST BUTTON ----------- ^^*/}
       <div className="comment-btns">
+        {/* <button className="post-btns" onClick={areWeShowingComments}>
+          <div id="comment-btn"></div>
+        </button> */}
         {user ? (
           <Like post_id={post.id} user_id={user.id} likes={likes} />
         ) : (
@@ -210,8 +162,44 @@ function PostCardExplore({ post, postComments, likes }) {
           <LoginFormPosts setShowLogin={setShowLogin} />
         </Modal>
       )}
+        <div className="create-comment-container">
+          {/* ----------- CREATE COMMENT FORM ----------- vv*/}
+          <CreateCommentForm
+            post={post}
+            userId={user.id}
+            setShowLogin={setShowLogin}
+          />
+          {/* ----------- CREATE COMMENT FORM ----------- ^^*/}
+
+          {/* ------------ COMMENTS ------------ vv*/}
+          <div className="comment-section">
+            {postComments && (
+              postComments.map((comment) => {
+                // FOR EACH COMMENT DISPLAY THIS
+                return (
+                  <Comment
+                    style={{
+                      backgroundColor: "red",
+                    }}
+                    className="comment"
+                    key={comment.id}
+                    comment={comment}
+                    post={post}
+                    userId={user.id}
+                  />
+                );
+              })
+            )}
+          </div>
+          {/* ------------ COMMENTS ------------ ^^*/}
+        </div>
+        {!postComments && (
+          <div className="no-comment-message">
+            No Comments Yet, Want To Leave One?
+          </div>
+        )}
     </div>
   );
 }
 
-export default PostCardExplore;
+export default PostCardDetail;

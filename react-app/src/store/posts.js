@@ -146,6 +146,13 @@ export const thunkGetOnePost = (postId) => async (dispatch) => {
     const data = await response.json();
     dispatch(actionGetOnePost(data));
     return data;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
   }
 };
 

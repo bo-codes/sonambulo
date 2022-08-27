@@ -85,9 +85,123 @@ function PostCard({ post, postComments, likes }) {
       </div>
 
       {/* ----------- POST IMAGE ----------- vv*/}
-      {post.image_url && (
-        <img id="postcard-image" src={post.image_url} alt="" />
-      )}
+      <div>
+        {post.image_url && (
+          <Link
+            style={{
+              textDecoration: "none",
+              color: "white",
+            }}
+            to={`/posts/${post.id}`}
+          >
+            <img id="postcard-image" src={post.image_url} alt="" />
+          </Link>
+        )}
+        {/*  POST CAPTION ----- vv*/}
+        {!showCreatePost && !post.image_url && (
+          <div
+            className="post-caption"
+          >
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+              to={`/posts/${post.id}`}
+            >
+              {post.caption.length > 138 ? (
+                <div>
+                  {!showFullCaption ? (
+                    <p>
+                      {post.caption.slice(0, 138)}{" "}
+                      <span>
+                        <button
+                          className="show-more"
+                          onClick={() => setShowFullCaption(true)}
+                        >
+                          ...
+                        </button>
+                      </span>
+                    </p>
+                  ) : (
+                    <p>
+                      {post.caption}{" "}
+                      <span>
+                        <button
+                          className="show-more"
+                          onClick={() => setShowFullCaption(false)}
+                        >
+                          show less
+                        </button>
+                      </span>
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <p>{post.caption}</p>
+              )}
+            </Link>
+          </div>
+        )}
+        {!showCreatePost && post.image_url && (
+          <div className="post-caption">
+            {post.caption.length > 138 ? (
+              <div>
+                {!showFullCaption ? (
+                  <p>
+                    {post.caption.slice(0, 138)}{" "}
+                    <span>
+                      <button
+                        className="show-more"
+                        onClick={() => setShowFullCaption(true)}
+                      >
+                        ...
+                      </button>
+                    </span>
+                  </p>
+                ) : (
+                  <p>
+                    {post.caption}{" "}
+                    <span>
+                      <button
+                        className="show-more"
+                        onClick={() => setShowFullCaption(false)}
+                      >
+                        show less
+                      </button>
+                    </span>
+                  </p>
+                )}
+              </div>
+            ) : (
+              <p>{post.caption}</p>
+            )}
+          </div>
+        )}
+        {/* POST CAPTION ----- ^^*/}
+        {/* ----------- EDIT POST BUTTON ----------- vv*/}
+        <div id="post-form-container">
+          {showCreatePost && (
+            <Modal onClose={() => setShowCreatePost(false)}>
+              <EditPostForm
+                post={post}
+                setShowCreatePost={setShowCreatePost}
+                setShowConfirmDeleteModal={setShowConfirmDeleteModal}
+              />
+            </Modal>
+          )}
+          {showConfirmDeleteModal && (
+            <Modal onClose={() => setShowConfirmDeleteModal(false)}>
+              <DeletePostModal
+                setShowConfirmDeleteModal={setShowConfirmDeleteModal}
+                showConfirmDeleteModal={showConfirmDeleteModal}
+                post={post}
+              />
+            </Modal>
+          )}
+        </div>
+        {/* ----------- EDIT POST BUTTON ----------- ^^*/}
+      </div>
       {/* ----------- POST IMAGE ----------- ^^*/}
 
       {/* ----- POST DATE ----- vv*/}
@@ -96,65 +210,6 @@ function PostCard({ post, postComments, likes }) {
       </div> */}
       {/* ----- POST DATE ----- ^^ */}
 
-      {/*  POST CAPTION ----- vv*/}
-      {!showCreatePost && (
-        <div className="post-caption">
-          {post.caption.length > 138 ? (
-            <div>
-              {!showFullCaption ? (
-                <p>
-                  {post.caption.slice(0, 138)}{" "}
-                  <span>
-                    <button
-                      className="show-more"
-                      onClick={() => setShowFullCaption(true)}
-                    >
-                      ...
-                    </button>
-                  </span>
-                </p>
-              ) : (
-                <p>
-                  {post.caption}{" "}
-                  <span>
-                    <button
-                      className="show-more"
-                      onClick={() => setShowFullCaption(false)}
-                    >
-                      show less
-                    </button>
-                  </span>
-                </p>
-              )}
-            </div>
-          ) : (
-            <p>{post.caption}</p>
-          )}
-        </div>
-      )}
-      {/* POST CAPTION ----- ^^*/}
-      {/* ----------- EDIT POST BUTTON ----------- vv*/}
-      <div id="post-form-container">
-        {showCreatePost && (
-          <Modal onClose={() => setShowCreatePost(false)}>
-            <EditPostForm
-              post={post}
-              setShowCreatePost={setShowCreatePost}
-              setShowConfirmDeleteModal={setShowConfirmDeleteModal}
-            />
-          </Modal>
-        )}
-        {showConfirmDeleteModal && (
-          <Modal onClose={() => setShowConfirmDeleteModal(false)}>
-            <DeletePostModal
-              setShowConfirmDeleteModal={setShowConfirmDeleteModal}
-              showConfirmDeleteModal={showConfirmDeleteModal}
-              post={post}
-            />
-          </Modal>
-        )}
-      </div>
-      {/* ----------- EDIT POST BUTTON ----------- ^^*/}
       <div className="comment-btns">
         <button className="post-btns" onClick={areWeShowingComments}>
           <div id="comment-btn"></div>

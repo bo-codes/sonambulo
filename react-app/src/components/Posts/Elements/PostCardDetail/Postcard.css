@@ -1,0 +1,256 @@
+* {
+  font-family: 'jost';
+}
+
+#outermost-card {
+  margin: 30px;
+  color: white;
+  width: 560px;
+  height: fit-content;
+  /* background-color: #ffffff; */
+  background-color: #2d2d2d;
+  /* background-color: #3f3f3f; */
+  /* padding: 17px; */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#postcard {
+  /* color: white;
+  width: 660px;
+  background-color: #3f3f3f;
+  padding: 17px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  align-items: center; */
+}
+
+#postcard-image {
+  width: 100%;
+  height: auto;
+}
+
+.comment-section {
+  max-height: 444px;
+  width: 100%;
+  /* border: 1px solid purple; */
+  /* background-color: #3f3f3f; */
+  overflow-y: scroll;
+  margin-left: 20px;
+  padding-bottom: 28px;
+}
+.comment {
+  height: 10%;
+  padding: 2%;
+  margin: 2%;
+  background-color: #ffff;
+  color: black;
+}
+
+.no-comment-message {
+  font-size: 20px;
+  border: 1px solid greenyellow;
+  height: 60px;
+}
+
+.comment-button {
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* margin: 10px 0px; */
+  border-radius: 11px;
+  padding: 5px;
+  border: none;
+}
+
+.post-caption {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 17px;
+  padding-right: 17px;
+  word-wrap: break-word;
+  font-weight: 300;
+  /* border: 1px solid greenyellow; */
+}
+
+.post-date {
+  color: #bbbcdb;
+  padding-top: 10px;
+  padding-bottom: 14px;
+  padding-left: 17px;
+  border: 1px solid aqua;
+}
+
+.create-comment-container:first-child {
+  /* background-color: #3f3f3f; */
+  /* width: 660px; */
+  border-top: 1px solid grey;
+}
+
+.create-comment-container{
+  /* background-color: #3f3f3f; */
+  width: 100%;
+  min-height: 444px;
+  border-top: .5px solid grey;
+  /* padding-top: 18px; */
+}
+
+.edit-post-container {
+  position: relative;
+  display: flex;
+}
+
+.edit-post-button-container {
+  /* border: 1px solid purple; */
+  margin-right: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  /* position: absolute; */
+}
+
+.edit-post-button {
+  position: relative;
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  background-color: transparent;
+  border: none;
+  /* float: "right" */
+}
+
+#post-edit-btn-img {
+  background-image: url('../../../../images/edit.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 28px;
+  height: 28px;
+}
+
+.post-edit-delete {
+  width: 100%;
+  /* border: 1px solid purple; */
+  display: flex;
+  justify-content: end;
+}
+
+#post-delete-btn-img {
+  background-image: url('../../../../images/delete.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 28px;
+  height: 28px;
+}
+
+.post-btns {
+  background-color: transparent;
+  margin: 11px 12px;
+}
+
+.post-username {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  font-weight: 400;
+  /* border: 1px solid blue; */
+}
+
+.post-head-container {
+  /* border: .1px solid orange; */
+  display: flex;
+  height: 50px;
+  width: 100%;
+  /* flex-direction: row; */
+  justify-content: space-between;
+}
+
+
+.show-more {
+  margin-top: 4px;
+  border: 1px solid grey;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 6px;
+}
+
+.show-more:hover {
+  border: 1px solid grey;
+  background-color: #5c457191;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#post-form-container {
+  width: 100%;
+}
+
+.comment-btns {
+  /* border: 1px solid orange; */
+  border-top: 1px solid grey;
+  width: 100%;
+  height: 55px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+#comment-btn {
+  background-image: url('../../../../images/chat-balloon.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+}
+
+#heart-btn {
+  background-image: url('../../../../images/heart.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+}
+
+#filled-heart-btn {
+  background-image: url('../../../../images/filled-heart-red.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+}
+
+.postcard-explore {
+  overflow: scroll;
+  background-color: #2d2d2d;
+  margin-bottom: 33px;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+.explore-caption {
+  padding: 11px;
+}

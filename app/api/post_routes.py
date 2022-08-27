@@ -31,6 +31,17 @@ def get_posts():
 # ----------- GET POSTS ----------- ^^#
 #
 #
+# ----------- GET ONE POST ----------- vv#
+@post_routes.route('/<int:postId>')
+def get_one_post(postId):
+    posts = Post.query.filter(Post.id == postId)
+    data = [post.to_dict() for post in posts]
+    # print("\n\n\n", data, "\n\n\n", "DATAAAAAAAA")
+    print("\n\n\n\n",data, "\n\n\n\n")
+    return {'post': data}
+# ----------- GET ONE POST ----------- ^^#
+#
+#
 # ----------- CREATE POST ----------- vv#
 @post_routes.route('/', methods=["POST"])
 @login_required

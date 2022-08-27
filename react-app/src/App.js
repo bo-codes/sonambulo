@@ -13,6 +13,7 @@ import SplashPage from "./components/Pages/SplashPage/SplashPage";
 import ErrorPage from "./components/Pages/404/404";
 import ProfilePage from "./components/Pages/ProfilePage/ProfilePage";
 import UsersProfilePage from "./components/Pages/usersProfilePage/UsersProfilePage";
+import PostDetailPage from "./components/Pages/PostDetailPage/PostDetailPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -40,6 +41,9 @@ function App() {
         </Route>
         <Route path="/users">
           <UsersProfilePage />
+        </Route>
+        <Route path="/posts">
+          <PostDetailPage />
         </Route>
         <Route path="/home" exact={true}>
           <HomePage />
