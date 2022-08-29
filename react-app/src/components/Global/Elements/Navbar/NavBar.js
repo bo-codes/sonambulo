@@ -55,7 +55,7 @@ const NavBar = () => {
         <NavigationBar className="navBarDiv2">
           {!loggedIn && (
             <>
-              <div className="navlink-container">
+              {/* <div className="navlink-container">
                 <NavLink
                   to="/explore"
                   exact={true}
@@ -71,7 +71,7 @@ const NavBar = () => {
                     }`}
                   ></div>
                 </NavLink>
-              </div>
+              </div> */}
               <div className="navlink-container">
                 <button onClick={demoLogIn} className="navlink">
                   Demo
