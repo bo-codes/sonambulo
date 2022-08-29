@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useLocation, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import UserMenu from "./UserMenu";
-// import EventzeitLogo from "../../images/EventzeitMainLogo.png";
-import sonambulogo from "../../../../images/sleepin-cat.png";
 import { login } from "../../../../store/session";
 import { Modal } from "../Modal";
 import LoginFormPosts from "../../../auth/LoginFormCreatePost/LoginFormCreatePost";
@@ -18,15 +16,6 @@ const NavigationBar = styled.div`
   height: 40px;
   align-items: center;
   justify-content: end;
-`;
-
-const Logo = styled.img`
-  position: absolute;
-  top: 0;
-  width: 3rem;
-  height: auto;
-  padding-top: 0%;
-  align-self: center;
 `;
 
 const NavBar = () => {
@@ -52,18 +41,11 @@ const NavBar = () => {
 
   return (
     <div>
-      {/* <div>{window.location.pathname}</div> */}
-      {/* {window.location.href == ""} */}
       {showLogin && (
         <Modal onClose={() => setShowLogin(false)}>
           <LoginFormPosts setShowLogin={setShowLogin} />
         </Modal>
       )}
-      {/* {showLogin && (
-        <Modal onClose={() => setShowLogin(false)}>
-          <LoginForm setShowLogin={setShowLogin} />
-        </Modal>
-      )} */}
       <div className="navBarWrapper">
         <div className="navBarDiv1">
           <NavLink to="/" exact={true} activeClassName="navlink navBarDiv1">
@@ -73,23 +55,7 @@ const NavBar = () => {
         <NavigationBar className="navBarDiv2">
           {!loggedIn && (
             <>
-              {/* <div className={`navlink-container`}>
-                <NavLink
-                  to="/home"
-                  activeClassName="active"
-                  style={{ textDecoration: "none" }}
-                >
-                  <div
-                    style={{ textDecoration: "none" }}
-                    className={`navlink ${
-                      window.location.pathname == "/home"
-                        ? "home-link-selected"
-                        : "home-link"
-                    }`}
-                  ></div>
-                </NavLink>
-              </div> */}
-              <div>
+              <div className="navlink-container">
                 <NavLink
                   to="/explore"
                   exact={true}
@@ -106,23 +72,25 @@ const NavBar = () => {
                   ></div>
                 </NavLink>
               </div>
-              <div>
+              <div className="navlink-container">
                 <button onClick={demoLogIn} className="navlink">
                   Demo
                 </button>
               </div>
-              <div>
+              <div className="navlink-container">
                 <button className="navlink" onClick={() => setShowLogin(true)}>
                   Login
                 </button>
               </div>
-              <NavLink
-                to="/signup"
-                activeClassName="active"
-                style={{ textDecoration: "none" }}
-              >
-                <p className="navlink">Signup</p>
-              </NavLink>
+              <div className="navlink-container">
+                <NavLink
+                  to="/signup"
+                  activeClassName="active"
+                  style={{ textDecoration: "none" }}
+                >
+                  <p className="navlink">Signup</p>
+                </NavLink>
+              </div>
             </>
           )}
           {loggedIn && user && (
@@ -193,11 +161,6 @@ const NavBar = () => {
                   ></div>
                 </NavLink>
               </div>
-              {/* <div>
-                <NavLink to="/userposts" exact={true} activeClassName="active">
-                  <p className="navlink">Profile</p>
-                </NavLink>
-              </div> */}
               <div>
                 <UserMenu user={user} />
               </div>
