@@ -55,23 +55,6 @@ const NavBar = () => {
         <NavigationBar className="navBarDiv2">
           {!loggedIn && (
             <>
-              {/* <div className="navlink-container">
-                <NavLink
-                  to="/explore"
-                  exact={true}
-                  activeClassName="active"
-                  style={{ textDecoration: "none" }}
-                >
-                  <div
-                    style={{ textDecoration: "none" }}
-                    className={`navlink ${
-                      window.location.pathname == "/explore"
-                        ? "explore-link-selected"
-                        : "explore-link"
-                    }`}
-                  ></div>
-                </NavLink>
-              </div> */}
               <div className="navlink-container">
                 <button onClick={demoLogIn} className="navlink">
                   Demo
