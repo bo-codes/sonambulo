@@ -1,6 +1,7 @@
 /********************** ACTIONS **************************/
 
 const CREATE_POST = "post/CREATE_POST";
+const CREATE_POST_TAG = "post/CREATE_POST_TAG";
 const READ_POST = "post/READ_POST";
 const GET_FEED_POSTS = "post/GET_FEED_POSTS";
 const GET_ONE_USERS_POSTS = "post/GET_ONE_USERS_POSTS";
@@ -13,6 +14,11 @@ const DELETE_POST = "post/DELETE_POST";
 const createPost = (post) => ({
   type: CREATE_POST,
   payload: post,
+});
+
+const createPostTag = (postTag) => ({
+  type: CREATE_POST_TAG,
+  payload: postTag,
 });
 
 const readPost = (posts) => ({
@@ -48,7 +54,7 @@ const deletePost = (postId) => ({
 /***************************** THUNKS ***************************************/
 
 export const makePost =
-  (user_id, image, caption, created_at) => async (dispatch) => {
+  (user_id, image, caption, tag, created_at) => async (dispatch) => {
     const imageData = new FormData();
     imageData.append("image", image);
 
@@ -68,7 +74,7 @@ export const makePost =
       return ["An error occurred. Please try again."];
     }
 
-    const response = await fetch("/api/posts/", {
+    const postRes = await fetch("/api/posts/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,12 +87,12 @@ export const makePost =
       }),
     });
 
-    if (response.ok) {
-      const data = await response.json();
+    if (postRes.ok) {
+      const data = await postRes.json();
       dispatch(createPost(data));
       return data;
-    } else if (response.status < 500) {
-      const data = await response.json();
+    } else if (postRes.status < 500) {
+      const data = await postRes.json();
       if (data.errors) {
         return data.errors;
       }
@@ -94,6 +100,66 @@ export const makePost =
       return ["An error occurred. Please try again."];
     }
   };
+
+export const makePostTag = (tag) => async (dispatch) => {
+  const tagRes = await fetch(`/api/tags/${tag.tag}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      tag: tag.tag,
+      post_id: tag.post_id,
+    }),
+  });
+
+  if (tagRes.ok) {
+    const data = await tagRes.json();
+    dispatch(createPostTag(data));
+    return data;
+  } else if (tagRes.status < 500) {
+    const data = await tagRes.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+};
+
+export const getAllPostTagsThunk = () => async (dispatch) => {
+  const response = await fetch("/api/tags/");
+  // console.log("inside getAllPostsThunk thunk", response);
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(readPost(data));
+    return data;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+};
+
+export const getAllPostTagsForPostThunk = (postId) => async (dispatch) => {
+  const response = await fetch(`/api/tags/${postId}`);
+  // console.log("inside getAllPostsThunk thunk", response);
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(readPost(data));
+    return data;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+};
 
 export const getAllPostsThunk = () => async (dispatch) => {
   const response = await fetch("/api/posts/");
@@ -228,6 +294,10 @@ export default function reducer(state = initialState, action) {
     case CREATE_POST:
       const post = action.payload;
       newState[post.id] = post;
+      return newState;
+    case CREATE_POST_TAG:
+      const postTag = action.payload;
+      newState[postTag.id] = postTag;
       return newState;
     case READ_POST:
       newState = {};

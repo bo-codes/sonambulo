@@ -6,8 +6,9 @@ import { useHistory, useLocation } from "react-router-dom";
 import { Modal } from "../../../Global/Elements/Modal";
 import DeletePostModal from "../../Elements/DeletePostModal/DeletePostModal";
 // IMPORT THUNKS WE NEED TO DISPATCH
-import { makePost, editPost } from "../../../../store/posts";
+import { makePost, editPost, makePostTag } from "../../../../store/posts";
 import "../../../auth/SignupForm/SignupForm.css";
+import "./CreatePostForm.css";
 
 // THIS IS OUR POST CREATION/EDIT FORM COMPONENT
 function PostForm({ post = null, setShowCreatePost }) {
@@ -15,6 +16,8 @@ function PostForm({ post = null, setShowCreatePost }) {
   const [date, setDate] = useState((post && post.created_at) || "");
   const [image, setImage] = useState((post && post.image_url) || "");
   const [caption, setCaption] = useState((post && post.caption) || "");
+  const [tags, setTags] = useState((post && post.tag) || []);
+  const [tag, setTag] = useState((post && post.tag) || []);
   const [errors, setErrors] = useState([]);
   const [imageLoading, setImageLoading] = useState(false);
   const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
@@ -26,6 +29,20 @@ function PostForm({ post = null, setShowCreatePost }) {
 
   // PULLING THE CURRENT USER IN OUR STATE
   const userId = useSelector((state) => state.session.user.id);
+
+  const createTag = async (e) => {
+    e.preventDefault();
+
+    if (!userId) {
+      // ADD THE ERROR INTO THE Errors STATE SLICE
+      setErrors(["You must be logged in to create a tag."]);
+      return;
+    }
+
+    else {
+      tag = await dispatch(makePostTag(tag))
+    }
+  };
 
   // ---------------------- ON SUBMITTAL ---------------------- vv//
   const submit = async (e) => {
@@ -98,34 +115,10 @@ function PostForm({ post = null, setShowCreatePost }) {
   };
 
   return (
-    <div
-      className="page-container"
-      style={{
-        width: "100vw",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
+    <div className="page-container">
       <div className="form-half">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-          className="form-container"
-        >
-          <div
-            className="signup-title"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: 'center',
-              marginLeft: '20px',
-              width: '400px'
-            }}
-          >
-            CREATE POST
-          </div>
+        <div className="form-container">
+          <div className="signup-title">CREATE POST</div>
           {/* ----------------------FORM ---------------------- vv*/}
           <form onSubmit={submit}>
             {/* IF POST IS FALSEY, AKA IF NOTHING WAS RETURNED FROM THE DISPATCH AND REASSIGNED THE VALUE OF THE
@@ -160,14 +153,8 @@ function PostForm({ post = null, setShowCreatePost }) {
             {/* -------- ERROR DISPLAY -------- ^^*/}
 
             {/* ----- IMAGE INPUT ----- vv*/}
-            <div
-              className="input-section"
-              style={{
-                marginBottom: "10px",
-                width: '300px'
-              }}
-            >
-              <label htmlFor="image-upload-button" className="imput-label" >
+            <div className="input-section">
+              <label htmlFor="image-upload-button" className="imput-label">
                 Image
                 <input
                   id="image-upload-button"
@@ -190,17 +177,12 @@ function PostForm({ post = null, setShowCreatePost }) {
             {/* ----- IMAGE INPUT ----- ^^*/}
 
             {/* ----- CAPTION INPUT ----- vv*/}
-            <div
-              className="input-section"
-              style={{
-                marginBottom: "10px",
-              }}
-            >
+            <div className="input-section">
               <label htmlFor="caption">Caption</label>
               <textarea
-              style={{
-                width: '230px'
-              }}
+                style={{
+                  width: "230px",
+                }}
                 name="caption"
                 type="text"
                 value={caption}
@@ -208,6 +190,23 @@ function PostForm({ post = null, setShowCreatePost }) {
               />
             </div>
             {/* ----- CAPTION INPUT ----- ^^*/}
+            {/* ----- TAGS INPUT ----- vv*/}
+            <div className="input-section">
+              <label htmlFor="tags">Tags</label>
+              <textarea
+                style={{
+                  width: "230px",
+                }}
+                name="tags"
+                type="text"
+                value={tag}
+                onChange={(e) => setTag(e.target.value)}
+              />
+              {/* ----- TAGS INPUT ----- ^^*/}
+            </div>
+            {/* ----- CREATE TAG BUTTON ----- vv*/}
+            <button onClick={createTag}>Add Tag</button>
+            {/* ----- CREATE TAG BUTTON -----^^*/}
             <div>
               <div>
                 <button className="login-button">Create Post</button>

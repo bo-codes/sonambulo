@@ -4,21 +4,22 @@ from .db import db
 from sqlalchemy import DateTime
 from sqlalchemy.sql import func
 
-post_tags = db.Table(
-    'post_tags',
-    db.Column(
-        'tag_id',
-        db.Integer,
-        db.ForeignKey('tags.id'),
-        primary_key=True
-    ),
-    db.Column(
-        'post_id',
-        db.Integer,
-        db.ForeignKey('posts.id'),
-        primary_key=True
-    )
-)
+
+# post_tags = db.Table(
+#     'post_tags',
+#     db.Column(
+#         'tag_id',
+#         db.Integer,
+#         db.ForeignKey('tags.id'),
+#         primary_key=True
+#     ),
+#     db.Column(
+#         'post_id',
+#         db.Integer,
+#         db.ForeignKey('posts.id'),
+#         primary_key=True
+#     )
+# )
 
 
 class Post(db.Model):
@@ -40,7 +41,7 @@ class Post(db.Model):
     user = db.relationship(
         'User', back_populates='posts', lazy='subquery')
     tags = db.relationship(
-        'Tag', secondary=post_tags, back_populates='posts')
+        'Tag', secondary='post_tags')
 
 
     def to_dict(self):

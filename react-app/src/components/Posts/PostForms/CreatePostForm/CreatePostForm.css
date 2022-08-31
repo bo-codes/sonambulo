@@ -1,0 +1,23 @@
+.page-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.signup-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  width: 400px;
+}
+
+.input-section {
+  margin-bottom: 10px;
+  width: 300px;
+}

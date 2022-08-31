@@ -4,17 +4,15 @@ class Post_Tag(db.Model):
     __tablename__ = "post_tags"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    post_id = db.Column(db.Integer, db.ForeignKey("postes.id"), nullable=False)
-    tag = db.Column(db.Text, nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), nullable=False)
+    tag_id = db.Column(db.Integer, db.ForeignKey("tags.id"), nullable=False)
 
-    post = db.relationship("Posts", back_populates="post_tags")
-    user = db.relationship("User", back_populates="post_tags")
+    post = db.relationship("Post", back_populates='post_tags')
+    tag = db.relationship("Tag", back_populates='post_tags')
 
     def to_dict(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,
-            "post_id": self.business_id,
+            "post_id": self.post_id,
             "tag": self.tag
         }
