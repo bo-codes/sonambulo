@@ -37,10 +37,8 @@ function PostForm({ post = null, setShowCreatePost }) {
       // ADD THE ERROR INTO THE Errors STATE SLICE
       setErrors(["You must be logged in to create a tag."]);
       return;
-    }
-
-    else {
-      tag = await dispatch(makePostTag(tag))
+    } else {
+      let newTag = await dispatch(makePostTag(tag));
     }
   };
 
@@ -191,7 +189,7 @@ function PostForm({ post = null, setShowCreatePost }) {
             </div>
             {/* ----- CAPTION INPUT ----- ^^*/}
             {/* ----- TAGS INPUT ----- vv*/}
-            <div className="input-section">
+            {/* <div className="input-section">
               <label htmlFor="tags">Tags</label>
               <textarea
                 style={{
@@ -201,11 +199,11 @@ function PostForm({ post = null, setShowCreatePost }) {
                 type="text"
                 value={tag}
                 onChange={(e) => setTag(e.target.value)}
-              />
-              {/* ----- TAGS INPUT ----- ^^*/}
-            </div>
+              /> */}
+            {/* ----- TAGS INPUT ----- ^^*/}
+            {/* </div> */}
             {/* ----- CREATE TAG BUTTON ----- vv*/}
-            <button onClick={createTag}>Add Tag</button>
+            {/* <button onClick={createTag}>Add Tag</button> */}
             {/* ----- CREATE TAG BUTTON -----^^*/}
             <div>
               <div>

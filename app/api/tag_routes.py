@@ -51,7 +51,7 @@ def add_post_tag(tagName):
             db.session.add(postTag)
             db.session.commit()
             return postTag.to_dict()
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        return {'errors': validation_errors_to_error_messages(post_tag_form.errors)}, 401
     else:
         post_tag_form = AddPostTagForm()
         post_tag_form['csrf_token'].data = request.cookies['csrf_token']
