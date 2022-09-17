@@ -13,6 +13,8 @@ import "./HomePage.css";
 import { thunkGetFeedPosts } from "../../../store/posts";
 // import Follows from "../../Follows/Follows";
 
+
+
 function ProfilePage({}) {
   const dispatch = useDispatch();
   // PULLING ALL OF THE INFORMATION FROM OUR STATE

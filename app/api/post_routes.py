@@ -111,11 +111,24 @@ def get_user_posts(username):
 # ----------- GET SELF POSTS ----------- ^^#
 
 
+# # ----------- GET FOLLOWED POSTS ----------- vv#
+# @post_routes.route('/feed/')
+# @login_required
+# def feed_posts():
+#     posts = Post.query.join(follows, (follows.c.followed_id == Post.user_id)).filter(follows.c.follower_id == current_user.id)
+#     data = [post.to_dict() for post in posts]
+#     return {'posts': data}
+# # ----------- GET FOLLOWED POSTS ----------- ^^#
+
 # ----------- GET FOLLOWED POSTS ----------- vv#
-@post_routes.route('/feed/<int:userId>')
+@post_routes.route('/feed/')
 @login_required
-def feed_posts(userId):
-    posts = Post.query.join(follows, (follows.c.followed_id == Post.user_id)).filter(follows.c.follower_id == userId)
+def feed_posts():
+    print("\n\n\n\n, IN FEED POSTS ROUTE, \n\n\n\n")
+    followed = Post.query.join(follows, (follows.c.followed_id == Post.user_id)).filter(follows.c.follower_id == current_user.id)
+    own = Post.query.filter_by(user_id=current_user.id)
+    posts = followed.union(own).order_by(Post.created_at.desc())
     data = [post.to_dict() for post in posts]
     return {'posts': data}
+
 # ----------- GET FOLLOWED POSTS ----------- ^^#

@@ -195,8 +195,8 @@ export const getOneUserPostsThunk = (username) => async (dispatch) => {
   }
 };
 
-export const thunkGetFeedPosts = (userId) => async (dispatch) => {
-  const response = await fetch(`/api/posts/feed/${userId}`);
+export const thunkGetFeedPosts = () => async (dispatch) => {
+  const response = await fetch(`/api/posts/feed/`);
 
   if (response.ok) {
     const feedPosts = await response.json();
@@ -205,8 +205,8 @@ export const thunkGetFeedPosts = (userId) => async (dispatch) => {
   }
 };
 
-export const thunkGetOnePost = (postId) => async (dispatch) => {
-  const response = await fetch(`/api/posts/${postId}`);
+export const thunkGetOnePost = () => async (dispatch) => {
+  const response = await fetch(`/api/posts/`);
 
   if (response.ok) {
     const data = await response.json();

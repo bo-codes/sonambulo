@@ -26,15 +26,17 @@ function HomePage({}) {
   const shuffledUsers = users.sort(() => Math.random() - 0.5);
 
   // WE ADD DISPATCH TO THE DEPENDENCY ARR SO THAT IT DOESNT RERENDER A MILLION TIMES, I JUST CANT EXPLAIN IT WELL
+
   useEffect(() => {
     // console.log(likes);
     // GET ALL POSTS
-    dispatch(thunkGetFeedPosts(user.id));
+    dispatch(thunkGetFeedPosts());
     // GET ALL COMMENTS
     dispatch(getAllCommentsThunk());
     // GET ALL LIKES
     dispatch(getAllLikes());
   }, [dispatch]);
+
 
   return (
     <main>
@@ -54,25 +56,29 @@ function HomePage({}) {
         </div>
         {/* CHECK IF THERE ARE POSTS SO THAT THE USESELECTOR DOESNT MESS US UP */}
         {posts &&
-          posts.map((post) => {
-            // WE FILTER THROUGH ALL COMMENTS EVER TO ONLY GRAB THE ONES ASSOCIATED WITH THIS POST
-            // console.log(likes, "LIKES BEFORE EVEN FILTERING");
-            let postComments = comments.filter((comment) => {
-              return parseInt(comment.post_id) === parseInt(post.id);
-            });
+          posts
+            .sort((a, b) => {
+              return new Date(b.created_at) - new Date(a.created_at);
+            })
+            .map((post) => {
+              // WE FILTER THROUGH ALL COMMENTS EVER TO ONLY GRAB THE ONES ASSOCIATED WITH THIS POST
+              // console.log(likes, "LIKES BEFORE EVEN FILTERING");
+              let postComments = comments.filter((comment) => {
+                return parseInt(comment.post_id) === parseInt(post.id);
+              });
 
-            // RETURNING A POST CARD WHICH IS A COMPONENT THAT DETERMINES HOW THE POST IS STRUCTURED
-            return (
-              // EACH ITEM IN A MAP NEEDS ITS OWN UNIQUE KEY
-              <a key={post.id} name={post.id} id={post.id}>
-                <PostCard
-                  post={post}
-                  postComments={postComments}
-                  likes={likes}
-                />
-              </a>
-            );
-          })}
+              // RETURNING A POST CARD WHICH IS A COMPONENT THAT DETERMINES HOW THE POST IS STRUCTURED
+              return (
+                // EACH ITEM IN A MAP NEEDS ITS OWN UNIQUE KEY
+                <a key={post.id} name={post.id} id={post.id}>
+                  <PostCard
+                    post={post}
+                    postComments={postComments}
+                    likes={likes}
+                  />
+                </a>
+              );
+            })}
       </div>
     </main>
   );

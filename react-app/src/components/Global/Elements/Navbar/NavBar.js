@@ -34,8 +34,8 @@ const NavBar = () => {
     if (user) setLoggedIn(true);
   }, [user, loggedIn]);
 
-  const demoLogIn = () => {
-    dispatch(login("demo@aa.io", "password"));
+  const demoLogIn = async () => {
+    await dispatch(login("demo@aa.io", "password"));
     history.push("/home");
   };
 
