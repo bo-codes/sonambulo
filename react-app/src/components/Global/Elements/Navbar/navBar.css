@@ -90,7 +90,7 @@
 }
 
 .create-link {
-    background-image: url("../../../../images/create-icon-transparent.png");
+    background-image: url("../../../../images/create-post-pen.png");
     background-size: cover;
     /* opacity: 70%; */
     width: 22px;
@@ -98,7 +98,7 @@
 }
 
 .create-link:hover {
-    background-image: url("../../../../images/create-icon.png");
+    background-image: url("../../../../images/create-post-pen.png");
     background-size: cover;
     /* opacity: 100%; */
     width: 22px;
@@ -106,7 +106,7 @@
 }
 
 .create-link-selected {
-    background-image: url("../../../../images/create-icon.png");
+    background-image: url("../../../../images/create-post-pen.png");
     background-size: cover;
     /* opacity: 100%; */
     width: 22px;
@@ -119,6 +119,15 @@
     /* opacity: 70%; */
     width: 22px;
     height: 22px;
+}
+
+.create-blue-box{
+    width: 45px;
+    height: 32px;
+    border-radius: 3px;
+    background-color: #2fbaff;
+    padding-left: 12px;
+    padding-top: 5px;
 }
 
 .profile-link:hover {

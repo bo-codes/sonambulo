@@ -99,9 +99,7 @@ function PostCard({ post, postComments, likes }) {
         )}
         {/*  POST CAPTION ----- vv*/}
         {!showCreatePost && !post.image_url && (
-          <div
-            className="post-caption"
-          >
+          <div className="post-caption">
             <Link
               style={{
                 textDecoration: "none",
@@ -210,17 +208,24 @@ function PostCard({ post, postComments, likes }) {
       </div> */}
       {/* ----- POST DATE ----- ^^ */}
 
-      <div className="comment-btns">
-        <button className="post-btns" onClick={areWeShowingComments}>
-          <div id="comment-btn"></div>
+      <div className="notes-number-and-comment-btns">
+        <button onClick={areWeShowingComments} style={{backgroundColor: 'transparent', color: 'white'}} >
+          <div className="notes-number">
+            {likes.length + postComments.length} <span style={{marginLeft: '4px'}}>notes</span>
+          </div>
         </button>
-        {user ? (
-          <Like post_id={post.id} user_id={user.id} likes={likes} />
-        ) : (
-          <button className="post-btns" onClick={() => setShowLogin(true)}>
-            <div id="heart-btn"></div>
+        <div className="comment-btns">
+          <button className="post-btns" onClick={areWeShowingComments}>
+            <div id="comment-btn"></div>
           </button>
-        )}
+          {user ? (
+            <Like post_id={post.id} user_id={user.id} likes={likes} />
+          ) : (
+            <button className="post-btns" onClick={() => setShowLogin(true)}>
+              <div id="heart-btn"></div>
+            </button>
+          )}
+        </div>
       </div>
       {showLogin && (
         <Modal onClose={() => setShowLogin(false)}>

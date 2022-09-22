@@ -96,22 +96,6 @@ const NavBar = () => {
               </div>
               <div className="navlink-container">
                 <NavLink
-                  to="/create"
-                  activeClassName="active"
-                  style={{ textDecoration: "none" }}
-                >
-                  <div
-                    style={{ textDecoration: "none" }}
-                    className={`navlink ${
-                      window.location.pathname == "/create"
-                        ? "create-link-selected"
-                        : "create-link"
-                    }`}
-                  ></div>
-                </NavLink>
-              </div>
-              <div className="navlink-container">
-                <NavLink
                   to="/explore"
                   exact={true}
                   activeClassName="active"
@@ -146,6 +130,24 @@ const NavBar = () => {
               </div>
               <div>
                 <UserMenu user={user} />
+              </div>
+              <div className="navlink-container">
+                <NavLink
+                  to="/create"
+                  activeClassName="active"
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="create-blue-box">
+                    <div
+                      style={{ textDecoration: "none" }}
+                      className={`navlink ${
+                        window.location.pathname == "/create"
+                          ? "create-link-selected"
+                          : "create-link"
+                      }`}
+                    ></div>
+                  </div>
+                </NavLink>
               </div>
             </>
           )}
