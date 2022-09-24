@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: 3f6f75d869ff
-Revises: 
+Revises:
 Create Date: 2022-08-30 21:42:04.319562
 
 """
@@ -26,6 +26,8 @@ def upgrade():
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
+    sa.Column('name', sa.String(length=30), nullable=False),
+    sa.Column('profile_picture', sa.String(length=255), nullable=True),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
