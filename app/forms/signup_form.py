@@ -56,6 +56,16 @@ def password_match(form, field):
     if (password != confirmPassword):
         raise ValidationError('Password fields must match.')
 
+def profile_picture(form, field):
+    pfp = form.data['profilePicture']
+    if (len(pfp) <= 0):
+        pfp = 'https://bobogrambucket.s3.amazonaws.com/5e4f815703124d158e977a6095890fe2.jpeg'
+
+def name_validate(form, field):
+    name = form.data['name']
+    if (len(name) <= 0):
+        raise ValidationError('Full name required')
+
 def password_validate(form, field):
     password = field.data
     if(not re.fullmatch('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{8,}$', password)):
@@ -66,4 +76,6 @@ class SignUpForm(FlaskForm):
         'username', validators=[ username_exists, username_length, username_required])
     email = StringField('email', validators=[ email_validate, user_exists])
     password = StringField('password', validators=[ password_validate])
+    profilePicture = StringField('profilePicture', validators=[profile_picture])
     confirmPassword = StringField('confirmPassword', validators=[ password_match])
+    name = StringField('name', validators=[name_validate])

@@ -13,9 +13,11 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    profile_picture = db.Column(db.String(255))
     created_at = db.Column(DateTime(timezone=True), server_default=func.now())
 
 
@@ -46,26 +48,22 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'name': self.name,
             'username': self.username,
             'email': self.email,
             'created_at': self.created_at,
+            'profile_picture': self.profile_picture,
             'followers': [user.to_dict_short() for user in self.follows],
             'following': [user.to_dict_short() for user in self.followed]
         }
-
-    # def to_dict(self):
-    #     return {
-    #         'id': self.id,
-    #         'email': self.email,
-    #         'username': self.username,
-    #         'created_at': self.created_at,
-    #     }
 
     def to_dict_short(self):
         return {
             'id': self.id,
             'email': self.email,
+            'name': self.name,
             'username': self.username,
+            'profile_picture': self.profile_picture,
             'created_at': self.created_at,
         }
 
@@ -80,3 +78,7 @@ class User(db.Model, UserMixin):
     def is_following(self, user):
         return self.followed.filter(
             follows.c.followed_id == user.id).count() > 0
+
+    def is_not_following(self, user):
+        return self.followed.filter(
+            follows.c.followed_id == user.id).count() <= 0
